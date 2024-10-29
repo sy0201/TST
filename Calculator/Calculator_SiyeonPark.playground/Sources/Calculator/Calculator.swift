@@ -11,6 +11,7 @@ public class Calculator: ArithmeticProtocol {
         case "/": return a / b
         case "+": return a + b
         case "-": return a - b
+        case "%": return a.truncatingRemainder(dividingBy: b)
         default:
             print("정확히 입력해 주세요.")
             return a * b
