@@ -1,36 +1,19 @@
 import Foundation
 
-public class Calculator {
+public class Calculator: ArithmeticProtocol {
     
-    private let multiply: MultiplyOperation
-    private let divide: DivideOperation
-    private let add: AddOperation
-    private let subtract: SubtractOperation
+    public init() {}
     
-    public init() {
-        self.multiply = MultiplyOperation()
-        self.divide = DivideOperation()
-        self.add = AddOperation()
-        self.subtract = SubtractOperation()
-    }
-
-    // 곱하기 함수
-    public func setMultiplication(a: Int, b: Int) -> Int {
-        return multiply.multiplication(a, b)
-    }
-    
-    // 나누기 함수
-    public func setDivision(a: Double, b: Double) -> Double {
-        return divide.divideOperation(a, b)
-    }
-    
-    // 더하기 함수
-    public func setPlus(a: Int, b: Int) -> Int {
-        return add.addOperation(a, b)
-    }
-    
-    // 빼기 함수
-    public func setMinus(a: Int, b: Int) -> Int {
-        return subtract.subtractOperation(a, b)
+    public func arithmetic(a: Double, b: Double, operation: String) -> Double {
+        
+        switch operation {
+        case "*": return a * b
+        case "/": return a / b
+        case "+": return a + b
+        case "-": return a - b
+        default:
+            print("정확히 입력해 주세요.")
+            return a * b
+        }
     }
 }
