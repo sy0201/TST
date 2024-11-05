@@ -8,6 +8,26 @@
 import Foundation
 
 final class BaseballGame {
+    func notice() {
+        print("환영합니다! 원하시는 번호를 입력해주세요")
+        print("1. 게임 시작하기  2. 게임 기록 보기  3. 종료하기")
+        
+        while true {
+            guard let selectMenu = readLine() else {
+                print("올바르지 않은 입력입니다. 다시 시도해주세요.")
+                continue
+            }
+            
+            switch selectMenu {
+            case "1": startGame()
+            case "2": print("게임 기록을 불러옵니다... ")
+            case "3": print("게임 기록을 불러옵니다... (기록 기능은 아직 구현되지 않았습니다)")
+            default:
+                print("올바르지 않은 입력입니다. 1, 2 또는 3을 입력해주세요.")
+            }
+        }
+    }
+    
     func startGame() {
         let answer = makeAnswer()
         print("< 게임을 시작합니다 >")
@@ -29,11 +49,26 @@ final class BaseballGame {
             if trimmedInput.count != 3 {
                 print("올바르지 않은 입력값입니다")
                 continue
-            } else if Array(trimmedInput).contains("0") {
-                print("올바르지 않은 입력값입니다")
-                continue
-            } else if trimmedInput == answer {
+            }
+            
+            if trimmedInput == answer {
                 print("스트라이크")
+                continue
+            }
+            
+            if trimmedInput.first == "0" {
+                print("올바르지 않은 입력값입니다. 첫번째 숫자는 0이 될 수 없습니다.")
+                continue
+            }
+            
+            let uniqueString = Set(trimmedInput)
+            if uniqueString.count != 3 {
+                print("올바르지 않은 입력값입니다. 중복되지 않는 숫자를 입력해주세요.")
+                continue
+            }
+            
+            if !trimmedInput.allSatisfy({ $0.isNumber }) {
+                print("올바르지 않은 입력값입니다. 숫자만 입력해주세요.")
                 continue
             }
             
@@ -61,7 +96,7 @@ final class BaseballGame {
                 let firstInt = Int.random(in: 1...9)
                 numbers.insert(firstInt)
             } else {
-                let randomInt = Int.random(in: 1...9)
+                let randomInt = Int.random(in: 0...9)
                 numbers.insert(randomInt)
             }
         }
