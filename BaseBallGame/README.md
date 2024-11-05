@@ -1,2 +1,0 @@
-# BaseBallGame
-TeamSparsTa
