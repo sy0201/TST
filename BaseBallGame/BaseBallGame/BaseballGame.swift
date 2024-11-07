@@ -48,8 +48,7 @@ final class BaseballGame {
         
         print("< 게임을 시작합니다 >")
         print("숫자를 입력하세요")
-        print("answer \(answer)")
-        
+
         while true {
             // 유저에게 입력값 받음
             guard let input = readLine() else {
@@ -57,45 +56,34 @@ final class BaseballGame {
                 continue
             }
             
-            // 정수로 변환되지 않는 경우 반복문 처음으로 돌아가기
-            // whitespaces로 input의 앞뒤 공백문자 삭제
-            let trimmedInput = input.trimmingCharacters(in: .whitespaces)
+            do {
+                try isValidateInput(input: input)
+            } catch GameError.checkThreeString {
+                print("올바르지 않은 입력값입니다. 3자리 숫자를 입력해주세요.")
+                continue
+            } catch GameError.checkFirstString {
+                print("올바르지 않은 입력값입니다. 첫번째 숫자는 0이 될 수 없습니다.")
+                continue
+            } catch GameError.checkUniqueString {
+                print("올바르지 않은 입력값입니다. 중복되지 않는 숫자를 입력해주세요.")
+                continue
+            } catch GameError.checkOtherString {
+                print("올바르지 않은 입력값입니다. 숫자만 입력해주세요.")
+                continue
+            } catch {
+                print("알 수 없는 오류가 발생했습니다. 다시 시도해 주세요.")
+                continue
+            }
+            
             attempts += 1
             recordManager.currentAttempts = attempts
             
-            print("attempts \(attempts)")
-
-            // 입력값이 3자리가 아닐때 안내메시지 출력
-            if trimmedInput.count != 3 {
-                print("올바르지 않은 입력값입니다")
-                continue
-            }
-            
-            // 0번째에 0입력시 안내메시지 출력
-            if trimmedInput.first == "0" {
-                print("올바르지 않은 입력값입니다. 첫번째 숫자는 0이 될 수 없습니다.")
-                continue
-            }
-                        
-            // 중복 숫자 입력시 안내메시지 출력
-            let uniqueString = Set(trimmedInput)
-            if uniqueString.count != 3 {
-                print("올바르지 않은 입력값입니다. 중복되지 않는 숫자를 입력해주세요.")
-                continue
-            }
-            
-            // 숫자 이외 입력시 안내메시지 출력
-            if !trimmedInput.allSatisfy({ $0.isNumber }) {
-                print("올바르지 않은 입력값입니다. 숫자만 입력해주세요.")
-                continue
-            }
-            
             // 정답과 유저의 입력값을 비교하여 스트라이크/볼을 출력하기
-            let strikeCount = getStrikeCount(input: trimmedInput, answer: answer)
-            let ballCount = getBallCount(input: trimmedInput, answer: answer)
+            let strikeCount = getStrikeCount(input: input, answer: answer)
+            let ballCount = getBallCount(input: input, answer: answer)
             
             // 만약 정답이라면 break 호출하여 반복문 탈출
-            if strikeCount == 3 && trimmedInput == answer {
+            if strikeCount == 3 && input == answer {
                 print("ALL 스트라이크! 정답입니다")
                 recordManager.add(attempts: attempts)
                 break
@@ -133,6 +121,35 @@ final class BaseballGame {
         let result = numbers.map { String($0) }.joined()
         
         return result
+    }
+    
+    // MARK: - 유저 input값 검증 함수
+
+    func isValidateInput(input: String) throws {
+        // 정수로 변환되지 않는 경우 반복문 처음으로 돌아가기
+        // whitespaces로 input의 앞뒤 공백문자 삭제
+        let trimmedInput = input.trimmingCharacters(in: .whitespaces)
+
+        // 입력값이 3자리가 아닐때 안내메시지 출력
+        if trimmedInput.count != 3 {
+            throw GameError.checkThreeString
+        }
+        
+        // 0번째에 0입력시 안내메시지 출력
+        if trimmedInput.first == "0" {
+            throw GameError.checkFirstString
+        }
+        
+        // 중복 숫자 입력시 안내메시지 출력
+        let uniqueString = Set(trimmedInput)
+        if uniqueString.count != 3 {
+            throw GameError.checkUniqueString
+        }
+        
+        // 숫자 이외 입력시 안내메시지 출력
+        if !trimmedInput.allSatisfy({ $0.isNumber }) {
+            throw GameError.checkOtherString
+        }
     }
     
     // input의 숫자가 answer와 비교 후 동일한 index에 위치하며, 동일한 숫자인 경우(순서상관있음)
