@@ -10,6 +10,7 @@
 		18834C4B2CD9949A005AF6A3 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18834C4A2CD9949A005AF6A3 /* main.swift */; };
 		18834C562CDA3E1A005AF6A3 /* BaseballGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18834C552CDA3E1A005AF6A3 /* BaseballGame.swift */; };
 		1883A0DA2CDCAE3A00DC6064 /* RecordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1883A0D92CDCAE3A00DC6064 /* RecordManager.swift */; };
+		1883A0DC2CDCBFA600DC6064 /* GameError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1883A0DB2CDCBFA600DC6064 /* GameError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,6 +30,7 @@
 		18834C4A2CD9949A005AF6A3 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		18834C552CDA3E1A005AF6A3 /* BaseballGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseballGame.swift; sourceTree = "<group>"; };
 		1883A0D92CDCAE3A00DC6064 /* RecordManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordManager.swift; sourceTree = "<group>"; };
+		1883A0DB2CDCBFA600DC6064 /* GameError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 		18834C492CD9949A005AF6A3 /* BaseBallGame */ = {
 			isa = PBXGroup;
 			children = (
+				1883A0DB2CDCBFA600DC6064 /* GameError.swift */,
 				18834C4A2CD9949A005AF6A3 /* main.swift */,
 				18834C552CDA3E1A005AF6A3 /* BaseballGame.swift */,
 				1883A0D92CDCAE3A00DC6064 /* RecordManager.swift */,
@@ -128,6 +131,7 @@
 			files = (
 				1883A0DA2CDCAE3A00DC6064 /* RecordManager.swift in Sources */,
 				18834C4B2CD9949A005AF6A3 /* main.swift in Sources */,
+				1883A0DC2CDCBFA600DC6064 /* GameError.swift in Sources */,
 				18834C562CDA3E1A005AF6A3 /* BaseballGame.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
