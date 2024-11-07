@@ -9,4 +9,4 @@ import Foundation
 
 
 let game = BaseballGame()
-game.notice()
+game.selectGameMenu()

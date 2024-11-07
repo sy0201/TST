@@ -9,8 +9,9 @@ import Foundation
 
 final class BaseballGame {
     var recordManager = RecordManager.shared
+    var gameInProgress = false
     
-    func notice() {
+    func selectGameMenu() {
         print("환영합니다! 원하시는 번호를 입력해주세요")
         print("1. 게임 시작하기  2. 게임 기록 보기  3. 종료하기")
         
@@ -22,41 +23,47 @@ final class BaseballGame {
             
             switch selectMenu {
             case "1": startGame()
-            case "2": recordManager.showRecords()
+            case "2": recordManager.showRecords(isGameInProgress: gameInProgress)
             case "3": print("게임 기록을 불러옵니다... (기록 기능은 아직 구현되지 않았습니다)")
             default:
                 print("올바르지 않은 입력입니다. 1, 2 또는 3을 입력해주세요.")
+            }
+            
+            if gameInProgress {
+                break
             }
         }
     }
     
     func startGame() {
+        gameInProgress = true
         let answer = makeAnswer()
+        var attempts = 0
+        recordManager.currentAttempts = 0
+        
         print("< 게임을 시작합니다 >")
         print("숫자를 입력하세요")
         print("answer \(answer)")
+        
         while true {
-            // 1. 유저에게 입력값 받음
+            // 유저에게 입력값 받음
             guard let input = readLine() else {
                 print("입력이 올바르지 않습니다. 다시 시도해 주세요.")
                 continue
             }
             
-            // 2. 정수로 변환되지 않는 경우 반복문 처음으로 돌아가기
-            
+            // 정수로 변환되지 않는 경우 반복문 처음으로 돌아가기
             // whitespaces로 input의 앞뒤 공백문자 삭제
             let trimmedInput = input.trimmingCharacters(in: .whitespaces)
+            attempts += 1
+            recordManager.currentAttempts = attempts
             
-            // 3. 입력값이 3자리가 아닐때 안내메시지 출력
+            print("attempts \(attempts)")
+
+            // 입력값이 3자리가 아닐때 안내메시지 출력
             if trimmedInput.count != 3 {
                 print("올바르지 않은 입력값입니다")
                 continue
-            }
-            
-            // 정답을 맞춘 경우 안내메시지 출력 및 break
-            if trimmedInput == answer {
-                print("정답입니다!")
-                break
             }
             
             // 0번째에 0입력시 안내메시지 출력
@@ -72,25 +79,31 @@ final class BaseballGame {
                 continue
             }
             
-            
             // 숫자 이외 입력시 안내메시지 출력
             if !trimmedInput.allSatisfy({ $0.isNumber }) {
                 print("올바르지 않은 입력값입니다. 숫자만 입력해주세요.")
                 continue
             }
             
-            // 4. 정답과 유저의 입력값을 비교하여 스트라이크/볼을 출력하기
+            // 정답과 유저의 입력값을 비교하여 스트라이크/볼을 출력하기
             let strikeCount = getStrikeCount(input: trimmedInput, answer: answer)
             let ballCount = getBallCount(input: trimmedInput, answer: answer)
             
             // 만약 정답이라면 break 호출하여 반복문 탈출
-            if strikeCount == 3 {
-                print("스트라이크")
+            if strikeCount == 3 && trimmedInput == answer {
+                print("ALL 스트라이크! 정답입니다")
+                recordManager.add(attempts: attempts)
                 break
+            } else if strikeCount == 0 && ballCount == 0 {
+                // 정답과 매치된 숫자가 하나도 없다면
+                print("Nothing")
+                continue
             } else {
                 print("\(strikeCount)스트라이크 \(ballCount)볼")
             }
         }
+        gameInProgress = false
+        
     }
     
     // MARK: - 정답 생성 함수
@@ -106,7 +119,6 @@ final class BaseballGame {
                 numbers.insert(firstInt)
                 print("firstInt\(firstInt)")
             } else {
-                
                 let randomInt = Int.random(in: 0...9)
                 numbers.insert(randomInt)
                 print("randomInt\(randomInt)")
