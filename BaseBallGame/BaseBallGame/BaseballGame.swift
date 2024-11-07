@@ -8,6 +8,8 @@
 import Foundation
 
 final class BaseballGame {
+    var recordManager = RecordManager.shared
+    
     func notice() {
         print("환영합니다! 원하시는 번호를 입력해주세요")
         print("1. 게임 시작하기  2. 게임 기록 보기  3. 종료하기")
@@ -20,7 +22,7 @@ final class BaseballGame {
             
             switch selectMenu {
             case "1": startGame()
-            case "2": print("게임 기록을 불러옵니다... ")
+            case "2": recordManager.showRecords()
             case "3": print("게임 기록을 불러옵니다... (기록 기능은 아직 구현되지 않았습니다)")
             default:
                 print("올바르지 않은 입력입니다. 1, 2 또는 3을 입력해주세요.")
@@ -32,7 +34,7 @@ final class BaseballGame {
         let answer = makeAnswer()
         print("< 게임을 시작합니다 >")
         print("숫자를 입력하세요")
-        
+        print("answer \(answer)")
         while true {
             // 1. 유저에게 입력값 받음
             guard let input = readLine() else {
@@ -45,28 +47,33 @@ final class BaseballGame {
             // whitespaces로 input의 앞뒤 공백문자 삭제
             let trimmedInput = input.trimmingCharacters(in: .whitespaces)
             
-            // 3. 세자리가 아니거나, 0을 가지거나 특정 숫자가 두번 사용된 경우 반복문 처음으로 돌아가기
+            // 3. 입력값이 3자리가 아닐때 안내메시지 출력
             if trimmedInput.count != 3 {
                 print("올바르지 않은 입력값입니다")
                 continue
             }
             
+            // 정답을 맞춘 경우 안내메시지 출력 및 break
             if trimmedInput == answer {
-                print("스트라이크")
-                continue
+                print("정답입니다!")
+                break
             }
             
+            // 0번째에 0입력시 안내메시지 출력
             if trimmedInput.first == "0" {
                 print("올바르지 않은 입력값입니다. 첫번째 숫자는 0이 될 수 없습니다.")
                 continue
             }
-            
+                        
+            // 중복 숫자 입력시 안내메시지 출력
             let uniqueString = Set(trimmedInput)
             if uniqueString.count != 3 {
                 print("올바르지 않은 입력값입니다. 중복되지 않는 숫자를 입력해주세요.")
                 continue
             }
             
+            
+            // 숫자 이외 입력시 안내메시지 출력
             if !trimmedInput.allSatisfy({ $0.isNumber }) {
                 print("올바르지 않은 입력값입니다. 숫자만 입력해주세요.")
                 continue
@@ -78,7 +85,7 @@ final class BaseballGame {
             
             // 만약 정답이라면 break 호출하여 반복문 탈출
             if strikeCount == 3 {
-                print("정답입니다!")
+                print("스트라이크")
                 break
             } else {
                 print("\(strikeCount)스트라이크 \(ballCount)볼")
@@ -86,18 +93,23 @@ final class BaseballGame {
         }
     }
     
+    // MARK: - 정답 생성 함수
+    
     func makeAnswer() -> String {
         // Set을 사용하여 3개의 숫자 중 중복값 자동으로 걸러내기
         var numbers: Set<Int> = []
         
-        // 첫번째 자리에 0이 되지 않도록 구현
+        // 0번째 자리에 0이 되지 않도록 구현
         while numbers.count < 3 {
             if numbers.isEmpty {
                 let firstInt = Int.random(in: 1...9)
                 numbers.insert(firstInt)
+                print("firstInt\(firstInt)")
             } else {
+                
                 let randomInt = Int.random(in: 0...9)
                 numbers.insert(randomInt)
+                print("randomInt\(randomInt)")
             }
         }
         
