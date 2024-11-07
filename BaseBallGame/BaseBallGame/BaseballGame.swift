@@ -11,6 +11,8 @@ final class BaseballGame {
     var recordManager = RecordManager.shared
     var gameInProgress = false
     
+    // MARK: - 게임 메뉴 선택 함수
+
     func selectGameMenu() {
         print("환영합니다! 원하시는 번호를 입력해주세요")
         print("1. 게임 시작하기  2. 게임 기록 보기  3. 종료하기")
@@ -22,10 +24,15 @@ final class BaseballGame {
             }
             
             switch selectMenu {
-            case "1": 
+            // 1. 게임 시작하기 버튼 입력 케이스
+            case "1":
                 startGame()
-            case "2": 
+                
+            // 2. 게임 기록 보기 버튼 입력 케이스
+            case "2":
                 recordManager.showRecords(isGameInProgress: gameInProgress)
+                
+            // 3. 종료하기 버튼 입력 케이스
             case "3":
                 print("< 숫자 야구 게임을 종료합니다 >")
                 return
@@ -40,6 +47,8 @@ final class BaseballGame {
         }
     }
     
+    // MARK: - 게임 시작 함수
+
     func startGame() {
         gameInProgress = true
         let answer = makeAnswer()
@@ -57,6 +66,7 @@ final class BaseballGame {
             }
             
             do {
+                // 입력값 검증 확인
                 try isValidateInput(input: input)
             } catch GameError.checkThreeString {
                 print("올바르지 않은 입력값입니다. 3자리 숫자를 입력해주세요.")
@@ -152,7 +162,11 @@ final class BaseballGame {
         }
     }
     
-    // input의 숫자가 answer와 비교 후 동일한 index에 위치하며, 동일한 숫자인 경우(순서상관있음)
+    /// input의 숫자가 answer와 비교 후 동일한 index에 위치하며, 동일한 숫자인 경우(순서상관있음)의 함수
+    /// - Parameters:
+    ///   - input: 사용자 입력 값
+    ///   - answer: makeAnswer함수를 통해 생성된 정답 값
+    /// - Returns: 정답값과 같은 위치에 입력값이 있는 경우의 숫자를 return 해준다.
     func getStrikeCount(input: String, answer: String) -> Int {
         var strikeCount = 0
         
@@ -165,7 +179,12 @@ final class BaseballGame {
         return strikeCount
     }
     
-    // input의 숫자가 answer와 비교 후 하나 이상 포함하는 경우(순서상관없음)
+    
+    /// input의 숫자가 answer와 비교 후 하나 이상 포함하는 경우(순서상관없음)의 함수
+    /// - Parameters:
+    ///   - input: 사용자 입력 값
+    ///   - answer: makeAnswer함수를 통해 생성된 정답 값
+    /// - Returns: 정답값과 다른 위치면서 동일한 값의 입력값이 있는 경우의 숫자를 return 해준다.
     func getBallCount(input: String, answer: String) -> Int {
         var ballCount = 0
         
