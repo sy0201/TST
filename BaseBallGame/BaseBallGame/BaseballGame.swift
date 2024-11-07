@@ -22,9 +22,14 @@ final class BaseballGame {
             }
             
             switch selectMenu {
-            case "1": startGame()
-            case "2": recordManager.showRecords(isGameInProgress: gameInProgress)
-            case "3": print("게임 기록을 불러옵니다... (기록 기능은 아직 구현되지 않았습니다)")
+            case "1": 
+                startGame()
+            case "2": 
+                recordManager.showRecords(isGameInProgress: gameInProgress)
+            case "3":
+                print("< 숫자 야구 게임을 종료합니다 >")
+                return
+
             default:
                 print("올바르지 않은 입력입니다. 1, 2 또는 3을 입력해주세요.")
             }
@@ -103,7 +108,6 @@ final class BaseballGame {
             }
         }
         gameInProgress = false
-        
     }
     
     // MARK: - 정답 생성 함수
