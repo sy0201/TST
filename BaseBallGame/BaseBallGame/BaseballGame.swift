@@ -71,20 +71,11 @@ final class BaseballGame {
             do {
                 // 입력값 검증 확인
                 try isValidateInput(input: input)
-            } catch GameError.checkThreeString {
-                print("올바르지 않은 입력값입니다. 3자리 숫자를 입력해주세요.")
-                continue
-            } catch GameError.checkFirstString {
-                print("올바르지 않은 입력값입니다. 첫번째 숫자는 0이 될 수 없습니다.")
-                continue
-            } catch GameError.checkUniqueString {
-                print("올바르지 않은 입력값입니다. 중복되지 않는 숫자를 입력해주세요.")
-                continue
-            } catch GameError.checkOtherString {
-                print("올바르지 않은 입력값입니다. 숫자만 입력해주세요.")
+            } catch let error as LocalizedError {
+                print(error.errorDescription ?? "알 수 없는 에러가 발생했습니다.")
                 continue
             } catch {
-                print("알 수 없는 오류가 발생했습니다. 다시 시도해 주세요.")
+                print("알 수 없는 에러가 발생했습니다. \(error)")
                 continue
             }
             
@@ -145,23 +136,23 @@ final class BaseballGame {
 
         // 입력값이 3자리가 아닐때 안내메시지 출력
         if trimmedInput.count != 3 {
-            throw GameError.checkThreeString
+            throw InputErrorMessage.checkThreeString
         }
         
         // 0번째에 0입력시 안내메시지 출력
         if trimmedInput.first == "0" {
-            throw GameError.checkFirstString
+            throw InputErrorMessage.checkFirstString
         }
         
         // 중복 숫자 입력시 안내메시지 출력
         let uniqueString = Set(trimmedInput)
         if uniqueString.count != 3 {
-            throw GameError.checkUniqueString
+            throw InputErrorMessage.checkUniqueString
         }
         
         // 숫자 이외 입력시 안내메시지 출력
         if !trimmedInput.allSatisfy({ $0.isNumber }) {
-            throw GameError.checkOtherString
+            throw InputErrorMessage.checkOtherString
         }
     }
     
