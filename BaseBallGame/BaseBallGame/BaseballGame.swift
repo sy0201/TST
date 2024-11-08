@@ -14,8 +14,11 @@ final class BaseballGame {
     // MARK: - 게임 메뉴 선택 함수
 
     func selectGameMenu() {
-        print("환영합니다! 원하시는 번호를 입력해주세요")
-        print("1. 게임 시작하기  2. 게임 기록 보기  3. 종료하기")
+        let selectMenu = """
+        환영합니다! 원하시는 번호를 입력해주세요
+        1. 게임 시작하기  2. 게임 기록 보기  3. 종료하기
+        """
+        print(selectMenu)
         
         while true {
             guard let selectMenu = readLine() else {
