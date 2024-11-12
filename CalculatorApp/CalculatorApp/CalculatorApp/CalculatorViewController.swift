@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  CalculatorViewController.swift
 //  CalculatorApp
 //
 //  Created by siyeon park on 11/11/24.
@@ -7,13 +7,10 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class CalculatorViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        view.backgroundColor = .red
     }
-
-
 }
-
