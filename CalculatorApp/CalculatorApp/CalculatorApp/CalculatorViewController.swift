@@ -98,11 +98,18 @@ final class CalculatorViewController: UIViewController {
             button.widthAnchor.constraint(equalToConstant: 80).isActive = true
             button.heightAnchor.constraint(equalToConstant: 80).isActive = true
             button.layer.cornerRadius = 40
-            button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
+            if title == "+" || title == "-" || title == "*" || title == "/" || title == "AC" || title == "=" {
+                button.backgroundColor = UIColor(red: 252/255, green: 134/255, blue: 0/255, alpha: 1.0)
+            } else {
+                button.backgroundColor = UIColor(red: 58/255, green: 58/255, blue: 58/255, alpha: 1.0)
+            }
             
+            button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
             
             buttons.append(button)
         }
+        
+        
         
         let horizontalStackView = UIStackView(arrangedSubviews: buttons)
         horizontalStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -116,5 +123,6 @@ final class CalculatorViewController: UIViewController {
     
     @objc func buttonTapped(_ sender: UIButton) {
         print("taptap")
+        
     }
 }
