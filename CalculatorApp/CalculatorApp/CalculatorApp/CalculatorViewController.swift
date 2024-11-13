@@ -8,7 +8,11 @@
 import UIKit
 
 final class CalculatorViewController: UIViewController {
-    private let maxLabelCount = 19
+    private let maxLabelCount = 17
+    var currentOperation: String?
+    var firstInput: String = ""
+    var laterInput: String = ""
+    
     let buttonList = [
         ["7", "8", "9", "+"],
         ["4", "5", "6", "-"],
@@ -17,17 +21,16 @@ final class CalculatorViewController: UIViewController {
     ]
     
     private let resultLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .right
-        label.font = .systemFont(ofSize: 60, weight: .bold)
-        label.textColor = .white
-        label.text = "1,23"
-        label.adjustsFontSizeToFitWidth = true  // label이 화면너비만큼 입력시 폰트 사이즈 작아지도록 설정
-        label.minimumScaleFactor = 0.5  // label 50%까지 줄어들 수 있도록 설정
-        label.lineBreakMode = .byTruncatingTail
+        let resultLabel = UILabel()
+        resultLabel.translatesAutoresizingMaskIntoConstraints = false
+        resultLabel.textAlignment = .right
+        resultLabel.font = .systemFont(ofSize: 60, weight: .bold)
+        resultLabel.textColor = .white
+        resultLabel.adjustsFontSizeToFitWidth = true  // label이 화면너비만큼 입력시 폰트 사이즈 작아지도록 설정
+        resultLabel.minimumScaleFactor = 0.5  // label 50%까지 줄어들 수 있도록 설정
+        resultLabel.lineBreakMode = .byTruncatingTail
         
-        return label
+        return resultLabel
     }()
     
     private let verticalStackView: UIStackView = {
@@ -45,7 +48,6 @@ final class CalculatorViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         setupConstraint()
-        limitedString(resultLabel.text ?? "")
     }
     
     private func setupUI() {
@@ -76,19 +78,25 @@ final class CalculatorViewController: UIViewController {
             verticalStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
         ])
     }
-    
+    // MARK: - 제한된 입력값만 노출해주는 함수
+
     private func limitedString(_ text: String) {
         if text.count > maxLabelCount {
             let limitedLabel = String(text.prefix(maxLabelCount))
             resultLabel.text = limitedLabel
+            print("limitedLabel\(limitedLabel)")
+            print("limitedLabel\(limitedLabel.count)")
         } else {
             resultLabel.text = text
         }
     }
     
+    // MARK: - buttonList를 가로 StackView를 return 하는 함수
+
     private func makeHorizontalStackView(_ titles: [String]) -> UIStackView {
         var buttons: [UIButton] = []
         
+        // 각 버튼의 title을 설정
         for title in titles {
             let button = UIButton()
             button.translatesAutoresizingMaskIntoConstraints = false
@@ -109,8 +117,7 @@ final class CalculatorViewController: UIViewController {
             buttons.append(button)
         }
         
-        
-        
+        // 가로 stackView 설정
         let horizontalStackView = UIStackView(arrangedSubviews: buttons)
         horizontalStackView.translatesAutoresizingMaskIntoConstraints = false
         horizontalStackView.axis = .horizontal
@@ -122,7 +129,29 @@ final class CalculatorViewController: UIViewController {
     }
     
     @objc func buttonTapped(_ sender: UIButton) {
-        print("taptap")
+        guard let buttonTitle = sender.currentTitle else {
+            return
+        }
         
+        switch buttonTitle {
+        case "AC": 
+            resetResult()
+        default:
+            if resultLabel.text == "0" {
+                resultLabel.text = buttonTitle
+            } else if resultLabel.text != "0" {
+                resultLabel.text = (resultLabel.text ?? "") + buttonTitle
+            }
+            limitedString(resultLabel.text ?? "")
+        }
+    }
+    
+    // MARK: - AC 버튼 탭시 결과값 reset 하는 함수
+
+    private func resetResult() {
+        currentOperation = nil
+        firstInput = ""
+        laterInput = ""
+        resultLabel.text = "0"
     }
 }
