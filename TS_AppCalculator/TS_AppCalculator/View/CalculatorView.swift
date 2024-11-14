@@ -133,7 +133,7 @@ private extension CalculatorView {
         
         switch buttonTitle {
         case "AC":
-            //resetResult()
+            resetResult()
             break
         default:
             if resultLabel.text == "0" {
@@ -143,5 +143,9 @@ private extension CalculatorView {
             }
             limitedString(resultLabel.text ?? "")
         }
+    }
+    
+    func resetResult() {
+        resultLabel.text = "0"
     }
 }
