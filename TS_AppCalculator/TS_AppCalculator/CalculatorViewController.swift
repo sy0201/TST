@@ -34,7 +34,7 @@ final class CalculatorViewController: UIViewController {
             let result = calculatorModel.arithmetic()
             calculatorView.resultLabel.text = result
             calculatorModel.reset()
-            currentExpression = result
+            currentExpression = ""
             
         case "+", "-", "*", "/":
             if !calculatorModel.firstInput.isEmpty {
