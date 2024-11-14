@@ -10,8 +10,9 @@ import UIKit
 
 final class CalculatorView: UIView {
     private let maxLabelCount = 17
+    var buttonTapHandler: ((String) -> Void)?
     
-    private let resultLabel: UILabel = {
+    let resultLabel: UILabel = {
         let resultLabel = UILabel()
         resultLabel.translatesAutoresizingMaskIntoConstraints = false
         resultLabel.textAlignment = .right
@@ -127,25 +128,7 @@ private extension CalculatorView {
     }
     
     @objc func buttonTapped(_ sender: UIButton) {
-        guard let buttonTitle = sender.currentTitle else {
-            return
-        }
-        
-        switch buttonTitle {
-        case "AC":
-            resetResult()
-            break
-        default:
-            if resultLabel.text == "0" {
-                resultLabel.text = buttonTitle
-            } else if resultLabel.text != "0" {
-                resultLabel.text = (resultLabel.text ?? "") + buttonTitle
-            }
-            limitedString(resultLabel.text ?? "")
-        }
-    }
-    
-    func resetResult() {
-        resultLabel.text = "0"
+        guard let buttonTitle = sender.currentTitle else { return }
+        buttonTapHandler?(buttonTitle)
     }
 }
