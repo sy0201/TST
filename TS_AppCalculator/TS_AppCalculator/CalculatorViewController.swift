@@ -8,7 +8,9 @@
 import UIKit
 
 final class CalculatorViewController: UIViewController {
-    let calculatorView = CalculatorView()
+    private let calculatorModel = CalculatorModel()
+    private let calculatorView = CalculatorView()
+    
     
     override func loadView() {
         view = calculatorView
