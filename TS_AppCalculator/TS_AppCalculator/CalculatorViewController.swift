@@ -21,8 +21,10 @@ final class CalculatorViewController: UIViewController {
             self?.handleButtonTap(buttonTitle)
         }
     }
-    
-    private func handleButtonTap(_ buttonTitle: String) {
+}
+
+private extension CalculatorViewController {
+    func handleButtonTap(_ buttonTitle: String) {
         switch buttonTitle {
         case "AC":
             calculatorModel.resetResult()
