@@ -19,7 +19,7 @@ final class CalculatorView: UIView {
         resultLabel.font = .systemFont(ofSize: 60, weight: .bold)
         resultLabel.textColor = .white
         resultLabel.adjustsFontSizeToFitWidth = true  // label이 화면너비만큼 입력시 폰트 사이즈 작아지도록 설정
-        resultLabel.minimumScaleFactor = 0.5  // label 50%까지 줄어들 수 있도록 설정
+        resultLabel.minimumScaleFactor = 0.5          // label 50%까지 줄어들 수 있도록 설정
         resultLabel.lineBreakMode = .byTruncatingTail
         
         return resultLabel
@@ -35,7 +35,7 @@ final class CalculatorView: UIView {
         return verticalStackView
     }()
     
-    let buttonList = [
+    private let buttonList = [
         ["7", "8", "9", "+"],
         ["4", "5", "6", "-"],
         ["1", "2", "3", "*"],
@@ -75,23 +75,25 @@ private extension CalculatorView {
             resultLabel.heightAnchor.constraint(equalToConstant: 100),
             
             verticalStackView.topAnchor.constraint(equalTo: resultLabel.bottomAnchor, constant: 60),
+            verticalStackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             verticalStackView.widthAnchor.constraint(equalToConstant: 350),
-            verticalStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            verticalStackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -20)
+            verticalStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor)
         ])
     }
     
+    // MARK: - 계산기 입력 숫자 제한 함수
+
     func limitedString(_ text: String) {
         if text.count > maxLabelCount {
             let limitedLabel = String(text.prefix(maxLabelCount))
             resultLabel.text = limitedLabel
-            print("limitedLabel\(limitedLabel)")
-            print("limitedLabel\(limitedLabel.count)")
         } else {
             resultLabel.text = text
         }
     }
     
+    // MARK: - 버튼 배열을 StackView에 넣고 버튼 설정 하는 함수
+
     func makeHorizontalStackView(_ titles: [String]) -> UIStackView {
         var buttons: [UIButton] = []
         
