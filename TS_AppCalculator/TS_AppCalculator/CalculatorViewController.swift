@@ -10,7 +10,6 @@ import UIKit
 final class CalculatorViewController: UIViewController {
     private var calculatorModel = CalculatorModel()
     private let calculatorView = CalculatorView()
-    private var currentExpression = ""
     
     override func loadView() {
         view = calculatorView
@@ -26,31 +25,20 @@ final class CalculatorViewController: UIViewController {
     private func handleButtonTap(_ buttonTitle: String) {
         switch buttonTitle {
         case "AC":
-            calculatorModel.reset()
-            currentExpression = ""
+            calculatorModel.resetResult()
             calculatorView.resultLabel.text = "0"
             
         case "=":
-            let result = calculatorModel.arithmetic()
+            let result = calculatorModel.calculateResult()
             calculatorView.resultLabel.text = result
-            calculatorModel.reset()
-            currentExpression = ""
             
         case "+", "-", "*", "/":
-            if !calculatorModel.firstInput.isEmpty {
-                calculatorModel.currentOperation = buttonTitle
-                currentExpression += buttonTitle
-                calculatorView.resultLabel.text = currentExpression
-            }
+            calculatorModel.inputOperation(buttonTitle)
+            calculatorView.resultLabel.text = calculatorModel.displayExpression
             
         default:
-            if calculatorModel.currentOperation == nil {
-                calculatorModel.firstInput += buttonTitle
-            } else {
-                calculatorModel.laterInput += buttonTitle
-            }
-            currentExpression += buttonTitle
-            calculatorView.resultLabel.text = currentExpression
+            calculatorModel.inputNumber(buttonTitle)
+            calculatorView.resultLabel.text = calculatorModel.displayExpression
         }
     }
 }
