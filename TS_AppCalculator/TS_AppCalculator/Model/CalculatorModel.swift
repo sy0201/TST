@@ -8,7 +8,7 @@
 import Foundation
 
 struct CalculatorModel {
-    var selectedOperator: String?      // 입력된 연산자 enteredOperator
+    var selectedOperator: Enum.OperatorType?  // 입력된 연산자 enteredOperator
     var currentInput: String = ""      // 입력된 값을 담아두는 변수 enteredValue
     var accumulatedResult: Int = 0     // 누적된 결과를 저장
     var displayExpression: String = "" // 입력된 값을 화면에 보여줌
@@ -27,7 +27,7 @@ struct CalculatorModel {
     
     // MARK: - 연산자 입력시 처리하는 함수
 
-    mutating func setOperation(_ operation: String) {
+    mutating func setOperation(_ operation: Enum.OperatorType) {
         // 첫번째 입력값이 숫자가 아닌 연산자인 경우 아무런 연산없이 리턴
         if currentInput.isEmpty {
             return
@@ -47,21 +47,21 @@ struct CalculatorModel {
         
         selectedOperator = operation
         currentInput = ""
-        displayExpression += operation
+        displayExpression += operation.rawValue
     }
     
     // MARK: - 입력된 연산자로 연산되도록 하는 함수
 
-    mutating func applyOperator(_ operation: String) {
+    mutating func applyOperator(_ operation: Enum.OperatorType) {
         guard let inputNumber = Int(currentInput) else {
             return
         }
         
         switch operation {
-        case "*": accumulatedResult *= inputNumber
-        case "/": accumulatedResult /= inputNumber
-        case "+": accumulatedResult += inputNumber
-        case "-": accumulatedResult -= inputNumber
+        case .multiplication: accumulatedResult *= inputNumber
+        case .division: accumulatedResult /= inputNumber
+        case .plus: accumulatedResult += inputNumber
+        case .minus: accumulatedResult -= inputNumber
         default: break
         }
     }

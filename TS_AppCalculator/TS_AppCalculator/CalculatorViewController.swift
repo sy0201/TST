@@ -23,27 +23,29 @@ final class CalculatorViewController: UIViewController {
 
 private extension CalculatorViewController {
     func setupBind() {
-        calculatorView.buttonTapHandler = { [weak self] buttonTitle in
-            self?.handleButtonTap(buttonTitle)
+        calculatorView.buttonTapHandler = { [weak self] buttonType in
+            if let operatorType = Enum.OperatorType(rawValue: buttonType) {
+                self?.handleButtonTap(operatorType)
+            }
         }
     }
     
-    func handleButtonTap(_ buttonTitle: String) {
-        switch buttonTitle {
-        case "AC":
+    func handleButtonTap(_ buttonType: Enum.OperatorType) {
+        switch buttonType {
+        case .ac:
             calculatorModel.resetResult()
             calculatorView.resultLabel.text = "0"
             
-        case "=":
+        case .equalSign:
             let result = calculatorModel.getCalculateResult()
             calculatorView.resultLabel.text = result
             
-        case "+", "-", "*", "/":
-            calculatorModel.setOperation(buttonTitle)
+        case .plus, .minus, .multiplication, .division:
+            calculatorModel.setOperation(buttonType)
             calculatorView.resultLabel.text = calculatorModel.displayExpression
             
         default:
-            calculatorModel.setNumber(buttonTitle)
+            calculatorModel.setNumber(buttonType.rawValue)
             calculatorView.resultLabel.text = calculatorModel.displayExpression
         }
     }
