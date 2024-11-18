@@ -5,7 +5,6 @@
 //  Created by siyeon park on 11/14/24.
 //
 
-import Foundation
 import UIKit
 
 final class CalculatorView: UIView {

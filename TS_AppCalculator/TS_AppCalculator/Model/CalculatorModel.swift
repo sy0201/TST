@@ -16,7 +16,7 @@ struct CalculatorModel {
     
     // MARK: - 입력된 숫자를 displayExpression에도 보여지게하고, currentInput에도 입력된 값을 담아두도록 하는 함수
 
-    mutating func inputNumber(_ number: String) {
+    mutating func setNumber(_ number: String) {
         if isResultDisplay {
             resetResult()
             isResultDisplay = false
@@ -27,7 +27,7 @@ struct CalculatorModel {
     
     // MARK: - 연산자 입력시 처리하는 함수
 
-    mutating func inputOperation(_ operation: String) {
+    mutating func setOperation(_ operation: String) {
         // 첫번째 입력값이 숫자가 아닌 연산자인 경우 아무런 연산없이 리턴
         if currentInput.isEmpty {
             return
@@ -67,7 +67,7 @@ struct CalculatorModel {
     }
     
     // MARK: - 등호 "="버튼 탭시 결과를 보여주는 함수
-    mutating func calculateResult() -> String {
+    mutating func getCalculateResult() -> String {
         if let operatorSymbol = selectedOperator {
             applyOperator(operatorSymbol)
             selectedOperator = nil       // 계산 종료 후 연산자 초기화

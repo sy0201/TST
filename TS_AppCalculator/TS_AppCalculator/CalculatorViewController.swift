@@ -17,13 +17,17 @@ final class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        calculatorView.buttonTapHandler = { [weak self] buttonTitle in
-            self?.handleButtonTap(buttonTitle)
-        }
+        setupBind()
     }
 }
 
 private extension CalculatorViewController {
+    func setupBind() {
+        calculatorView.buttonTapHandler = { [weak self] buttonTitle in
+            self?.handleButtonTap(buttonTitle)
+        }
+    }
+    
     func handleButtonTap(_ buttonTitle: String) {
         switch buttonTitle {
         case "AC":
@@ -31,15 +35,15 @@ private extension CalculatorViewController {
             calculatorView.resultLabel.text = "0"
             
         case "=":
-            let result = calculatorModel.calculateResult()
+            let result = calculatorModel.getCalculateResult()
             calculatorView.resultLabel.text = result
             
         case "+", "-", "*", "/":
-            calculatorModel.inputOperation(buttonTitle)
+            calculatorModel.setOperation(buttonTitle)
             calculatorView.resultLabel.text = calculatorModel.displayExpression
             
         default:
-            calculatorModel.inputNumber(buttonTitle)
+            calculatorModel.setNumber(buttonTitle)
             calculatorView.resultLabel.text = calculatorModel.displayExpression
         }
     }
