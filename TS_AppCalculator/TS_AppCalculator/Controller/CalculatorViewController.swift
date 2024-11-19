@@ -41,12 +41,18 @@ private extension CalculatorViewController {
             calculatorView.resultLabel.text = result
             
         case .plus, .minus, .multiplication, .division:
-            calculatorModel.setOperation(buttonType)
+            calculatorModel.setInputOperation(buttonType)
             calculatorView.resultLabel.text = calculatorModel.getDisplayExpression()
             
         default:
-            calculatorModel.setNumber(buttonType.rawValue)
-            calculatorView.resultLabel.text = calculatorModel.getDisplayExpression()
+            let result = calculatorModel.setInputNumber(buttonType.rawValue)
+            switch result {
+            case .success(let displayExpression):
+                calculatorView.resultLabel.text = displayExpression
+                calculatorView.limitedString(displayExpression)
+            case .failure(let error):
+                print("Error occurred: \(error.errorMessage)")
+            }
         }
     }
 }

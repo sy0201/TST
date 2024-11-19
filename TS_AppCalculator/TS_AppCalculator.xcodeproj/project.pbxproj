@@ -76,7 +76,8 @@
 		1883A1702CE4CE0F00DC6064 /* TS_AppCalculator */ = {
 			isa = PBXGroup;
 			children = (
-				1883A18B2CE5950500DC6064 /* Service */,
+				1883A1712CE4CE0F00DC6064 /* AppDelegate.swift */,
+				1883A1732CE4CE0F00DC6064 /* SceneDelegate.swift */,
 				1882B3562CEAE2AD00782F2B /* Enums */,
 				1883A1852CE58C1300DC6064 /* Model */,
 				1883A1862CE58E2700DC6064 /* View */,
@@ -102,15 +103,6 @@
 				1883A1872CE5942200DC6064 /* CalculatorView.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		1883A18B2CE5950500DC6064 /* Service */ = {
-			isa = PBXGroup;
-			children = (
-				1883A1712CE4CE0F00DC6064 /* AppDelegate.swift */,
-				1883A1732CE4CE0F00DC6064 /* SceneDelegate.swift */,
-			);
-			path = Service;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

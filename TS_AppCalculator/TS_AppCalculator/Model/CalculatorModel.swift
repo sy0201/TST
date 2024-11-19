@@ -16,18 +16,25 @@ struct CalculatorModel {
     
     // MARK: - 입력된 숫자를 displayExpression에도 보여지게하고, currentInput에도 입력된 값을 담아두도록 하는 함수
 
-    mutating func setNumber(_ number: String) {
+    mutating func setInputNumber(_ number: String) -> Result<String, Enum.InputErrorMessage> {
+        if currentInput.count > 17 {
+            return .failure(.checkCountString)
+        }
+        
         if isResultDisplay {
             resetResult()
             isResultDisplay = false
         }
+
         currentInput += number
         displayExpression += number
+        
+        return .success(displayExpression)
     }
     
     // MARK: - 연산자 입력시 처리하는 함수
 
-    mutating func setOperation(_ operation: Enum.OperatorType) {
+    mutating func setInputOperation(_ operation: Enum.OperatorType) {
         // 첫번째 입력값이 숫자가 아닌 연산자인 경우 아무런 연산없이 리턴
         if currentInput.isEmpty {
             return

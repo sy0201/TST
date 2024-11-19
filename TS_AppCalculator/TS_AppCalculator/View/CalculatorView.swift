@@ -50,6 +50,17 @@ final class CalculatorView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - 계산기 입력 숫자 제한 함수
+
+    func limitedString(_ text: String) {
+        if text.count > maxLabelCount {
+            let limitedLabel = String(text.prefix(maxLabelCount))
+            resultLabel.text = limitedLabel
+        } else {
+            resultLabel.text = text
+        }
+    }
 }
 
 private extension CalculatorView {
@@ -78,17 +89,6 @@ private extension CalculatorView {
             verticalStackView.widthAnchor.constraint(equalToConstant: 350),
             verticalStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor)
         ])
-    }
-    
-    // MARK: - 계산기 입력 숫자 제한 함수
-
-    func limitedString(_ text: String) {
-        if text.count > maxLabelCount {
-            let limitedLabel = String(text.prefix(maxLabelCount))
-            resultLabel.text = limitedLabel
-        } else {
-            resultLabel.text = text
-        }
     }
     
     // MARK: - 버튼 배열을 StackView에 넣고 버튼 설정 하는 함수
