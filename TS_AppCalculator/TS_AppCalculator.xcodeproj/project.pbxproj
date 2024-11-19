@@ -49,6 +49,14 @@
 			path = Enums;
 			sourceTree = "<group>";
 		};
+		1882B37F2CEC466B00782F2B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1883A1752CE4CE0F00DC6064 /* CalculatorViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		1883A1652CE4CE0F00DC6064 = {
 			isa = PBXGroup;
 			children = (
@@ -72,7 +80,7 @@
 				1882B3562CEAE2AD00782F2B /* Enums */,
 				1883A1852CE58C1300DC6064 /* Model */,
 				1883A1862CE58E2700DC6064 /* View */,
-				1883A1752CE4CE0F00DC6064 /* CalculatorViewController.swift */,
+				1882B37F2CEC466B00782F2B /* Controller */,
 				1883A17A2CE4CE1000DC6064 /* Assets.xcassets */,
 				1883A17C2CE4CE1000DC6064 /* LaunchScreen.storyboard */,
 				1883A17F2CE4CE1000DC6064 /* Info.plist */,
