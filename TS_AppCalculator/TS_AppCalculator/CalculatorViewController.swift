@@ -42,11 +42,11 @@ private extension CalculatorViewController {
             
         case .plus, .minus, .multiplication, .division:
             calculatorModel.setOperation(buttonType)
-            calculatorView.resultLabel.text = calculatorModel.displayExpression
+            calculatorView.resultLabel.text = calculatorModel.getDisplayExpression()
             
         default:
             calculatorModel.setNumber(buttonType.rawValue)
-            calculatorView.resultLabel.text = calculatorModel.displayExpression
+            calculatorView.resultLabel.text = calculatorModel.getDisplayExpression()
         }
     }
 }

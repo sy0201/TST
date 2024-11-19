@@ -8,11 +8,11 @@
 import Foundation
 
 struct CalculatorModel {
-    var selectedOperator: Enum.OperatorType?  // 입력된 연산자 enteredOperator
-    var currentInput: String = ""      // 입력된 값을 담아두는 변수 enteredValue
-    var accumulatedResult: Int = 0     // 누적된 결과를 저장
-    var displayExpression: String = "" // 입력된 값을 화면에 보여줌
-    var isResultDisplay: Bool = false  // 결과값이 있으면 초기화
+    private var selectedOperator: Enum.OperatorType?  // 입력된 연산자 enteredOperator
+    private var currentInput: String = ""      // 입력된 값을 담아두는 변수 enteredValue
+    private var accumulatedResult: Int = 0     // 누적된 결과를 저장
+    private var displayExpression: String = "" // 입력된 값을 화면에 보여줌
+    private var isResultDisplay: Bool = false  // 결과값이 있으면 초기화
     
     // MARK: - 입력된 숫자를 displayExpression에도 보여지게하고, currentInput에도 입력된 값을 담아두도록 하는 함수
 
@@ -64,6 +64,10 @@ struct CalculatorModel {
         case .minus: accumulatedResult -= inputNumber
         default: break
         }
+    }
+    
+    mutating func getDisplayExpression() -> String {
+        return displayExpression
     }
     
     // MARK: - 등호 "="버튼 탭시 결과를 보여주는 함수
