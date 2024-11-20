@@ -30,13 +30,11 @@ struct Enum {
     
     public enum InputErrorMessage: Error {
         case checkCountString  // 입력 숫자 제한
-        case checkDividingError  // 나누기 에러
         case checkNumberFirst  // 숫자가 아닌 연산저 먼저 입력 시
         
         var errorMessage: String {
             switch self {
             case .checkCountString: "ERROR"
-            case .checkDividingError: "ERROR"
             case .checkNumberFirst: "ERROR"
             }
         }

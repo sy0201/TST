@@ -34,10 +34,10 @@ struct CalculatorModel {
     
     // MARK: - 연산자 입력시 처리하는 함수
 
-    mutating func setInputOperation(_ operation: Enum.OperatorType) {
+    mutating func setInputOperation(_ operation: Enum.OperatorType) -> Result<String, Enum.InputErrorMessage> {
         // 첫번째 입력값이 숫자가 아닌 연산자인 경우 아무런 연산없이 리턴
         if currentInput.isEmpty {
-            return
+            return .failure(.checkNumberFirst)
         }
         
         if let currentValue = Int(currentInput) {
@@ -55,6 +55,8 @@ struct CalculatorModel {
         selectedOperator = operation
         currentInput = ""
         displayExpression += operation.rawValue
+        
+        return .success(displayExpression)
     }
     
     // MARK: - 입력된 연산자로 연산되도록 하는 함수

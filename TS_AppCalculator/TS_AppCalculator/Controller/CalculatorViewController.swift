@@ -41,8 +41,14 @@ private extension CalculatorViewController {
             calculatorView.resultLabel.text = result
             
         case .plus, .minus, .multiplication, .division:
-            calculatorModel.setInputOperation(buttonType)
-            calculatorView.resultLabel.text = calculatorModel.getDisplayExpression()
+            let result = calculatorModel.setInputOperation(buttonType)
+            switch result {
+            case .success(_):
+                calculatorView.resultLabel.text = calculatorModel.getDisplayExpression()
+            case .failure(let failure):
+                print("Error occurred: \(failure.errorMessage)")
+            }
+            
             
         default:
             let result = calculatorModel.setInputNumber(buttonType.rawValue)
@@ -50,8 +56,8 @@ private extension CalculatorViewController {
             case .success(let displayExpression):
                 calculatorView.resultLabel.text = displayExpression
                 calculatorView.limitedString(displayExpression)
-            case .failure(let error):
-                print("Error occurred: \(error.errorMessage)")
+            case .failure(let failure):
+                print("Error occurred: \(failure.errorMessage)")
             }
         }
     }
