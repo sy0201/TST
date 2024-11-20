@@ -8,29 +8,36 @@
 import Foundation
 
 struct CalculatorModel {
-    var selectedOperator: String?      // 입력된 연산자 enteredOperator
-    var currentInput: String = ""      // 입력된 값을 담아두는 변수 enteredValue
-    var accumulatedResult: Int = 0     // 누적된 결과를 저장
-    var displayExpression: String = "" // 입력된 값을 화면에 보여줌
-    var isResultDisplay: Bool = false  // 결과값이 있으면 초기화
+    private var selectedOperator: Enum.OperatorType?  // 입력된 연산자 enteredOperator
+    private var currentInput: String = ""      // 입력된 값을 담아두는 변수 enteredValue
+    private var accumulatedResult: Int = 0     // 누적된 결과를 저장
+    private var displayExpression: String = "" // 입력된 값을 화면에 보여줌
+    private var isResultDisplay: Bool = false  // 결과값이 있으면 초기화
     
     // MARK: - 입력된 숫자를 displayExpression에도 보여지게하고, currentInput에도 입력된 값을 담아두도록 하는 함수
 
-    mutating func inputNumber(_ number: String) {
+    mutating func setInputNumber(_ number: String) -> Result<String, Enum.InputErrorMessage> {
+        if currentInput.count > 17 {
+            return .failure(.checkCountString)
+        }
+        
         if isResultDisplay {
             resetResult()
             isResultDisplay = false
         }
+
         currentInput += number
         displayExpression += number
+        
+        return .success(displayExpression)
     }
     
     // MARK: - 연산자 입력시 처리하는 함수
 
-    mutating func inputOperation(_ operation: String) {
+    mutating func setInputOperation(_ operation: Enum.OperatorType) -> Result<String, Enum.InputErrorMessage> {
         // 첫번째 입력값이 숫자가 아닌 연산자인 경우 아무런 연산없이 리턴
         if currentInput.isEmpty {
-            return
+            return .failure(.checkNumberFirst)
         }
         
         if let currentValue = Int(currentInput) {
@@ -47,27 +54,33 @@ struct CalculatorModel {
         
         selectedOperator = operation
         currentInput = ""
-        displayExpression += operation
+        displayExpression += operation.rawValue
+        
+        return .success(displayExpression)
     }
     
     // MARK: - 입력된 연산자로 연산되도록 하는 함수
 
-    mutating func applyOperator(_ operation: String) {
+    mutating func applyOperator(_ operation: Enum.OperatorType) {
         guard let inputNumber = Int(currentInput) else {
             return
         }
         
         switch operation {
-        case "*": accumulatedResult *= inputNumber
-        case "/": accumulatedResult /= inputNumber
-        case "+": accumulatedResult += inputNumber
-        case "-": accumulatedResult -= inputNumber
+        case .multiplication: accumulatedResult *= inputNumber
+        case .division: accumulatedResult /= inputNumber
+        case .plus: accumulatedResult += inputNumber
+        case .minus: accumulatedResult -= inputNumber
         default: break
         }
     }
     
+    mutating func getDisplayExpression() -> String {
+        return displayExpression
+    }
+    
     // MARK: - 등호 "="버튼 탭시 결과를 보여주는 함수
-    mutating func calculateResult() -> String {
+    mutating func getCalculateResult() -> String {
         if let operatorSymbol = selectedOperator {
             applyOperator(operatorSymbol)
             selectedOperator = nil       // 계산 종료 후 연산자 초기화
