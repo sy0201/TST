@@ -79,8 +79,7 @@ private extension CalculatorView {
     }
     
     func setupConstraint() {
-        addSubview(displayLabel)
-        addSubview(verticalStackView)
+        addSubviews([displayLabel, verticalStackView])
         
         let screenHeight = UIScreen.main.bounds.height
         
@@ -91,8 +90,8 @@ private extension CalculatorView {
             displayLabel.heightAnchor.constraint(equalToConstant: 100),
 
             verticalStackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -screenHeight * 0.02),
-            verticalStackView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            verticalStackView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -20)
+            verticalStackView.leadingAnchor.constraint(equalTo: displayLabel.leadingAnchor),
+            verticalStackView.trailingAnchor.constraint(equalTo: displayLabel.trailingAnchor)
         ])
     }
     
