@@ -11,15 +11,15 @@ final class CalculatorView: UIView {
     private let maxLabelCount = 18
     var buttonTapHandler: ((String) -> Void)?
     
-    let resultLabel: UILabel = {
-        let resultLabel = UILabel()
-        resultLabel.translatesAutoresizingMaskIntoConstraints = false
-        resultLabel.textAlignment = .right
-        resultLabel.font = .systemFont(ofSize: 60, weight: .bold)
-        resultLabel.textColor = .white
-        resultLabel.adjustsFontSizeToFitWidth = true  // label이 화면너비만큼 입력시 폰트 사이즈 작아지도록 설정
-        resultLabel.minimumScaleFactor = 0.5          // label 50%까지 줄어들 수 있도록 설정
-        return resultLabel
+    let displayLabel: UILabel = {
+        let displayLabel = UILabel()
+        displayLabel.translatesAutoresizingMaskIntoConstraints = false
+        displayLabel.textAlignment = .right
+        displayLabel.font = .systemFont(ofSize: 60, weight: .bold)
+        displayLabel.textColor = .white
+        displayLabel.adjustsFontSizeToFitWidth = true  // label이 화면너비만큼 입력시 폰트 사이즈 작아지도록 설정
+        displayLabel.minimumScaleFactor = 0.5          // label 50%까지 줄어들 수 있도록 설정
+        return displayLabel
     }()
     
     private let verticalStackView: UIStackView = {
@@ -28,18 +28,21 @@ final class CalculatorView: UIView {
         verticalStackView.axis = .vertical
         verticalStackView.distribution = .equalSpacing
         
-        // TODO: screen의 비율로 넣으면 UI가 깨집니다 ㅠ 임의로 넣었는데 계속 고민해볼게요!
+        // TODO: - screen의 비율로 넣으면 UI가 깨집니다 ㅠ 임의로 넣었는데 계속 고민해볼게요!
         verticalStackView.spacing = 10
         
         return verticalStackView
     }()
     
-    private let buttonList = [
-        ["7", "8", "9", "+"],
-        ["4", "5", "6", "-"],
-        ["1", "2", "3", "*"],
-        ["AC", "0", "=", "/"]
+    let buttonType: Enum.ButtonType = .ac
+    
+    private let buttonList: [[Enum.ButtonType]] = [
+        [.seven, .eight, .nine, .plus],
+        [.four, .five, .six, .minus],
+        [.one, .two, .three, .multiplication],
+        [.ac, .zero, .equalSign, .division]
     ]
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -56,9 +59,9 @@ final class CalculatorView: UIView {
     func limitedString(_ text: String) {
         if text.count > maxLabelCount {
             let limitedLabel = String(text.prefix(maxLabelCount))
-            resultLabel.text = limitedLabel
+            displayLabel.text = limitedLabel
         } else {
-            resultLabel.text = text
+            displayLabel.text = text
         }
     }
 }
@@ -69,22 +72,23 @@ private extension CalculatorView {
         
         // buttonList를 한줄씩 담는곳
         for row in buttonList {
-            let buttonRowStack = makeHorizontalStackView(row)
-            verticalStackView.addArrangedSubview(buttonRowStack)
+            let rowString = row.map { $0.rawValue }
+            let buttonHorizontalStack = makeHorizontalStackView(rowString)
+            verticalStackView.addArrangedSubview(buttonHorizontalStack)
         }
     }
     
     func setupConstraint() {
-        addSubview(resultLabel)
+        addSubview(displayLabel)
         addSubview(verticalStackView)
         
         let screenHeight = UIScreen.main.bounds.height
         
         NSLayoutConstraint.activate([
-            resultLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: screenHeight * 0.2),
-            resultLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 30),
-            resultLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -30),
-            resultLabel.heightAnchor.constraint(equalToConstant: 100),
+            displayLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: screenHeight * 0.2),
+            displayLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 30),
+            displayLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -30),
+            displayLabel.heightAnchor.constraint(equalToConstant: 100),
 
             verticalStackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -screenHeight * 0.02),
             verticalStackView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 20),
@@ -94,12 +98,12 @@ private extension CalculatorView {
     
     // MARK: - 버튼 배열을 StackView에 넣고 버튼 설정 하는 함수
 
-    func makeHorizontalStackView(_ titles: [String]) -> UIStackView {
+    func makeHorizontalStackView(_ buttonTitles: [String]) -> UIStackView {
         var buttons: [UIButton] = []
         let screenWidth = UIScreen.main.bounds.width
         
         // 각 버튼의 title을 설정
-        for title in titles {
+        for title in buttonTitles {
             let button = UIButton()
             button.translatesAutoresizingMaskIntoConstraints = false
             button.setTitle(title, for: .normal)

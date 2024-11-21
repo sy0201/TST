@@ -23,28 +23,28 @@ final class CalculatorViewController: UIViewController {
 
 private extension CalculatorViewController {
     func setupBind() {
-        calculatorView.buttonTapHandler = { [weak self] buttonType in
-            if let operatorType = Enum.OperatorType(rawValue: buttonType) {
-                self?.handleButtonTap(operatorType)
+        calculatorView.buttonTapHandler = { [weak self] buttonLabel in
+            if let buttonType = Enum.ButtonType(rawValue: buttonLabel) {
+                self?.handleButtonTap(buttonType)
             }
         }
     }
     
-    func handleButtonTap(_ buttonType: Enum.OperatorType) {
+    func handleButtonTap(_ buttonType: Enum.ButtonType) {
         switch buttonType {
         case .ac:
             calculatorModel.resetResult()
-            calculatorView.resultLabel.text = "0"
+            calculatorView.displayLabel.text = "0"
             
         case .equalSign:
             let result = calculatorModel.getCalculateResult()
-            calculatorView.resultLabel.text = result
+            calculatorView.displayLabel.text = result
             
         case .plus, .minus, .multiplication, .division:
             let result = calculatorModel.setInputOperation(buttonType)
             switch result {
             case .success(_):
-                calculatorView.resultLabel.text = calculatorModel.getDisplayExpression()
+                calculatorView.displayLabel.text = calculatorModel.getDisplayValue()
             case .failure(let failure):
                 print("Error occurred: \(failure.errorMessage)")
             }
@@ -53,9 +53,9 @@ private extension CalculatorViewController {
         default:
             let result = calculatorModel.setInputNumber(buttonType.rawValue)
             switch result {
-            case .success(let displayExpression):
-                calculatorView.resultLabel.text = displayExpression
-                calculatorView.limitedString(displayExpression)
+            case .success(let displayValue):
+                calculatorView.displayLabel.text = displayValue
+                calculatorView.limitedString(displayValue)
             case .failure(let failure):
                 print("Error occurred: \(failure.errorMessage)")
             }
