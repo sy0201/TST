@@ -8,7 +8,7 @@
 import Foundation
 
 struct Enum {
-    public enum OperatorType: String {
+    public enum ButtonType: String {
         case plus = "+"  // + 더하기
         case minus = "-"  // - 빼기
         case division = "/" // / 나누기
@@ -26,17 +26,5 @@ struct Enum {
         case seven = "7"
         case eight = "8"
         case nine = "9"
-    }
-    
-    public enum InputErrorMessage: Error {
-        case checkCountString  // 입력 숫자 제한
-        case checkNumberFirst  // 숫자가 아닌 연산저 먼저 입력 시
-        
-        var errorMessage: String {
-            switch self {
-            case .checkCountString: "ERROR"
-            case .checkNumberFirst: "ERROR"
-            }
-        }
     }
 }
