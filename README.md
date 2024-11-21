@@ -58,6 +58,6 @@
 
 <a id="트러블슈팅"></a>
 ## ❗ 트러블 슈팅
-> [💬 트러블슈팅 기록 이동 1]([https://velog.io/@sy0201/%EA%B3%BC%EC%A0%9C3-%EA%B3%84%EC%82%B0%EA%B8%B0-%EC%95%B1-%EB%A7%8C%EB%93%A4%EA%B8%B0](https://velog.io/@sy0201/Week45-%EA%B3%84%EC%82%B0%EA%B8%B0-%EC%95%B1-%EB%A7%8C%EB%93%A4%EA%B8%B0))
+> [💬 트러블슈팅 기록 이동 1](https://velog.io/@sy0201/Week45-계산기-앱-만들기)
 
-> [💬 트러블슈팅 기록 이동 2]([[https://velog.io/@sy0201/%EA%B3%BC%EC%A0%9C3-%EA%B3%84%EC%82%B0%EA%B8%B0-%EC%95%B1-%EB%A7%8C%EB%93%A4%EA%B8%B0](https://velog.io/@sy0201/Week45-%EA%B3%84%EC%82%B0%EA%B8%B0-%EC%95%B1-%EB%A7%8C%EB%93%A4%EA%B8%B0](https://velog.io/@sy0201/Week45-%EA%B3%84%EC%82%B0%EA%B8%B0-%EC%95%B1-%EB%A7%8C%EB%93%A4%EA%B8%B0-2)))
+> [💬 트러블슈팅 기록 이동 2](https://velog.io/@sy0201/Week45-계산기-앱-만들기-2)
