@@ -8,7 +8,7 @@
 import UIKit
 
 final class CalculatorView: UIView {
-    private let maxLabelCount = 17
+    private let maxLabelCount = 18
     var buttonTapHandler: ((String) -> Void)?
     
     let resultLabel: UILabel = {
@@ -19,8 +19,6 @@ final class CalculatorView: UIView {
         resultLabel.textColor = .white
         resultLabel.adjustsFontSizeToFitWidth = true  // label이 화면너비만큼 입력시 폰트 사이즈 작아지도록 설정
         resultLabel.minimumScaleFactor = 0.5          // label 50%까지 줄어들 수 있도록 설정
-        resultLabel.lineBreakMode = .byTruncatingTail
-        
         return resultLabel
     }()
     
@@ -29,6 +27,8 @@ final class CalculatorView: UIView {
         verticalStackView.translatesAutoresizingMaskIntoConstraints = false
         verticalStackView.axis = .vertical
         verticalStackView.distribution = .equalSpacing
+        
+        // TODO: screen의 비율로 넣으면 UI가 깨집니다 ㅠ 임의로 넣었는데 계속 고민해볼게요!
         verticalStackView.spacing = 10
         
         return verticalStackView
@@ -78,16 +78,17 @@ private extension CalculatorView {
         addSubview(resultLabel)
         addSubview(verticalStackView)
         
+        let screenHeight = UIScreen.main.bounds.height
+        
         NSLayoutConstraint.activate([
-            resultLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 200),
+            resultLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: screenHeight * 0.2),
             resultLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 30),
             resultLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -30),
             resultLabel.heightAnchor.constraint(equalToConstant: 100),
-            
-            verticalStackView.topAnchor.constraint(equalTo: resultLabel.bottomAnchor, constant: 60),
-            verticalStackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            verticalStackView.widthAnchor.constraint(equalToConstant: 350),
-            verticalStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor)
+
+            verticalStackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -screenHeight * 0.02),
+            verticalStackView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            verticalStackView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -20)
         ])
     }
     
@@ -95,6 +96,7 @@ private extension CalculatorView {
 
     func makeHorizontalStackView(_ titles: [String]) -> UIStackView {
         var buttons: [UIButton] = []
+        let screenWidth = UIScreen.main.bounds.width
         
         // 각 버튼의 title을 설정
         for title in titles {
@@ -103,9 +105,12 @@ private extension CalculatorView {
             button.setTitle(title, for: .normal)
             button.titleLabel?.font = .systemFont(ofSize: 30)
             button.backgroundColor = UIColor(red: 58/255, green: 58/255, blue: 58/255, alpha: 1.0)
-            button.widthAnchor.constraint(equalToConstant: 80).isActive = true
-            button.heightAnchor.constraint(equalToConstant: 80).isActive = true
-            button.layer.cornerRadius = 40
+            
+            let buttonSize = screenWidth * 0.2
+            button.heightAnchor.constraint(equalToConstant: buttonSize).isActive = true
+            button.widthAnchor.constraint(equalTo: button.heightAnchor).isActive = true
+            button.layer.cornerRadius = buttonSize / 2
+            
             if title == "+" || title == "-" || title == "*" || title == "/" || title == "AC" || title == "=" {
                 button.backgroundColor = UIColor(red: 252/255, green: 134/255, blue: 0/255, alpha: 1.0)
             } else {
@@ -122,8 +127,7 @@ private extension CalculatorView {
         horizontalStackView.translatesAutoresizingMaskIntoConstraints = false
         horizontalStackView.axis = .horizontal
         horizontalStackView.distribution = .fillEqually
-        horizontalStackView.spacing = 10
-        horizontalStackView.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        horizontalStackView.spacing = screenWidth * 0.02
         
         return horizontalStackView
     }

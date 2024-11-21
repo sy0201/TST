@@ -49,12 +49,12 @@
 			path = Enums;
 			sourceTree = "<group>";
 		};
-		1882B37F2CEC466B00782F2B /* Controller */ = {
+		1882B37F2CEC466B00782F2B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				1883A1752CE4CE0F00DC6064 /* CalculatorViewController.swift */,
 			);
-			path = Controller;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		1883A1652CE4CE0F00DC6064 = {
@@ -79,9 +79,9 @@
 				1883A1712CE4CE0F00DC6064 /* AppDelegate.swift */,
 				1883A1732CE4CE0F00DC6064 /* SceneDelegate.swift */,
 				1882B3562CEAE2AD00782F2B /* Enums */,
-				1883A1852CE58C1300DC6064 /* Model */,
-				1883A1862CE58E2700DC6064 /* View */,
-				1882B37F2CEC466B00782F2B /* Controller */,
+				1883A1852CE58C1300DC6064 /* Models */,
+				1883A1862CE58E2700DC6064 /* Views */,
+				1882B37F2CEC466B00782F2B /* Controllers */,
 				1883A17A2CE4CE1000DC6064 /* Assets.xcassets */,
 				1883A17C2CE4CE1000DC6064 /* LaunchScreen.storyboard */,
 				1883A17F2CE4CE1000DC6064 /* Info.plist */,
@@ -89,20 +89,20 @@
 			path = TS_AppCalculator;
 			sourceTree = "<group>";
 		};
-		1883A1852CE58C1300DC6064 /* Model */ = {
+		1883A1852CE58C1300DC6064 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				1883A1892CE5948100DC6064 /* CalculatorModel.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
-		1883A1862CE58E2700DC6064 /* View */ = {
+		1883A1862CE58E2700DC6064 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				1883A1872CE5942200DC6064 /* CalculatorView.swift */,
 			);
-			path = View;
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -329,8 +329,8 @@
 				INFOPLIST_FILE = TS_AppCalculator/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -339,9 +339,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sy0201.TS-AppCalculator";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -357,8 +361,8 @@
 				INFOPLIST_FILE = TS_AppCalculator/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -367,9 +371,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sy0201.TS-AppCalculator";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
