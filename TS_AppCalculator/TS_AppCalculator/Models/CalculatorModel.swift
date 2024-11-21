@@ -17,7 +17,7 @@ struct CalculatorModel {
     // MARK: - 입력된 숫자를 displayExpression에도 보여지게하고, currentInput에도 입력된 값을 담아두도록 하는 함수
 
     mutating func setInputNumber(_ number: String) -> Result<String, Enum.InputErrorMessage> {
-        if currentInput.count > 17 {
+        if currentInput.count > 18 {
             return .failure(.checkCountString)
         }
         
@@ -91,7 +91,6 @@ struct CalculatorModel {
         isResultDisplay = true
         return displayExpression
     }
-
     
     // MARK: - 결과 값을 초기화 하는 함수
 
