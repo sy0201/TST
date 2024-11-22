@@ -20,9 +20,10 @@ struct CalculatorModel {
         if inputNumber.count > 18 {
             return .failure(.checkCountString)
         }
-        
-        // 화면에 결과값이 false면(있으면)
+        // true 면 결과값이 있으니..
         if isResultDisplay {
+            // 화면에 결과값이 있는데 사용자가 입력을하면 기존 결과값 리셋, isResultDisplay false로 초기화
+            print("isResultDisplay22 \(isResultDisplay)")
             resetResult()
             isResultDisplay = false
         }
@@ -87,7 +88,7 @@ struct CalculatorModel {
         if let operatorSymbol = inputOperator {
             setOperator(operatorSymbol)
             inputOperator = nil       // 계산 종료 후 연산자 초기화
-            inputNumber = ""            // 계산 종료 후 입력 초기화
+            inputNumber = ""          // 계산 종료 후 입력 초기화
         }
         
         displayValue = String(resultValue)

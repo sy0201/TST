@@ -9,7 +9,15 @@ import UIKit
 
 final class CalculatorView: UIView {
     private let maxLabelCount = 18
+    // TODO: - delegage 패턴으로 변경예정 클로저를 사용하면 의존성이 높다고함.
     var buttonTapHandler: ((String) -> Void)?
+    
+    private let labelView: UIView = {
+        let labelView = UIView()
+        labelView.translatesAutoresizingMaskIntoConstraints = false
+        labelView.backgroundColor = .clear
+        return labelView
+    }()
     
     let displayLabel: UILabel = {
         let displayLabel = UILabel()
@@ -79,16 +87,22 @@ private extension CalculatorView {
     }
     
     func setupConstraint() {
-        addSubviews([displayLabel, verticalStackView])
+        addSubviews([labelView, verticalStackView])
+        labelView.addSubview(displayLabel)
         
         let screenHeight = UIScreen.main.bounds.height
         
         NSLayoutConstraint.activate([
-            displayLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: screenHeight * 0.2),
-            displayLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 30),
-            displayLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -30),
-            displayLabel.heightAnchor.constraint(equalToConstant: 100),
+            labelView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: screenHeight * 0.2),
+            labelView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
+            labelView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
+            labelView.heightAnchor.constraint(equalToConstant: 100),
+            
+            displayLabel.leadingAnchor.constraint(equalTo: labelView.leadingAnchor, constant: 30),
+            displayLabel.trailingAnchor.constraint(equalTo: labelView.trailingAnchor, constant: -30),
+            displayLabel.centerYAnchor.constraint(equalTo: labelView.centerYAnchor),
 
+            verticalStackView.topAnchor.constraint(greaterThanOrEqualTo: labelView.bottomAnchor, constant: 60),
             verticalStackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -screenHeight * 0.02),
             verticalStackView.leadingAnchor.constraint(equalTo: displayLabel.leadingAnchor),
             verticalStackView.trailingAnchor.constraint(equalTo: displayLabel.trailingAnchor)
