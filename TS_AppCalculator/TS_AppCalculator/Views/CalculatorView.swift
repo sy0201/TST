@@ -8,9 +8,9 @@
 import UIKit
 
 final class CalculatorView: UIView {
+    weak var delegate: ButtonTypeDelegate?
+    private var tagIndex = 0
     private let maxLabelCount = 18
-    // TODO: - delegage 패턴으로 변경예정 클로저를 사용하면 의존성이 높다고함.
-    var buttonTapHandler: ((String) -> Void)?
     
     private let labelView: UIView = {
         let labelView = UIView()
@@ -19,7 +19,7 @@ final class CalculatorView: UIView {
         return labelView
     }()
     
-    let displayLabel: UILabel = {
+    lazy var displayLabel: UILabel = {
         let displayLabel = UILabel()
         displayLabel.translatesAutoresizingMaskIntoConstraints = false
         displayLabel.textAlignment = .right
@@ -41,9 +41,7 @@ final class CalculatorView: UIView {
         
         return verticalStackView
     }()
-    
-    let buttonType: Enum.ButtonType = .ac
-    
+        
     private let buttonList: [[Enum.ButtonType]] = [
         [.seven, .eight, .nine, .plus],
         [.four, .five, .six, .minus],
@@ -79,9 +77,8 @@ private extension CalculatorView {
         self.backgroundColor = .black
         
         // buttonList를 한줄씩 담는곳
-        for row in buttonList {
-            let rowString = row.map { $0.rawValue }
-            let buttonHorizontalStack = makeHorizontalStackView(rowString)
+        for (rowIndex, row) in buttonList.enumerated() {
+            let buttonHorizontalStack = makeHorizontalStackView(row, rowIndex: rowIndex)
             verticalStackView.addArrangedSubview(buttonHorizontalStack)
         }
     }
@@ -103,7 +100,7 @@ private extension CalculatorView {
             displayLabel.centerYAnchor.constraint(equalTo: labelView.centerYAnchor),
 
             verticalStackView.topAnchor.constraint(greaterThanOrEqualTo: labelView.bottomAnchor, constant: 60),
-            verticalStackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -screenHeight * 0.02),
+            verticalStackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             verticalStackView.leadingAnchor.constraint(equalTo: displayLabel.leadingAnchor),
             verticalStackView.trailingAnchor.constraint(equalTo: displayLabel.trailingAnchor)
         ])
@@ -111,24 +108,29 @@ private extension CalculatorView {
     
     // MARK: - 버튼 배열을 StackView에 넣고 버튼 설정 하는 함수
 
-    func makeHorizontalStackView(_ buttonTitles: [String]) -> UIStackView {
+    func makeHorizontalStackView(_ buttonTitles: [Enum.ButtonType], rowIndex: Int) -> UIStackView {
         var buttons: [UIButton] = []
         let screenWidth = UIScreen.main.bounds.width
+        print("screenWidth \(screenWidth)")
         
         // 각 버튼의 title을 설정
-        for title in buttonTitles {
+        for (index, buttonType) in buttonTitles.enumerated() {
             let button = UIButton()
             button.translatesAutoresizingMaskIntoConstraints = false
-            button.setTitle(title, for: .normal)
+            button.setTitle(buttonType.rawValue, for: .normal)
             button.titleLabel?.font = .systemFont(ofSize: 30)
             button.backgroundColor = UIColor(red: 58/255, green: 58/255, blue: 58/255, alpha: 1.0)
+            let globalTag = (rowIndex * buttonTitles.count) + index
+            button.tag = globalTag
             
+            // TODO: - 작은화면기기로 빌드시 에러 수정 필요
             let buttonSize = screenWidth * 0.2
+            print("buttonSize \(buttonSize)")
             button.heightAnchor.constraint(equalToConstant: buttonSize).isActive = true
             button.widthAnchor.constraint(equalTo: button.heightAnchor).isActive = true
             button.layer.cornerRadius = buttonSize / 2
-            
-            if title == "+" || title == "-" || title == "*" || title == "/" || title == "AC" || title == "=" {
+
+            if buttonType == .plus || buttonType == .minus || buttonType == .multiplication || buttonType == .division || buttonType == .ac || buttonType == .equalSign {
                 button.backgroundColor = UIColor(red: 252/255, green: 134/255, blue: 0/255, alpha: 1.0)
             } else {
                 button.backgroundColor = UIColor(red: 58/255, green: 58/255, blue: 58/255, alpha: 1.0)
@@ -150,7 +152,9 @@ private extension CalculatorView {
     }
     
     @objc func buttonTapped(_ sender: UIButton) {
-        guard let buttonTitle = sender.currentTitle else { return }
-        buttonTapHandler?(buttonTitle)
+        let flatButtonList = buttonList.flatMap { $0 }
+        let buttonType = flatButtonList[sender.tag]
+        print("Button tapped: \(buttonType), with tag: \(sender.tag)")
+        delegate?.didTapButton(for: buttonType)
     }
 }

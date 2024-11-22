@@ -10,6 +10,7 @@ import UIKit
 final class CalculatorViewController: UIViewController {
     private var calculatorModel = CalculatorModel()
     private let calculatorView = CalculatorView()
+
     
     override func loadView() {
         view = calculatorView
@@ -17,20 +18,12 @@ final class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupBind()
+        self.calculatorView.delegate = self
     }
 }
 
-private extension CalculatorViewController {
-    func setupBind() {
-        calculatorView.buttonTapHandler = { [weak self] buttonLabel in
-            if let buttonType = Enum.ButtonType(rawValue: buttonLabel) {
-                self?.handleButtonTap(buttonType)
-            }
-        }
-    }
-    
-    func handleButtonTap(_ buttonType: Enum.ButtonType) {
+extension CalculatorViewController: ButtonTypeDelegate {
+    func didTapButton(for buttonType: Enum.ButtonType) {
         switch buttonType {
         case .ac:
             calculatorModel.resetResult()
@@ -48,7 +41,6 @@ private extension CalculatorViewController {
             case .failure(let failure):
                 print("Error occurred: \(failure.errorMessage)")
             }
-            
             
         default:
             let result = calculatorModel.setInputNumber(buttonType.rawValue)

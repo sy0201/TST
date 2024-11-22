@@ -10,6 +10,7 @@
 		1882B3582CEAE2BC00782F2B /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1882B3572CEAE2BC00782F2B /* Enum.swift */; };
 		1882B3882CEF147400782F2B /* InputErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1882B3872CEF147400782F2B /* InputErrorMessage.swift */; };
 		1882B38B2CEF39F300782F2B /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1882B38A2CEF39F300782F2B /* UIView.swift */; };
+		1882B3932CF068F500782F2B /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1882B3922CF068F500782F2B /* Protocol.swift */; };
 		1883A1722CE4CE0F00DC6064 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1883A1712CE4CE0F00DC6064 /* AppDelegate.swift */; };
 		1883A1742CE4CE0F00DC6064 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1883A1732CE4CE0F00DC6064 /* SceneDelegate.swift */; };
 		1883A1762CE4CE0F00DC6064 /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1883A1752CE4CE0F00DC6064 /* CalculatorViewController.swift */; };
@@ -23,6 +24,7 @@
 		1882B3572CEAE2BC00782F2B /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
 		1882B3872CEF147400782F2B /* InputErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputErrorMessage.swift; sourceTree = "<group>"; };
 		1882B38A2CEF39F300782F2B /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		1882B3922CF068F500782F2B /* Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
 		1883A16E2CE4CE0F00DC6064 /* TS_AppCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TS_AppCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1883A1712CE4CE0F00DC6064 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1883A1732CE4CE0F00DC6064 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -77,6 +79,24 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		1882B3902CF0687700782F2B /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				1882B3922CF068F500782F2B /* Protocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		1882B3912CF068C900782F2B /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				1882B3892CEF39DF00782F2B /* Extensions */,
+				1882B3562CEAE2AD00782F2B /* Enums */,
+				1882B3902CF0687700782F2B /* Protocols */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 		1883A1652CE4CE0F00DC6064 = {
 			isa = PBXGroup;
 			children = (
@@ -99,8 +119,7 @@
 				1883A1712CE4CE0F00DC6064 /* AppDelegate.swift */,
 				1883A1732CE4CE0F00DC6064 /* SceneDelegate.swift */,
 				1882B3862CEF144300782F2B /* Errors */,
-				1882B3892CEF39DF00782F2B /* Extensions */,
-				1882B3562CEAE2AD00782F2B /* Enums */,
+				1882B3912CF068C900782F2B /* Util */,
 				1883A1852CE58C1300DC6064 /* Models */,
 				1883A1862CE58E2700DC6064 /* Views */,
 				1882B37F2CEC466B00782F2B /* Controllers */,
@@ -202,6 +221,7 @@
 				1882B3882CEF147400782F2B /* InputErrorMessage.swift in Sources */,
 				1883A18A2CE5948100DC6064 /* CalculatorModel.swift in Sources */,
 				1882B3582CEAE2BC00782F2B /* Enum.swift in Sources */,
+				1882B3932CF068F500782F2B /* Protocol.swift in Sources */,
 				1883A1762CE4CE0F00DC6064 /* CalculatorViewController.swift in Sources */,
 				1883A1722CE4CE0F00DC6064 /* AppDelegate.swift in Sources */,
 				1883A1742CE4CE0F00DC6064 /* SceneDelegate.swift in Sources */,
