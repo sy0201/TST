@@ -9,6 +9,7 @@ import UIKit
 
 final class WeatherViewController: UIViewController {
     let mainView = MainView()
+    let weatherViewModel = WeatherViewModel()
 
     override func loadView() {
         view = mainView
@@ -18,8 +19,14 @@ final class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
+        setupDataBinding()
+        weatherViewModel.fetchWeather(lat: 45.133, lon: 7.367)
     }
-    
+}
+
+// MARK: - Private Methods
+
+private extension WeatherViewController {
     func setupCollectionView() {
         mainView.collectionView.dataSource = self
         mainView.collectionView.delegate = self
@@ -28,6 +35,12 @@ final class WeatherViewController: UIViewController {
         mainView.collectionView.register(CurrentLocationWeatherCVCell.self, forCellWithReuseIdentifier: CurrentLocationWeatherCVCell.reuseIdentifier)
         mainView.collectionView.register(WeatherImageCVCell.self, forCellWithReuseIdentifier: WeatherImageCVCell.reuseIdentifier)
         mainView.collectionView.register(WeatherForecastListCVCell.self, forCellWithReuseIdentifier: WeatherForecastListCVCell.reuseIdentifier)
+    }
+    
+    func setupDataBinding() {
+        weatherViewModel.updateData = { [weak self] in
+            self?.mainView.collectionView.reloadData()
+        }
     }
 }
 
@@ -45,12 +58,20 @@ extension WeatherViewController: UICollectionViewDataSource, UICollectionViewDel
                 return UICollectionViewCell()
             }
             
+            cell.locationLabel.text = weatherViewModel.getLocationName()
+            cell.temperatureLabel.text = weatherViewModel.getTemperature()
+            cell.minTemperatureLabel.text = weatherViewModel.getMinTemperature()
+            cell.maxTemperatureLabel.text = weatherViewModel.getMaxTemperature()
+            
             return cell
             
         case 1:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeatherImageCVCell.reuseIdentifier, for: indexPath) as? WeatherImageCVCell else {
                 return UICollectionViewCell()
             }
+            
+            let iconURL = weatherViewModel.getWeatherIcon()
+            cell.setWeatherIcon(iconURL: iconURL)
             
             return cell
             
