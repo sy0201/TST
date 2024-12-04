@@ -32,9 +32,9 @@ final class WeatherForecastListCVCell: UICollectionViewCell, ReuseIdentifying {
     }
 }
 
-// MARK: - Setup UI
+// MARK: - Private setup UI Methods
 
-extension WeatherForecastListCVCell {
+private extension WeatherForecastListCVCell {
     func setupUI() {
         addSubview(tableView)
     }

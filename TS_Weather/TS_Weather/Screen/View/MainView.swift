@@ -30,9 +30,9 @@ final class MainView: UIView {
     }
 }
 
-// MARK: - setupUI Methods
+// MARK: - Private setup UI Methods
 
-extension MainView {
+private extension MainView {
     func setupUI() {
         collectionView.backgroundColor = .black
         addSubview(collectionView)
