@@ -21,12 +21,24 @@ final class WeatherImageCVCell: UICollectionViewCell, ReuseIdentifying {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func setWeatherIcon(iconURL: String) {
+        if let url = URL(string: iconURL) {
+            DispatchQueue.global().async {
+                if let data = try? Data(contentsOf: url) {
+                    DispatchQueue.main.async {
+                        self.weatherImg.image = UIImage(data: data)
+                    }
+                }
+            }
+        }
+    }
 }
 
-extension WeatherImageCVCell {
+// MARK: - Private setup UI Methods
+
+private extension WeatherImageCVCell {
     func setupUI() {
-        let dummyImg = UIImage(systemName: "sun.max")
-        weatherImg.image = dummyImg
         weatherImg.contentMode = .scaleAspectFit
         addSubview(weatherImg)
     }

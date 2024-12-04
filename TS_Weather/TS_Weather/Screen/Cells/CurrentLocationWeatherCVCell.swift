@@ -22,14 +22,13 @@ final class CurrentLocationWeatherCVCell: UICollectionViewCell, ReuseIdentifying
         let label = UILabel()
         label.font = .systemFont(ofSize: 24, weight: .regular)
         label.textColor = .systemBackground
-        label.text = "서울특별시"
         return label
     }()
     
     let tempStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
+        stackView.distribution = .equalCentering
         stackView.alignment = .center
         return stackView
     }()
@@ -38,7 +37,6 @@ final class CurrentLocationWeatherCVCell: UICollectionViewCell, ReuseIdentifying
         let label = UILabel()
         label.font = .systemFont(ofSize: 34, weight: .medium)
         label.textColor = .systemBackground
-        label.text = "22"
         return label
     }()
     
@@ -46,7 +44,7 @@ final class CurrentLocationWeatherCVCell: UICollectionViewCell, ReuseIdentifying
         let label = UILabel()
         label.font = .systemFont(ofSize: 32, weight: .regular)
         label.textColor = .systemBackground
-        label.text = "℃"
+        label.text = "°C"
         return label
     }()
 
@@ -63,7 +61,6 @@ final class CurrentLocationWeatherCVCell: UICollectionViewCell, ReuseIdentifying
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .regular)
         label.textColor = .systemBackground
-        label.text = "최저-4℃"
         return label
     }()
     
@@ -71,7 +68,6 @@ final class CurrentLocationWeatherCVCell: UICollectionViewCell, ReuseIdentifying
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .regular)
         label.textColor = .systemBackground
-        label.text = "최고4℃"
         return label
     }()
     
@@ -87,9 +83,9 @@ final class CurrentLocationWeatherCVCell: UICollectionViewCell, ReuseIdentifying
     }
 }
 
-// MARK: - Setup UI
+// MARK: - Private setup UI Methods
 
-extension CurrentLocationWeatherCVCell {
+private extension CurrentLocationWeatherCVCell {
     func setupUI() {
         self.backgroundColor = .clear
         addSubview(mainStackView)

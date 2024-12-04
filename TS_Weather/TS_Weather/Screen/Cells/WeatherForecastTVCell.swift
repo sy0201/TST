@@ -36,9 +36,9 @@ final class WeatherForecastTVCell: UITableViewCell, ReuseIdentifying {
     }
 }
 
-// MARK: - Setup UI
+// MARK: - Private setup UI Methods
 
-extension WeatherForecastTVCell {
+private extension WeatherForecastTVCell {
     func setupUI() {
         self.selectionStyle = .none
         self.backgroundColor = .clear
