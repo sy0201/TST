@@ -21,6 +21,10 @@
 		186235692CFEDF27000CEA16 /* WeatherImageCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186235682CFEDF27000CEA16 /* WeatherImageCVCell.swift */; };
 		1862356B2CFEEBE5000CEA16 /* WeatherForecastListCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1862356A2CFEEBE5000CEA16 /* WeatherForecastListCVCell.swift */; };
 		1862356D2CFEECD8000CEA16 /* WeatherForecastTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1862356C2CFEECD8000CEA16 /* WeatherForecastTVCell.swift */; };
+		186235742CFF0F93000CEA16 /* WeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186235732CFF0F93000CEA16 /* WeatherResponse.swift */; };
+		186235792CFF194F000CEA16 /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186235782CFF194F000CEA16 /* NetworkingManager.swift */; };
+		1862357C2CFF21BF000CEA16 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1862357B2CFF21BF000CEA16 /* Bundle+Extension.swift */; };
+		1862357F2D0026F7000CEA16 /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1862357E2D0026F7000CEA16 /* WeatherViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +43,11 @@
 		186235682CFEDF27000CEA16 /* WeatherImageCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherImageCVCell.swift; sourceTree = "<group>"; };
 		1862356A2CFEEBE5000CEA16 /* WeatherForecastListCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastListCVCell.swift; sourceTree = "<group>"; };
 		1862356C2CFEECD8000CEA16 /* WeatherForecastTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastTVCell.swift; sourceTree = "<group>"; };
+		186235732CFF0F93000CEA16 /* WeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherResponse.swift; sourceTree = "<group>"; };
+		186235782CFF194F000CEA16 /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
+		1862357A2CFF1FB8000CEA16 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		1862357B2CFF21BF000CEA16 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
+		1862357E2D0026F7000CEA16 /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +65,7 @@
 		186235302CFEBCD1000CEA16 = {
 			isa = PBXGroup;
 			children = (
+				1862357A2CFF1FB8000CEA16 /* Secrets.xcconfig */,
 				1862353B2CFEBCD1000CEA16 /* TS_Weather */,
 				1862353A2CFEBCD1000CEA16 /* Products */,
 			);
@@ -74,6 +84,7 @@
 			children = (
 				186235672CFEDA39000CEA16 /* Support */,
 				1862356F2CFF0AD8000CEA16 /* Util */,
+				186235702CFF0F65000CEA16 /* Data */,
 				186235572CFECD1D000CEA16 /* Screen */,
 				1862356E2CFF0ABD000CEA16 /* Resource */,
 			);
@@ -91,6 +102,7 @@
 		186235572CFECD1D000CEA16 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				1862357D2D0026E5000CEA16 /* ViewModel */,
 				1862355C2CFECF89000CEA16 /* Cells */,
 				186235562CFECD06000CEA16 /* View */,
 				186235402CFEBCD1000CEA16 /* WeatherViewController.swift */,
@@ -122,6 +134,7 @@
 			children = (
 				186235632CFED9EF000CEA16 /* UIView+Extension.swift */,
 				186235652CFEDA1A000CEA16 /* UIStackView+Extension.swift */,
+				1862357B2CFF21BF000CEA16 /* Bundle+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -152,6 +165,47 @@
 				186235612CFED050000CEA16 /* Protocols */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		186235702CFF0F65000CEA16 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				186235752CFF1826000CEA16 /* API */,
+				186235712CFF0F70000CEA16 /* Domain */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		186235712CFF0F70000CEA16 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				186235722CFF0F85000CEA16 /* Entity */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		186235722CFF0F85000CEA16 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				186235732CFF0F93000CEA16 /* WeatherResponse.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		186235752CFF1826000CEA16 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				186235782CFF194F000CEA16 /* NetworkingManager.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		1862357D2D0026E5000CEA16 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				1862357E2D0026F7000CEA16 /* WeatherViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,12 +285,16 @@
 			files = (
 				186235602CFED02B000CEA16 /* ReuseIdentifying.swift in Sources */,
 				186235412CFEBCD1000CEA16 /* WeatherViewController.swift in Sources */,
+				1862357C2CFF21BF000CEA16 /* Bundle+Extension.swift in Sources */,
+				186235792CFF194F000CEA16 /* NetworkingManager.swift in Sources */,
 				186235642CFED9EF000CEA16 /* UIView+Extension.swift in Sources */,
 				186235472CFEBCD1000CEA16 /* TS_Weather.xcdatamodeld in Sources */,
 				1862353D2CFEBCD1000CEA16 /* AppDelegate.swift in Sources */,
 				186235662CFEDA1A000CEA16 /* UIStackView+Extension.swift in Sources */,
 				1862355E2CFECFD8000CEA16 /* CurrentLocationWeatherCVCell.swift in Sources */,
 				1862356B2CFEEBE5000CEA16 /* WeatherForecastListCVCell.swift in Sources */,
+				1862357F2D0026F7000CEA16 /* WeatherViewModel.swift in Sources */,
+				186235742CFF0F93000CEA16 /* WeatherResponse.swift in Sources */,
 				186235692CFEDF27000CEA16 /* WeatherImageCVCell.swift in Sources */,
 				1862355B2CFECDCA000CEA16 /* MainView.swift in Sources */,
 				1862353F2CFEBCD1000CEA16 /* SceneDelegate.swift in Sources */,
@@ -368,6 +426,7 @@
 		};
 		186235512CFEBCD2000CEA16 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1862357A2CFF1FB8000CEA16 /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -400,6 +459,7 @@
 		};
 		186235522CFEBCD2000CEA16 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1862357A2CFF1FB8000CEA16 /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
