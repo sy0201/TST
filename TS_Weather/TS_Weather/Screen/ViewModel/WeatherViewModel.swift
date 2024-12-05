@@ -20,8 +20,8 @@ final class WeatherViewModel {
                 DispatchQueue.main.async {
                     self?.updateData?()
                 }
-            case .failure(let error):
-                print("Error: \(error.localizedDescription)")
+            case .failure(let failure):
+                print("Error: \(failure.localizedDescription)")
             }
         }
     }
