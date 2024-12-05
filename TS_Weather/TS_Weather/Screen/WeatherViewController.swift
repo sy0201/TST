@@ -10,7 +10,9 @@ import UIKit
 final class WeatherViewController: UIViewController {
     let mainView = MainView()
     let weatherViewModel = WeatherViewModel()
+    let forecastViewModel = ForecastViewModel()
 
+    
     override func loadView() {
         view = mainView
     }
@@ -21,6 +23,7 @@ final class WeatherViewController: UIViewController {
         setupCollectionView()
         setupDataBinding()
         weatherViewModel.fetchWeather(lat: 45.133, lon: 7.367)
+        forecastViewModel.fetchForecast(lat: 45.133, lon: 7.367)
     }
 }
 
@@ -39,6 +42,10 @@ private extension WeatherViewController {
     
     func setupDataBinding() {
         weatherViewModel.updateData = { [weak self] in
+            self?.mainView.collectionView.reloadData()
+        }
+        
+        forecastViewModel.updateForecastData = { [weak self] in
             self?.mainView.collectionView.reloadData()
         }
     }
@@ -80,6 +87,7 @@ extension WeatherViewController: UICollectionViewDataSource, UICollectionViewDel
                 return UICollectionViewCell()
             }
             
+            cell.updateForecastList(forecastViewModel.getForecastList())
             return cell
             
         default:
