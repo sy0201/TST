@@ -12,8 +12,7 @@ final class WeatherForecastTVCell: UITableViewCell, ReuseIdentifying {
     var dateLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .regular)
-        label.textColor = .systemBackground
-        label.text = "2024-12-03 18:00:00"
+        label.textColor = .white
         return label
     }()
     
@@ -21,7 +20,6 @@ final class WeatherForecastTVCell: UITableViewCell, ReuseIdentifying {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .regular)
         label.textColor = .systemBackground
-        label.text = "22.5℃"
         return label
     }()
     
@@ -36,9 +34,9 @@ final class WeatherForecastTVCell: UITableViewCell, ReuseIdentifying {
     }
 }
 
-// MARK: - Setup UI
+// MARK: - Private setup UI Methods
 
-extension WeatherForecastTVCell {
+private extension WeatherForecastTVCell {
     func setupUI() {
         self.selectionStyle = .none
         self.backgroundColor = .clear

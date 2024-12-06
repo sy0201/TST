@@ -9,7 +9,10 @@ import UIKit
 
 final class WeatherViewController: UIViewController {
     let mainView = MainView()
+    let weatherViewModel = WeatherViewModel()
+    let forecastViewModel = ForecastViewModel()
 
+    
     override func loadView() {
         view = mainView
     }
@@ -18,8 +21,15 @@ final class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
+        setupDataBinding()
+        weatherViewModel.fetchWeatherByAlamofire(lat: 44.34, lon: 10.99)
+        forecastViewModel.fetchForecast(lat: 44.34, lon: 10.99)
     }
-    
+}
+
+// MARK: - Private Methods
+
+private extension WeatherViewController {
     func setupCollectionView() {
         mainView.collectionView.dataSource = self
         mainView.collectionView.delegate = self
@@ -28,6 +38,16 @@ final class WeatherViewController: UIViewController {
         mainView.collectionView.register(CurrentLocationWeatherCVCell.self, forCellWithReuseIdentifier: CurrentLocationWeatherCVCell.reuseIdentifier)
         mainView.collectionView.register(WeatherImageCVCell.self, forCellWithReuseIdentifier: WeatherImageCVCell.reuseIdentifier)
         mainView.collectionView.register(WeatherForecastListCVCell.self, forCellWithReuseIdentifier: WeatherForecastListCVCell.reuseIdentifier)
+    }
+    
+    func setupDataBinding() {
+        weatherViewModel.updateData = { [weak self] in
+            self?.mainView.collectionView.reloadData()
+        }
+        
+        forecastViewModel.updateForecastData = { [weak self] in
+            self?.mainView.collectionView.reloadData()
+        }
     }
 }
 
@@ -45,12 +65,20 @@ extension WeatherViewController: UICollectionViewDataSource, UICollectionViewDel
                 return UICollectionViewCell()
             }
             
+            cell.locationLabel.text = weatherViewModel.getLocationName()
+            cell.temperatureLabel.text = weatherViewModel.getTemperature()
+            cell.minTemperatureLabel.text = weatherViewModel.getMinTemperature()
+            cell.maxTemperatureLabel.text = weatherViewModel.getMaxTemperature()
+            
             return cell
             
         case 1:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeatherImageCVCell.reuseIdentifier, for: indexPath) as? WeatherImageCVCell else {
                 return UICollectionViewCell()
             }
+            
+            let iconURL = weatherViewModel.getWeatherIcon()
+            cell.setWeatherIcon(iconURL: iconURL)
             
             return cell
             
@@ -59,6 +87,7 @@ extension WeatherViewController: UICollectionViewDataSource, UICollectionViewDel
                 return UICollectionViewCell()
             }
             
+            cell.updateForecastList(forecastViewModel.getForecastList())
             return cell
             
         default:
