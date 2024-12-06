@@ -13,6 +13,7 @@ struct WeatherResponse: Codable {
     let main: Main?
     let timezone, id: Int
     let name: String
+    let dt: Int
 }
 
 // MARK: - Main

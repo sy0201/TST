@@ -12,7 +12,7 @@ final class ForecastViewModel {
     var updateForecastData: (() -> Void)?
     
     func fetchForecast(lat: Double, lon: Double) {
-        NetworkingManager.shared.fetchForecastData(for: lat, lon: lon) { [weak self] result in
+        NetworkingManager.shared.fetchForecastWeatherData(for: lat, lon: lon) { [weak self] result in
             switch result {
             case .success(let response):
                 self?.forecastData = response

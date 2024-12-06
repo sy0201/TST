@@ -20,7 +20,6 @@ final class WeatherForecastTVCell: UITableViewCell, ReuseIdentifying {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .regular)
         label.textColor = .systemBackground
-        label.text = "22.5℃"
         return label
     }()
     

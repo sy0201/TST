@@ -6,115 +6,65 @@
 //
 
 import Foundation
+import Alamofire
 
 final class NetworkingManager {
     static let shared = NetworkingManager()
     private init() {}
     
-    func fetchWeatherData(for lat: Double, lon: Double, completion: @escaping (Result<WeatherResponse, Error>) -> Void) {
-        guard let url = currentWeatherURL(lat: lat, lon: lon) else {
-            completion(.failure(NSError(domain: "Invalid URL", code: 1001, userInfo: nil)))
-            return
-        }
+    func fetchWeatherData(for lat: Double, lon: Double, lang: String = "kr", completion: @escaping (Result<WeatherResponse, Error>) -> Void) {
         
-        let session = URLSession.shared
-        let task = session.dataTask(with: url) { data, response, error in
+        let apiKey = Bundle.main.apiKey
+        let params: [String: Any] = ["lat": "44.34",
+                                     "lon": "10.99",
+                                     "appid": apiKey ?? "",
+                                     "units": "metric",
+                                     "lang": "kr"]
 
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-            
-            guard let data = data else {
-                completion(.failure(NSError(domain: "No Data", code: 1001, userInfo: nil)))
-                return
-            }
-            
-            if let jsonString = String(data: data, encoding: .utf8) {
-                print("Received JSON: \(jsonString)")
-            }
-            
-            do {
-                let decoder = JSONDecoder()
-                let decodedData = try decoder.decode(WeatherResponse.self, from: data)
-                completion(.success(decodedData))
-                
-            } catch {
-                completion(.failure(error))
-                print("Decoding error: \(error.localizedDescription)")
-            }
-        }
-        task.resume()
-    }
-    
-    // 위도, 경도 받아오는 함수
-    private func currentWeatherURL(lat: Double, lon: Double, lang: String = "kr") -> URL? {
-        guard let apiKey = Bundle.main.apiKey else {
-            print("API 키를 로드하지 못했습니다.")
-            return nil
-        }
-        var urlComponents = URLComponents(string: "https://api.openweathermap.org/data/2.5/weather")
-        urlComponents?.queryItems = [
-            URLQueryItem(name: "lat", value: "\(lat)"),
-            URLQueryItem(name: "lon", value: "\(lon)"),
-            URLQueryItem(name: "appid", value: apiKey),
-            URLQueryItem(name: "units", value: "metric"),
-            URLQueryItem(name: "lang", value: lang)
-        ]
-        return urlComponents?.url
-    }
-    
-    func fetchForecastData(for lat: Double, lon: Double, completion: @escaping (Result<ForecastWeatherResponse, Error>) -> Void) {
-        guard let url = forecastWeatherURL(lat: lat, lon: lon) else {
-            completion(.failure(NSError(domain: "Invalid URL", code: 1001, userInfo: nil)))
-            return
-        }
+        let url = "https://api.openweathermap.org/data/2.5/weather"
         
-        let session = URLSession.shared
-        let task = session.dataTask(with: url) { data, response, error in
-            
-            if let error = error {
+        AF.request(url,
+                   method: .get,
+                   parameters: params,
+                   encoding: URLEncoding.default,
+                   headers: ["Content-Type":"application/json", "Accept":"application/json"])
+        .validate()
+        .responseDecodable(of: WeatherResponse.self) { response in
+            switch response.result {
+            case .success(let weatherResponse):
+                completion(.success(weatherResponse))
+            case .failure(let error):
                 completion(.failure(error))
-                return
-            }
-            
-            guard let data = data else {
-                completion(.failure(NSError(domain: "No Data", code: 1001, userInfo: nil)))
-                return
-            }
-            
-            if let jsonString = String(data: data, encoding: .utf8) {
-                print("Received JSON: \(jsonString)")
-            }
-            
-            do {
-                let decoder = JSONDecoder()
-                let decodedData = try decoder.decode(ForecastWeatherResponse.self, from: data)
-                completion(.success(decodedData))
-                
-            } catch {
-                completion(.failure(error))
-                print("Decoding error: \(error.localizedDescription)")
+                print("Request failed: \(error.localizedDescription)")
             }
         }
-        task.resume()
     }
     
-    // 5일간 예보 받아오는 함수
-    private func forecastWeatherURL(lat: Double, lon: Double, lang: String = "kr") -> URL? {
-        guard let apiKey = Bundle.main.apiKey else {
-            print("API 키를 로드하지 못했습니다.")
-            return nil
-        }
+    func fetchForecastWeatherData(for lat: Double, lon: Double, lang: String = "kr", completion: @escaping (Result<ForecastWeatherResponse, Error>) -> Void) {
         
-        var urlComponents = URLComponents(string: "https://api.openweathermap.org/data/2.5/forecast")
-        urlComponents?.queryItems = [
-            URLQueryItem(name: "lat", value: "\(lat)"),
-            URLQueryItem(name: "lon", value: "\(lon)"),
-            URLQueryItem(name: "appid", value: apiKey),
-            URLQueryItem(name: "units", value: "metric"),
-            URLQueryItem(name: "lang", value: lang)
-        ]
-        return urlComponents?.url
+        let apiKey = Bundle.main.apiKey
+        let params: [String: Any] = ["lat": "44.34",
+                                     "lon": "10.99",
+                                     "appid": apiKey ?? "",
+                                     "units": "metric",
+                                     "lang": "kr"]
+
+        let url = "https://api.openweathermap.org/data/2.5/forecast"
+        
+        AF.request(url,
+                   method: .get,
+                   parameters: params,
+                   encoding: URLEncoding.default,
+                   headers: ["Content-Type":"application/json", "Accept":"application/json"])
+        .validate()
+        .responseDecodable(of: ForecastWeatherResponse.self) { response in
+            switch response.result {
+            case .success(let weatherResponse):
+                completion(.success(weatherResponse))
+            case .failure(let error):
+                completion(.failure(error))
+                print("Request failed: \(error.localizedDescription)")
+            }
+        }
     }
 }
