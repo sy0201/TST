@@ -11,12 +11,12 @@ final class WeatherViewModel {
     private var weatherData: WeatherResponse?
     var updateData: (() -> Void)?
     
-    func fetchWeather(lat: Double, lon: Double) {
+    func fetchWeatherByAlamofire(lat: Double, lon: Double) {
         NetworkingManager.shared.fetchWeatherData(for: lat, lon: lon) { [weak self] result in
             switch result {
-            case .success(let response):
-                self?.weatherData = response
-                print("Weather data updated: \(String(describing: self?.weatherData))")
+            case .success(let success):
+                self?.weatherData = success
+                print("self?.weatherData \(String(describing: self?.weatherData) )")
                 DispatchQueue.main.async {
                     self?.updateData?()
                 }
@@ -59,6 +59,15 @@ final class WeatherViewModel {
             print("weatherImg \(weatherImg)")
             let iconString = "https://openweathermap.org/img/wn/\(weatherImg)@2x.png"
             return iconString
+        } else {
+            return "데이터가 없습니다."
+        }
+    }
+    
+    func getUTCDate() -> String {
+        if let date = weatherData?.dt {
+            print("date \(date)")
+            return "\(date)"
         } else {
             return "데이터가 없습니다."
         }

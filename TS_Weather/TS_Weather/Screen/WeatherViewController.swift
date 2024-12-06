@@ -22,8 +22,8 @@ final class WeatherViewController: UIViewController {
         super.viewDidLoad()
         setupCollectionView()
         setupDataBinding()
-        weatherViewModel.fetchWeather(lat: 45.133, lon: 7.367)
-        forecastViewModel.fetchForecast(lat: 45.133, lon: 7.367)
+        weatherViewModel.fetchWeatherByAlamofire(lat: 44.34, lon: 10.99)
+        forecastViewModel.fetchForecast(lat: 44.34, lon: 10.99)
     }
 }
 
