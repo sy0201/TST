@@ -35,18 +35,25 @@ final class ContactListViewController: UIViewController {
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         
+        // 왼쪽 바 버튼 설정
+        let navLeftItem = UIBarButtonItem(title: "Back",
+                                          style: .plain,
+                                          target: self,
+                                          action: nil)
         // 오른쪽 바 버튼 설정
         let navRightItem = UIBarButtonItem(title: "추가",
                                            style: .plain,
                                            target: self,
                                            action: #selector(addButtonTapped))
         navRightItem.tintColor = .gray
+        navigationItem.backBarButtonItem = navLeftItem
         navigationItem.rightBarButtonItem = navRightItem
         navigationItem.title = "친구 목록"
     }
     
     @objc func addButtonTapped() {
-        print("추가버튼 탭")
+        let contactInfoController = ContactInfoViewController()
+        self.navigationController?.pushViewController(contactInfoController, animated: true)
     }
 }
 
