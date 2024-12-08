@@ -41,8 +41,20 @@ final class ContactListTVCell: UITableViewCell, ReuseIdentifying {
         return label
     }()
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    let lineView: UIView = {
+        let lineView = UIView()
+        lineView.backgroundColor = UIColor(red: 216/255, green: 216/255, blue: 216/255, alpha: 1.0)
+        return lineView
+    }()
+    
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//        
+//        profileImg.layer.cornerRadius = profileImg.bounds.width / 2
+//        profileImg.layer.masksToBounds = true
+//    }
+    
+    override func draw(_ rect: CGRect) {
         profileImg.layer.cornerRadius = profileImg.bounds.width / 2
     }
     
@@ -64,7 +76,9 @@ private extension ContactListTVCell {
     func setupUI() {
         self.selectionStyle = .none
         self.backgroundColor = .clear
-        addSubViews([profileStackView, phoneNumberLabel])
+        addSubViews([profileStackView, 
+                     phoneNumberLabel,
+                     lineView])
         profileStackView.addSubViews([profileImg, nameLabel])
     }
     
@@ -87,6 +101,13 @@ private extension ContactListTVCell {
         phoneNumberLabel.snp.makeConstraints { make in
             make.trailing.equalToSuperview().offset(-20)
             make.centerY.equalToSuperview()
+        }
+        
+        lineView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.bottom.equalToSuperview()
+            make.height.equalTo(1)
         }
     }
 }
