@@ -30,7 +30,7 @@ final class ContactListView: UIView {
 
 private extension ContactListView {
     func setupUI() {
-        tableView.separatorInset.right = 20
+        tableView.separatorStyle = .none
         addSubview(tableView)
     }
     
