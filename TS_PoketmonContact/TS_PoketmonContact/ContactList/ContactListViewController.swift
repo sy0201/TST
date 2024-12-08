@@ -26,8 +26,18 @@ final class ContactListViewController: UIViewController {
     func setupNavigationBar() {
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.title = "친구 목록"
-        navigationItem.hidesSearchBarWhenScrolling = false
-        navigationItem.largeTitleDisplayMode = .automatic
+        
+        // 오른쪽 바 버튼 설정
+        let navRightItem = UIBarButtonItem(title: "추가",
+                                           style: .plain,
+                                           target: self,
+                                           action: #selector(addButtonTapped))
+        navRightItem.tintColor = .gray
+        navigationItem.rightBarButtonItem = navRightItem
+    }
+    
+    @objc func addButtonTapped() {
+        print("추가버튼 탭")
     }
 }
 
@@ -37,14 +47,9 @@ private extension ContactListViewController {
     func setupTableView() {
         contactListView.tableView.dataSource = self
         contactListView.tableView.delegate = self
-        //contactListView.tableView.rowHeight = UITableView.automaticDimension
         
         // 셀 연결
         contactListView.tableView.register(ContactListTVCell.self, forCellReuseIdentifier: ContactListTVCell.reuseIdentifier)
-    }
-    
-    func setupDataBinding() {
-        
     }
 }
 
