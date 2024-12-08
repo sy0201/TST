@@ -21,6 +21,7 @@
 		186235D22D052866000CEA16 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186235D12D052866000CEA16 /* UIView+Extension.swift */; };
 		186235D52D0528E9000CEA16 /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186235D42D0528E9000CEA16 /* UIStackView+Extension.swift */; };
 		186235D92D056656000CEA16 /* ContactInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186235D82D056656000CEA16 /* ContactInfoViewController.swift */; };
+		186235DC2D0566DB000CEA16 /* ContactInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186235DB2D0566DB000CEA16 /* ContactInfoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		186235D12D052866000CEA16 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		186235D42D0528E9000CEA16 /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
 		186235D82D056656000CEA16 /* ContactInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactInfoViewController.swift; sourceTree = "<group>"; };
+		186235DB2D0566DB000CEA16 /* ContactInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactInfoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +149,7 @@
 		186235D62D05662D000CEA16 /* ContactInfo */ = {
 			isa = PBXGroup;
 			children = (
+				186235DA2D0566CA000CEA16 /* View */,
 				186235D82D056656000CEA16 /* ContactInfoViewController.swift */,
 			);
 			path = ContactInfo;
@@ -159,6 +162,14 @@
 				186235D62D05662D000CEA16 /* ContactInfo */,
 			);
 			path = Screen;
+			sourceTree = "<group>";
+		};
+		186235DA2D0566CA000CEA16 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				186235DB2D0566DB000CEA16 /* ContactInfoView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,6 +253,7 @@
 				186235CF2D0527F8000CEA16 /* ReuseIdentifying.swift in Sources */,
 				186235C92D052583000CEA16 /* ContactListView.swift in Sources */,
 				186235D22D052866000CEA16 /* UIView+Extension.swift in Sources */,
+				186235DC2D0566DB000CEA16 /* ContactInfoView.swift in Sources */,
 				186235AD2D051C61000CEA16 /* ContactListViewController.swift in Sources */,
 				186235A92D051C61000CEA16 /* AppDelegate.swift in Sources */,
 				186235D52D0528E9000CEA16 /* UIStackView+Extension.swift in Sources */,

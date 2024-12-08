@@ -54,9 +54,11 @@ final class ContactListTVCell: UITableViewCell, ReuseIdentifying {
 //        profileImg.layer.masksToBounds = true
 //    }
     
+    
     override func draw(_ rect: CGRect) {
         profileImg.layer.cornerRadius = profileImg.bounds.width / 2
     }
+    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
