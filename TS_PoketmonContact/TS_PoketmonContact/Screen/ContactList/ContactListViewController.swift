@@ -47,6 +47,8 @@ final class ContactListViewController: UIViewController {
     
     @objc func addButtonTapped() {
         print("추가버튼 탭")
+        let viewController = ContactInfoViewController()
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
