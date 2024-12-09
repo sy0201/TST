@@ -8,7 +8,17 @@
 import UIKit
 
 final class ContactListViewController: UIViewController {
+    private let pokemonViewModel: PokemonViewModel
     let contactListView = ContactListView()
+    
+    init(pokemonViewModel: PokemonViewModel) {
+        self.pokemonViewModel = pokemonViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     
     override func loadView() {
@@ -21,6 +31,17 @@ final class ContactListViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationBar()
         setupTableView()
+        pokemonViewModel.fetchPokemon(frontDefault: 5)
+    }
+    
+    func setupBind() {
+        pokemonViewModel.onPokemonData = { [weak self] in
+            guard let pokemon = self?.pokemonViewModel.pokemonResponse else {
+                return
+            }
+            print("Pokemon data: \(pokemon)")
+            
+        }
     }
     
     func setupNavigationBar() {
