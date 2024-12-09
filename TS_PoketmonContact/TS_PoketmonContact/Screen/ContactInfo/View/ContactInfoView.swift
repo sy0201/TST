@@ -51,6 +51,7 @@ final class ContactInfoView: UIView {
         phoneTv.placeholder = "연락처를 입력해주세요.예시)010-1234-5678"
         return phoneTv
     }()
+    var randomButtonTapped: (() -> Void)?
     
     
     override func layoutSubviews() {
