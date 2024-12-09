@@ -13,20 +13,29 @@ final class PokemonViewModel {
     
     var onPokemonData: (() -> Void)?
     
-    init(networkService: NetworkService) {
-        self.repository = PokemonRepository(networkService: networkService)
+    init(repository: PokemonRepository) {
+        self.repository = repository
     }
     
-    func fetchPokemon(frontDefault: Int) {
-        repository.fetchPokemon(frontDefault: frontDefault) { [weak self] result in
+    func fetchRandomPokemon() {
+        let randomInt = Int.random(in: 1...1000)
+        
+        repository.fetchPokemon(frontDefault: randomInt) { [weak self] result in
             switch result {
             case .success(let success):
                 self?.pokemonResponse = success
                 self?.onPokemonData?()
-                print(self?.pokemonResponse)
             case .failure(let failure):
                 print("Error: \(failure.localizedDescription)")
             }
         }
+    }
+    
+    func getPokemonResponse() -> PokemonResponse? {
+        return pokemonResponse
+    }
+    
+    func setPokemonResponse(_ newResponse: PokemonResponse) {
+        self.pokemonResponse = newResponse
     }
 }

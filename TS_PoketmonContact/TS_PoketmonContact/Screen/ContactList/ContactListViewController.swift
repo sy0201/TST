@@ -31,7 +31,7 @@ final class ContactListViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationBar()
         setupTableView()
-        pokemonViewModel.fetchPokemon(frontDefault: 5)
+        setupBind()
     }
     
     func setupBind() {

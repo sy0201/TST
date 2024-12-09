@@ -18,7 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         
         let networkService = NetworkService()
-        let pokemonViewModel = PokemonViewModel(networkService: networkService)
+        let pokemonRepository = PokemonRepository(networkService: networkService)
+        let pokemonViewModel = PokemonViewModel(repository: pokemonRepository)
         
         // PokemonViewModel을 ContactListViewController에 주입
         let viewController = ContactListViewController(pokemonViewModel: pokemonViewModel)

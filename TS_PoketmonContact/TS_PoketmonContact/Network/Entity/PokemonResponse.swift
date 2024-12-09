@@ -7,6 +7,20 @@
 
 import Foundation
 
+struct PokemonResponse: Decodable {
+    let name: String
+    let sprites: Sprites
+}
+
+struct Sprites: Decodable {
+    let frontDefault: String?
+    
+    private enum CodingKeys: String, CodingKey {
+        case frontDefault = "front_default"
+    }
+}
+
+/**
 // MARK: - Welcome
 struct PokemonResponse: Codable {
     let abilities: [Ability]
@@ -604,3 +618,4 @@ class JSONAny: Codable {
             }
     }
 }
+ */
