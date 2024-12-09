@@ -22,7 +22,6 @@ final class ContactInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
-        setRandomPokemon()
     }
     
     func setupNavigationBar() {
@@ -30,12 +29,13 @@ final class ContactInfoViewController: UIViewController {
         let navRightItem = UIBarButtonItem(title: "적용",
                                            style: .plain,
                                            target: self,
-                                           action: #selector(confirmButtonTapped))
+                                           action: #selector(applyButtonTapped))
         navigationItem.rightBarButtonItem = navRightItem
         navigationItem.title = "연락처 추가"
     }
 
-    @objc func confirmButtonTapped() {
+    @objc func applyButtonTapped() {
+        print("적용버튼")
     }
     
     func setRandomPokemon() {
