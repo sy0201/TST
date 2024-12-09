@@ -8,7 +8,7 @@
 import Foundation
 
 protocol PokemonRepositoryProtocol {
-    func fetchPokemon(frontDefault: Int, completion: @escaping (Result<PokemonResponse, Error>) -> Void)
+    func fetchPokemon(frontDefault: Int, completion: @escaping (Result<PokemonResponse, NetworkError>) -> Void)
 }
 
 final class PokemonRepository: PokemonRepositoryProtocol {
@@ -19,11 +19,16 @@ final class PokemonRepository: PokemonRepositoryProtocol {
         self.networkService = networkService
     }
     
-    func fetchPokemon(frontDefault: Int, completion: @escaping (Result<PokemonResponse, any Error>) -> Void) {
+    func fetchPokemon(frontDefault: Int, completion: @escaping (Result<PokemonResponse, NetworkError>) -> Void) {
         let url = "\(baseURL)\(frontDefault)"
         print("repository url \(url)")
-        networkService.networkRequest(url: url, method: .get, parameters: nil) { (result: Result<PokemonResponse, Error>) in
-            completion(result)
+        networkService.networkRequest(url: url, method: .get, parameters: nil) { (result: Result<PokemonResponse, NetworkError>) in
+            switch result {
+            case .success(let success):
+                completion(.success(success))
+            case .failure(let failure):
+                completion(.failure(failure))
+            }
         }
     }
 }

@@ -29,14 +29,4 @@ final class PokemonViewModel {
             }
         }
     }
-    
-    func randomNumber() -> Int {
-        var randomNumber: Int = 0
-        for i in 1...1000 {
-            
-            print(Int.random(in: 1..<1000))
-            randomNumber = i
-        }
-        return randomNumber
-    }
 }
