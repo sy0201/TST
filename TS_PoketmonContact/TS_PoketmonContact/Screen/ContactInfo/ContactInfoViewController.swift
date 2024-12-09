@@ -22,6 +22,7 @@ final class ContactInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
+        setupRandomPokemon()
     }
     
     func setupNavigationBar() {
@@ -38,24 +39,20 @@ final class ContactInfoViewController: UIViewController {
         print("적용버튼")
     }
     
-    func setRandomPokemon() {
+    func setupRandomPokemon() {
+        contactInfoView.randomButton.addTarget(self, action: #selector(randomImage), for: .touchUpInside)
+    }
+    
+    @objc func randomImage() {
         // 포켓몬 데이터 가져오기
         pokemonViewModel.fetchRandomPokemon()
         
         pokemonViewModel.onPokemonData = { [weak self] in
             if let randomImgURL = self?.pokemonViewModel.getPokemonResponse()?.sprites.frontDefault {
                 self?.loadImage(from: randomImgURL)
+            }else {
+                print("이미지가 없습니다.")
             }
-        }
-        
-        contactInfoView.randomButton.addTarget(self, action: #selector(randomImage), for: .touchUpInside)
-    }
-    
-    @objc func randomImage() {
-        if let randomImgURL = pokemonViewModel.getPokemonResponse()?.sprites.frontDefault {
-            loadImage(from: randomImgURL)
-        } else {
-            print("이미지가 없습니다.")
         }
     }
     
