@@ -27,6 +27,10 @@
 		186235E52D058469000CEA16 /* PokemonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186235E42D058469000CEA16 /* PokemonViewModel.swift */; };
 		186235E82D068878000CEA16 /* PokemonRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186235E72D068878000CEA16 /* PokemonRepository.swift */; };
 		186235ED2D06DEFD000CEA16 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 186235EC2D06DEFD000CEA16 /* Kingfisher */; };
+		186235F32D07D3B4000CEA16 /* ContactDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186235F22D07D3B4000CEA16 /* ContactDataManager.swift */; };
+		186235F62D07D754000CEA16 /* ContactEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186235F42D07D754000CEA16 /* ContactEntity+CoreDataClass.swift */; };
+		186235F72D07D754000CEA16 /* ContactEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186235F52D07D754000CEA16 /* ContactEntity+CoreDataProperties.swift */; };
+		186235FA2D07F8BA000CEA16 /* ContactViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186235F92D07F8BA000CEA16 /* ContactViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +53,10 @@
 		186235E12D0580F2000CEA16 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		186235E42D058469000CEA16 /* PokemonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonViewModel.swift; sourceTree = "<group>"; };
 		186235E72D068878000CEA16 /* PokemonRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonRepository.swift; sourceTree = "<group>"; };
+		186235F22D07D3B4000CEA16 /* ContactDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDataManager.swift; sourceTree = "<group>"; };
+		186235F42D07D754000CEA16 /* ContactEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContactEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		186235F52D07D754000CEA16 /* ContactEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContactEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		186235F92D07F8BA000CEA16 /* ContactViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +76,8 @@
 		1862359C2D051C61000CEA16 = {
 			isa = PBXGroup;
 			children = (
+				186235F42D07D754000CEA16 /* ContactEntity+CoreDataClass.swift */,
+				186235F52D07D754000CEA16 /* ContactEntity+CoreDataProperties.swift */,
 				186235A72D051C61000CEA16 /* TS_PoketmonContact */,
 				186235A62D051C61000CEA16 /* Products */,
 			);
@@ -152,6 +162,7 @@
 			children = (
 				186235D02D052858000CEA16 /* Extexsion */,
 				186235CD2D0527E4000CEA16 /* Protocol */,
+				186235FB2D0800EC000CEA16 /* Manager */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -168,7 +179,7 @@
 		186235D72D05663F000CEA16 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
-				186235E32D05845C000CEA16 /* ViewModel */,
+				186235F82D07F8A9000CEA16 /* ViewModel */,
 				186235C62D05252F000CEA16 /* ContactList */,
 				186235D62D05662D000CEA16 /* ContactInfo */,
 			);
@@ -186,6 +197,7 @@
 		186235DD2D057862000CEA16 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				186235E32D05845C000CEA16 /* ViewModel */,
 				186235E62D058D57000CEA16 /* Entity */,
 				186235E12D0580F2000CEA16 /* NetworkService.swift */,
 				186235E72D068878000CEA16 /* PokemonRepository.swift */,
@@ -216,6 +228,22 @@
 				186235DF2D057933000CEA16 /* PokemonResponse.swift */,
 			);
 			path = Entity;
+			sourceTree = "<group>";
+		};
+		186235F82D07F8A9000CEA16 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				186235F92D07F8BA000CEA16 /* ContactViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		186235FB2D0800EC000CEA16 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				186235F22D07D3B4000CEA16 /* ContactDataManager.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -304,7 +332,9 @@
 				186235DC2D0566DB000CEA16 /* ContactInfoView.swift in Sources */,
 				186235AD2D051C61000CEA16 /* ContactListViewController.swift in Sources */,
 				186235A92D051C61000CEA16 /* AppDelegate.swift in Sources */,
+				186235F32D07D3B4000CEA16 /* ContactDataManager.swift in Sources */,
 				186235D52D0528E9000CEA16 /* UIStackView+Extension.swift in Sources */,
+				186235FA2D07F8BA000CEA16 /* ContactViewModel.swift in Sources */,
 				186235E02D057933000CEA16 /* PokemonResponse.swift in Sources */,
 				186235B32D051C61000CEA16 /* TS_PoketmonContact.xcdatamodeld in Sources */,
 				186235AB2D051C61000CEA16 /* SceneDelegate.swift in Sources */,
@@ -312,6 +342,8 @@
 				186235E82D068878000CEA16 /* PokemonRepository.swift in Sources */,
 				186235D92D056656000CEA16 /* ContactInfoViewController.swift in Sources */,
 				186235E22D0580F2000CEA16 /* NetworkService.swift in Sources */,
+				186235F62D07D754000CEA16 /* ContactEntity+CoreDataClass.swift in Sources */,
+				186235F72D07D754000CEA16 /* ContactEntity+CoreDataProperties.swift in Sources */,
 				186235CC2D052703000CEA16 /* ContactListTVCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

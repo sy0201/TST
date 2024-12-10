@@ -36,22 +36,21 @@ final class ContactInfoView: UIView {
         return button
     }()
     
-    let nameTextView: UITextField = {
-        let nameTv = UITextField()
-        nameTv.frame.size.height = 30
-        nameTv.borderStyle = .roundedRect
-        nameTv.placeholder = "이름을 입력해주세요."
-        return nameTv
+    let nameTextField: UITextField = {
+        let nameTf = UITextField()
+        nameTf.frame.size.height = 30
+        nameTf.borderStyle = .roundedRect
+        nameTf.placeholder = "이름을 입력해주세요."
+        return nameTf
     }()
     
-    let phoneTextView: UITextField = {
-        let phoneTv = UITextField()
-        phoneTv.frame.size.height = 30
-        phoneTv.borderStyle = .roundedRect
-        phoneTv.placeholder = "연락처를 입력해주세요.예시)010-1234-5678"
-        return phoneTv
+    let phoneTextField: UITextField = {
+        let phoneTf = UITextField()
+        phoneTf.frame.size.height = 30
+        phoneTf.borderStyle = .roundedRect
+        phoneTf.placeholder = "연락처를 입력해주세요.예시)010-1234-5678"
+        return phoneTf
     }()
-    var randomButtonTapped: (() -> Void)?
     
     
     override func layoutSubviews() {
@@ -81,8 +80,8 @@ private extension ContactInfoView {
         baseView.addSubview(baseStackView)
         baseStackView.addArrangedSubViews([profileImg,
                                            randomButton,
-                                           nameTextView,
-                                           phoneTextView])
+                                           nameTextField,
+                                           phoneTextField])
     }
     
     func setupConstraint() {
@@ -104,12 +103,12 @@ private extension ContactInfoView {
             make.height.equalTo(50)
         }
         
-        nameTextView.snp.makeConstraints { make in
+        nameTextField.snp.makeConstraints { make in
             make.leading.equalTo(baseStackView.snp.leading).offset(20)
             make.trailing.equalTo(baseStackView.snp.trailing).offset(-20)
         }
         
-        phoneTextView.snp.makeConstraints { make in
+        phoneTextField.snp.makeConstraints { make in
             make.leading.equalTo(baseStackView.snp.leading).offset(20)
             make.trailing.equalTo(baseStackView.snp.trailing).offset(-20)
         }

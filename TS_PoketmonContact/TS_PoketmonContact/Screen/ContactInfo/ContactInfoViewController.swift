@@ -10,6 +10,7 @@ import Kingfisher
 
 final class ContactInfoViewController: UIViewController {
     let pokemonViewModel = PokemonViewModel(repository: PokemonRepository(networkService: NetworkService()))
+    let contactViewModel = ContactViewModel(contactList: [])
     let contactInfoView = ContactInfoView()
 
     
@@ -37,10 +38,36 @@ final class ContactInfoViewController: UIViewController {
 
     @objc func applyButtonTapped() {
         print("적용버튼")
+        guard let name = contactInfoView.nameTextField.text,
+              let phoneNumber = contactInfoView.phoneTextField.text,
+              let profileImg = contactInfoView.profileImg.image else {
+            return
+        }
+        
+        // 이미지 URL String으로 변환
+        let imageString = contactViewModel.saveImageToString(image: profileImg)
+        
+        contactViewModel.contactDataManager.createContactData(name: name, phoneNumber: phoneNumber, profileImage: imageString)
+        self.navigationController?.popViewController(animated: true)
     }
     
     func setupRandomPokemon() {
         contactInfoView.randomButton.addTarget(self, action: #selector(randomImage), for: .touchUpInside)
+    }
+    
+    private func saveImageToLocalDirectory(image: UIImage) -> String {
+        guard let data = image.pngData() else { return "" }
+        let fileName = UUID().uuidString + ".png"
+        let filePath = NSTemporaryDirectory().appending(fileName)
+        let fileURL = URL(fileURLWithPath: filePath)
+        do {
+            try data.write(to: fileURL)
+            UserDefaults.standard.set(fileURL.path, forKey: "lastSavedImagePath")
+            return fileURL.path
+        } catch {
+            print("이미지 저장 실패: \(error.localizedDescription)")
+            return ""
+        }
     }
     
     @objc func randomImage() {
@@ -48,8 +75,8 @@ final class ContactInfoViewController: UIViewController {
         pokemonViewModel.fetchRandomPokemon()
         
         pokemonViewModel.onPokemonData = { [weak self] in
-            if let randomImgURL = self?.pokemonViewModel.getPokemonResponse()?.sprites.frontDefault {
-                self?.loadImage(from: randomImgURL)
+            if let randomImgString = self?.pokemonViewModel.getPokemonResponse()?.sprites.frontDefault {
+                self?.loadImage(from: randomImgString)
             }else {
                 print("이미지가 없습니다.")
             }
