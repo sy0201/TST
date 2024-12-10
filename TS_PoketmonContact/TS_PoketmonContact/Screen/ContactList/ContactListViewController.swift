@@ -9,10 +9,12 @@ import UIKit
 
 final class ContactListViewController: UIViewController {
     private let pokemonViewModel: PokemonViewModel
+    var contactViewModel: ContactViewModel
     let contactListView = ContactListView()
     
     init(pokemonViewModel: PokemonViewModel) {
         self.pokemonViewModel = pokemonViewModel
+        self.contactViewModel = ContactViewModel(contactList: [])
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -32,6 +34,15 @@ final class ContactListViewController: UIViewController {
         setupNavigationBar()
         setupTableView()
         setupBind()
+        
+        let contactEntities = contactViewModel.contactDataManager.readContactData()
+        contactViewModel = ContactViewModel(contactList: contactEntities)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        contactViewModel.getContactList()
+        contactListView.tableView.reloadData()
     }
     
     func setupBind() {
@@ -40,7 +51,6 @@ final class ContactListViewController: UIViewController {
                 return
             }
             print("Pokemon data: \(pokemon)")
-            
         }
     }
     
@@ -94,12 +104,21 @@ private extension ContactListViewController {
 
 extension ContactListViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return contactViewModel.contactList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ContactListTVCell.reuseIdentifier, for: indexPath) as? ContactListTVCell else {
             return UITableViewCell()
+        }
+        
+        let contact = contactViewModel.contactList[indexPath.row]
+        cell.nameLabel.text =  contact.name
+        cell.phoneNumberLabel.text =  contact.phoneNumber
+        
+        if let profileImagePath = contact.profileImage,
+           let profileImage = contactViewModel.loadImage(from: profileImagePath) {
+            cell.profileImg.image = profileImage
         }
         
         return cell
