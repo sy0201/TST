@@ -106,13 +106,49 @@ final class PhoneBookViewController: UIViewController {
 
 extension PhoneBookViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        // 현재 텍스트 필드에 있는 텍스트
+        let currentText = textField.text ?? ""
+        
+        // 입력 후 결과 텍스트
+        guard let textRange = Range(range, in: currentText) else { return false }
+        let updatedText = currentText.replacingCharacters(in: textRange, with: string)
+        
+        // 11자리 초과 입력 방지
+        if updatedText.count > 13 {
+            return false
+        }
+        
+        // 전화번호 입력 필드에 대한 처리
         if textField == phoneBookView.phoneTextField {
-            // 숫자입력만 허용
+            // 숫자만 입력 가능
             let allowedCharacters = CharacterSet.decimalDigits
             let characterSet = CharacterSet(charactersIn: string)
-            return allowedCharacters.isSuperset(of: characterSet)
+            if !allowedCharacters.isSuperset(of: characterSet) {
+                return false
+            }
+            
+            // 자동으로 "-" 추가
+            textField.text = formatPhoneNumber(updatedText)
+            return false // 직접 textField.text를 업데이트했으므로 반환 false
         }
+        
+        // 다른 텍스트 필드는 기본 처리
         return true
+    }
+    
+    /// 전화번호 형식으로 변환
+    private func formatPhoneNumber(_ number: String) -> String {
+        let digits = number.filter { $0.isNumber } // 숫자만 남기기
+        var formattedNumber = digits
+        
+        if digits.count > 3 {
+            formattedNumber.insert("-", at: formattedNumber.index(formattedNumber.startIndex, offsetBy: 3))
+        }
+        if digits.count > 7 {
+            formattedNumber.insert("-", at: formattedNumber.index(formattedNumber.startIndex, offsetBy: 8))
+        }
+        
+        return formattedNumber
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
