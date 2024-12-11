@@ -11,8 +11,13 @@ final class ContactViewModel {
     let contactDataManager = ContactDataManager.shared
     private(set) var contactList: [ContactEntity] = []  // contactList 외부에서 읽기만 가능, set은 해당 class에서만 가능
     
+    func sortContactsByName() {
+        contactList.sort { ($0.name ?? "") < ($1.name ?? "") }
+    }
+    
     func loadContacts() {
         self.contactList = contactDataManager.readContactData()
+        sortContactsByName()
     }
     
     func addContact(name: String, phoneNumber: String, profileImage: String) {
