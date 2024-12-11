@@ -31,6 +31,7 @@
 		186235F72D07D754000CEA16 /* ContactEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186235F52D07D754000CEA16 /* ContactEntity+CoreDataProperties.swift */; };
 		186235FA2D07F8BA000CEA16 /* ContactViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186235F92D07F8BA000CEA16 /* ContactViewModel.swift */; };
 		186235FE2D08709C000CEA16 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186235FD2D08709C000CEA16 /* UIImage+Extension.swift */; };
+		186236012D095402000CEA16 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 186236002D095402000CEA16 /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				186236012D095402000CEA16 /* Kingfisher in Frameworks */,
 				186235C12D051D8E000CEA16 /* Alamofire in Frameworks */,
 				186235C42D051D9E000CEA16 /* SnapKit in Frameworks */,
 			);
@@ -274,6 +276,7 @@
 			packageProductDependencies = (
 				186235C02D051D8E000CEA16 /* Alamofire */,
 				186235C32D051D9E000CEA16 /* SnapKit */,
+				186236002D095402000CEA16 /* Kingfisher */,
 			);
 			productName = TS_PoketmonContact;
 			productReference = 186235A52D051C61000CEA16 /* TS_PoketmonContact.app */;
@@ -306,7 +309,7 @@
 			packageReferences = (
 				186235BF2D051D8E000CEA16 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				186235C22D051D9E000CEA16 /* XCRemoteSwiftPackageReference "SnapKit" */,
-				186235EB2D06DEFD000CEA16 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				186235FF2D095402000CEA16 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 186235A62D051C61000CEA16 /* Products */;
 			projectDirPath = "";
@@ -594,7 +597,7 @@
 				minimumVersion = 5.7.1;
 			};
 		};
-		186235EB2D06DEFD000CEA16 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+		186235FF2D095402000CEA16 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher";
 			requirement = {
@@ -614,6 +617,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 186235C22D051D9E000CEA16 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		186236002D095402000CEA16 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 186235FF2D095402000CEA16 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 
