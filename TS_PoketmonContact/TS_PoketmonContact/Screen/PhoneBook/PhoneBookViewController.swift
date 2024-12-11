@@ -7,11 +7,11 @@
 
 import UIKit
 
-final class ContactInfoViewController: UIViewController {
+final class PhoneBookViewController: UIViewController {
     let pokemonViewModel = PokemonViewModel(repository: PokemonRepository(networkService: NetworkService()))
     let contactViewModel: ContactViewModel
     var selectedContact: ContactEntity?
-    let contactInfoView = ContactInfoView()
+    let phoneBookView = PhoneBookView()
     
     init(contactViewModel: ContactViewModel, selectedContact: ContactEntity? = nil) {
         self.contactViewModel = contactViewModel
@@ -26,20 +26,25 @@ final class ContactInfoViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
-        view = contactInfoView
+        view = phoneBookView
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
+        setupTextField()
         setupRandomPokemon()
         
+        // 기존 연락처 정보를 수정시 텍스트 필드에 값 설정
         if let contact = selectedContact {
-            contactInfoView.nameTextField.text = contact.name
-            contactInfoView.phoneTextField.text = contact.phoneNumber
-            if let imageString = contact.profileImage {
-                contactInfoView.profileImg.loadImage(from: imageString)
+            print("Selected Contact Profile Image: \(contact.profileImage ?? "nil")")
+            phoneBookView.nameTextField.text = contact.name
+            phoneBookView.phoneTextField.text = contact.phoneNumber
+            if let imageString = contact.profileImage, !imageString.isEmpty {
+                phoneBookView.profileImg.loadImage(from: imageString)
+            } else {
+                phoneBookView.profileImg.image = UIImage(named: "placeholder")
             }
         }
     }
@@ -53,20 +58,26 @@ final class ContactInfoViewController: UIViewController {
         navigationItem.rightBarButtonItem = navRightItem
         navigationItem.title = "연락처 추가"
     }
+    
+    func setupTextField() {
+        phoneBookView.nameTextField.delegate = self
+        phoneBookView.phoneTextField.delegate = self
+    }
 
     @objc func applyButtonTapped() {
-        guard let name = contactInfoView.nameTextField.text,
-              let phoneNumber = contactInfoView.phoneTextField.text,
-              let profileImage = pokemonViewModel.getPokemonImageURL() else {
+        let name = phoneBookView.nameTextField.text
+        let phoneNumber = phoneBookView.phoneTextField.text
+        let profileImage = pokemonViewModel.getPokemonImageURL() ?? "default_image_url"  // 기본값 설정
+        
+        guard let name = name, !name.isEmpty,
+              let phoneNumber = phoneNumber, !phoneNumber.isEmpty else {
             print("유효하지 않은 입력입니다.")
             return
         }
         
         if let contact = selectedContact {
-            // 기존 데이터가 있으면 업데이트(수정)
             contactViewModel.updateContact(contact: contact, name: name, phoneNumber: phoneNumber, profileImage: profileImage)
         } else {
-            // 기존 데이터가 없으면 새로 저장
             contactViewModel.addContact(name: name, phoneNumber: phoneNumber, profileImage: profileImage)
         }
         
@@ -74,18 +85,39 @@ final class ContactInfoViewController: UIViewController {
     }
     
     func setupRandomPokemon() {
-        contactInfoView.randomButton.addTarget(self, action: #selector(randomImage), for: .touchUpInside)
+        phoneBookView.randomButton.addTarget(self, action: #selector(getRandomImage), for: .touchUpInside)
     }
     
-    @objc func randomImage() {
+    @objc func getRandomImage() {
         // 포켓몬 데이터 가져오기
         pokemonViewModel.fetchRandomPokemon()
         pokemonViewModel.onPokemonData = { [weak self] in
             if let imageURL = self?.pokemonViewModel.getPokemonImageURL() {
-                self?.contactInfoView.profileImg.loadImage(from: imageURL)
+                self?.phoneBookView.profileImg.loadImage(from: imageURL)
+                print("imageURL \(imageURL)")
             } else {
                 print("이미지가 없습니다.")
             }
         }
+    }
+}
+
+// MARK: - UITextFieldDelegate Method
+
+extension PhoneBookViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == phoneBookView.phoneTextField {
+            // 숫자입력만 허용
+            let allowedCharacters = CharacterSet.decimalDigits
+            let characterSet = CharacterSet(charactersIn: string)
+            return allowedCharacters.isSuperset(of: characterSet)
+        }
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        // 키보드 숨기기
+        textField.resignFirstResponder()
+        return true
     }
 }

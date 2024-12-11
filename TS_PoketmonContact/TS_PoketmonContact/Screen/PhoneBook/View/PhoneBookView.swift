@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class ContactInfoView: UIView {
+final class PhoneBookView: UIView {
     let baseView = UIView()
     
     let baseStackView: UIStackView = {
@@ -48,6 +48,7 @@ final class ContactInfoView: UIView {
         let phoneTf = UITextField()
         phoneTf.frame.size.height = 30
         phoneTf.borderStyle = .roundedRect
+        phoneTf.keyboardType = .numberPad
         phoneTf.placeholder = "연락처를 입력해주세요.예시)010-1234-5678"
         return phoneTf
     }()
@@ -73,7 +74,7 @@ final class ContactInfoView: UIView {
 
 // MARK: - Private setup UI Methods
 
-private extension ContactInfoView {
+private extension PhoneBookView {
     func setupUI() {
         self.backgroundColor = .white
         addSubview(baseView)
@@ -86,20 +87,21 @@ private extension ContactInfoView {
     
     func setupConstraint() {
         baseView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(100)
-            make.leading.trailing.bottom.equalToSuperview()
+            make.edges.equalToSuperview()
         }
         
         baseStackView.snp.makeConstraints { make in
-            make.leading.top.trailing.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
+            make.top.equalTo(baseView.snp.top).offset(130)
         }
         
         profileImg.snp.makeConstraints { make in
-            make.top.equalTo(baseStackView.snp.top).offset(30)
             make.width.height.equalTo(150)
         }
         
         randomButton.snp.makeConstraints { make in
+            make.leading.equalTo(baseStackView.snp.leading).offset(20)
+            make.trailing.equalTo(baseStackView.snp.trailing).offset(-20)
             make.height.equalTo(50)
         }
         
@@ -111,6 +113,7 @@ private extension ContactInfoView {
         phoneTextField.snp.makeConstraints { make in
             make.leading.equalTo(baseStackView.snp.leading).offset(20)
             make.trailing.equalTo(baseStackView.snp.trailing).offset(-20)
+            make.bottom.equalTo(baseStackView.snp.bottom)
         }
     }
 }

@@ -23,12 +23,14 @@ final class ContactListViewController: UIViewController {
         setupNavigationBar()
         setupTableView()
         
+        // 연락처 데이터 로드
         contactViewModel.loadContacts()
         contactListView.tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // 데이터를 로드하고 새로 고침
         contactViewModel.loadContacts()
         contactListView.tableView.reloadData()
     }
@@ -62,7 +64,7 @@ final class ContactListViewController: UIViewController {
     }
     
     @objc func addButtonTapped() {
-        let contactInfoController = ContactInfoViewController(contactViewModel: contactViewModel)
+        let contactInfoController = PhoneBookViewController(contactViewModel: contactViewModel)
         navigationController?.pushViewController(contactInfoController, animated: true)
     }
 }
@@ -97,6 +99,7 @@ extension ContactListViewController: UITableViewDataSource, UITableViewDelegate 
         
         if let imageURL = contact.profileImage {
             cell.profileImg.loadImage(from: imageURL)
+            print("imagURL \(imageURL)")
         } else {
             cell.profileImg.image = UIImage(named: "placeholder")
         }
@@ -110,7 +113,9 @@ extension ContactListViewController: UITableViewDataSource, UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedContact = contactViewModel.contactList[indexPath.row]
-        let contactInfoController = ContactInfoViewController(contactViewModel: contactViewModel, selectedContact: selectedContact)
+        print("Selected Contact: \(selectedContact.name), \(selectedContact.phoneNumber)")
+        
+        let contactInfoController = PhoneBookViewController(contactViewModel: contactViewModel, selectedContact: selectedContact)
         navigationController?.pushViewController(contactInfoController, animated: true)
     }
 }

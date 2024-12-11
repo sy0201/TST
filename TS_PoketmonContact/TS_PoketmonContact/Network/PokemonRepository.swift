@@ -22,6 +22,7 @@ final class PokemonRepository: PokemonRepositoryProtocol {
     func fetchPokemon(frontDefault: Int, completion: @escaping (Result<PokemonResponse, NetworkError>) -> Void) {
         let url = "\(baseURL)\(frontDefault)"
         print("repository url \(url)")
+        
         networkService.networkRequest(url: url, method: .get, parameters: nil) { (result: Result<PokemonResponse, NetworkError>) in
             switch result {
             case .success(let success):
