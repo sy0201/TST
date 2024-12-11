@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let pokemonViewModel = PokemonViewModel(repository: pokemonRepository)
         
         // PokemonViewModel을 ContactListViewController에 주입
-        let viewController = ContactListViewController(pokemonViewModel: pokemonViewModel)
+        let viewController = ContactListViewController()
         let navigationController = UINavigationController(rootViewController: viewController)
         
         window?.rootViewController = navigationController

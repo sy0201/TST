@@ -6,13 +6,21 @@
 //
 
 import UIKit
-import Kingfisher
 
 final class ContactInfoViewController: UIViewController {
     let pokemonViewModel = PokemonViewModel(repository: PokemonRepository(networkService: NetworkService()))
-    let contactViewModel = ContactViewModel(contactList: [])
+    let contactViewModel: ContactViewModel
     let contactInfoView = ContactInfoView()
-
+    
+    init(contactViewModel: ContactViewModel) {
+        self.contactViewModel = contactViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     override func loadView() {
         super.loadView()
@@ -37,54 +45,30 @@ final class ContactInfoViewController: UIViewController {
     }
 
     @objc func applyButtonTapped() {
-        print("적용버튼")
         guard let name = contactInfoView.nameTextField.text,
               let phoneNumber = contactInfoView.phoneTextField.text,
-              let profileImg = contactInfoView.profileImg.image else {
+              let profileImage = pokemonViewModel.getPokemonImageURL() else {
+            print("유효하지 않은 입력입니다.")
             return
         }
         
-        // 이미지 URL String으로 변환
-        let imageString = contactViewModel.saveImageToString(image: profileImg)
-        
-        contactViewModel.contactDataManager.createContactData(name: name, phoneNumber: phoneNumber, profileImage: imageString)
-        self.navigationController?.popViewController(animated: true)
+        contactViewModel.addContact(name: name, phoneNumber: phoneNumber, profileImage: profileImage)
+        navigationController?.popViewController(animated: true)
     }
     
     func setupRandomPokemon() {
         contactInfoView.randomButton.addTarget(self, action: #selector(randomImage), for: .touchUpInside)
     }
     
-    private func saveImageToLocalDirectory(image: UIImage) -> String {
-        guard let data = image.pngData() else { return "" }
-        let fileName = UUID().uuidString + ".png"
-        let filePath = NSTemporaryDirectory().appending(fileName)
-        let fileURL = URL(fileURLWithPath: filePath)
-        do {
-            try data.write(to: fileURL)
-            UserDefaults.standard.set(fileURL.path, forKey: "lastSavedImagePath")
-            return fileURL.path
-        } catch {
-            print("이미지 저장 실패: \(error.localizedDescription)")
-            return ""
-        }
-    }
-    
     @objc func randomImage() {
         // 포켓몬 데이터 가져오기
         pokemonViewModel.fetchRandomPokemon()
-        
         pokemonViewModel.onPokemonData = { [weak self] in
-            if let randomImgString = self?.pokemonViewModel.getPokemonResponse()?.sprites.frontDefault {
-                self?.loadImage(from: randomImgString)
-            }else {
+            if let imageURL = self?.pokemonViewModel.getPokemonImageURL() {
+                self?.contactInfoView.profileImg.loadImage(from: imageURL)
+            } else {
                 print("이미지가 없습니다.")
             }
         }
-    }
-    
-    func loadImage(from urlString: String) {
-        guard let url = URL(string: urlString) else { return }
-        contactInfoView.profileImg.kf.setImage(with: url)
     }
 }

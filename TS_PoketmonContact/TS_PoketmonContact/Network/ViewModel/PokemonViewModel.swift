@@ -9,8 +9,11 @@ import Foundation
 
 final class PokemonViewModel {
     private let repository: PokemonRepository
-    var pokemonResponse: PokemonResponse?
-    
+    var pokemonResponse: PokemonResponse? {
+        didSet {
+            onPokemonData?()
+        }
+    }
     var onPokemonData: (() -> Void)?
     
     init(repository: PokemonRepository) {
@@ -24,18 +27,13 @@ final class PokemonViewModel {
             switch result {
             case .success(let success):
                 self?.pokemonResponse = success
-                self?.onPokemonData?()
-            case .failure(let failure):
-                print("Error: \(failure.localizedDescription)")
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
             }
         }
     }
     
-    func getPokemonResponse() -> PokemonResponse? {
-        return pokemonResponse
-    }
-    
-    func setPokemonResponse(_ newResponse: PokemonResponse) {
-        self.pokemonResponse = newResponse
+    func getPokemonImageURL() -> String? {
+        return pokemonResponse?.sprites.frontDefault
     }
 }
