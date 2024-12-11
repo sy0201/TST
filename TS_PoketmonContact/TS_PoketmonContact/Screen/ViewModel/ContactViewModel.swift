@@ -20,4 +20,8 @@ final class ContactViewModel {
         contactDataManager.createContactData(name: name, phoneNumber: phoneNumber, profileImage: profileImage)
         loadContacts()
     }
+    
+    func updateContact(contact: ContactEntity, name: String, phoneNumber: String, profileImage: String) {
+        contactDataManager.updateContactData(contact: contact, name: name, phoneNumber: phoneNumber, profileImage: profileImage)
+    }
 }

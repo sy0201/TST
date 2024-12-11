@@ -107,4 +107,10 @@ extension ContactListViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedContact = contactViewModel.contactList[indexPath.row]
+        let contactInfoController = ContactInfoViewController(contactViewModel: contactViewModel, selectedContact: selectedContact)
+        navigationController?.pushViewController(contactInfoController, animated: true)
+    }
 }
