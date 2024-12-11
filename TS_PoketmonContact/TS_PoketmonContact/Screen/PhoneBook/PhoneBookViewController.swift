@@ -7,11 +7,11 @@
 
 import UIKit
 
-final class ContactInfoViewController: UIViewController {
+final class PhoneBookViewController: UIViewController {
     let pokemonViewModel = PokemonViewModel(repository: PokemonRepository(networkService: NetworkService()))
     let contactViewModel: ContactViewModel
     var selectedContact: ContactEntity?
-    let contactInfoView = ContactInfoView()
+    let phoneBookView = PhoneBookView()
     
     init(contactViewModel: ContactViewModel, selectedContact: ContactEntity? = nil) {
         self.contactViewModel = contactViewModel
@@ -26,7 +26,7 @@ final class ContactInfoViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
-        view = contactInfoView
+        view = phoneBookView
     }
     
     
@@ -36,10 +36,10 @@ final class ContactInfoViewController: UIViewController {
         setupRandomPokemon()
         
         if let contact = selectedContact {
-            contactInfoView.nameTextField.text = contact.name
-            contactInfoView.phoneTextField.text = contact.phoneNumber
+            phoneBookView.nameTextField.text = contact.name
+            phoneBookView.phoneTextField.text = contact.phoneNumber
             if let imageString = contact.profileImage {
-                contactInfoView.profileImg.loadImage(from: imageString)
+                phoneBookView.profileImg.loadImage(from: imageString)
             }
         }
     }
@@ -55,17 +55,19 @@ final class ContactInfoViewController: UIViewController {
     }
 
     @objc func applyButtonTapped() {
-        guard let name = contactInfoView.nameTextField.text,
-              let phoneNumber = contactInfoView.phoneTextField.text,
+        guard let name = phoneBookView.nameTextField.text,
+              let phoneNumber = phoneBookView.phoneTextField.text,
               let profileImage = pokemonViewModel.getPokemonImageURL() else {
             print("유효하지 않은 입력입니다.")
             return
         }
-        
+
         if let contact = selectedContact {
             // 기존 데이터가 있으면 업데이트(수정)
+            print("name: \(name), phoneNumber: \(phoneNumber), profileImage: \(profileImage)")
             contactViewModel.updateContact(contact: contact, name: name, phoneNumber: phoneNumber, profileImage: profileImage)
         } else {
+            print("name: \(name), phoneNumber: \(phoneNumber), profileImage: \(profileImage)")
             // 기존 데이터가 없으면 새로 저장
             contactViewModel.addContact(name: name, phoneNumber: phoneNumber, profileImage: profileImage)
         }
@@ -74,15 +76,15 @@ final class ContactInfoViewController: UIViewController {
     }
     
     func setupRandomPokemon() {
-        contactInfoView.randomButton.addTarget(self, action: #selector(randomImage), for: .touchUpInside)
+        phoneBookView.randomButton.addTarget(self, action: #selector(getRandomImage), for: .touchUpInside)
     }
     
-    @objc func randomImage() {
+    @objc func getRandomImage() {
         // 포켓몬 데이터 가져오기
         pokemonViewModel.fetchRandomPokemon()
         pokemonViewModel.onPokemonData = { [weak self] in
             if let imageURL = self?.pokemonViewModel.getPokemonImageURL() {
-                self?.contactInfoView.profileImg.loadImage(from: imageURL)
+                self?.phoneBookView.profileImg.loadImage(from: imageURL)
             } else {
                 print("이미지가 없습니다.")
             }
