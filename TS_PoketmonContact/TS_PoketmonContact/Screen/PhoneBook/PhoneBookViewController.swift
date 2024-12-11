@@ -38,10 +38,13 @@ final class PhoneBookViewController: UIViewController {
         
         // 기존 연락처 정보를 수정시 텍스트 필드에 값 설정
         if let contact = selectedContact {
+            print("Selected Contact Profile Image: \(contact.profileImage ?? "nil")")
             phoneBookView.nameTextField.text = contact.name
             phoneBookView.phoneTextField.text = contact.phoneNumber
-            if let imageString = contact.profileImage {
+            if let imageString = contact.profileImage, !imageString.isEmpty {
                 phoneBookView.profileImg.loadImage(from: imageString)
+            } else {
+                phoneBookView.profileImg.image = UIImage(named: "placeholder")
             }
         }
     }
@@ -64,7 +67,7 @@ final class PhoneBookViewController: UIViewController {
     @objc func applyButtonTapped() {
         let name = phoneBookView.nameTextField.text
         let phoneNumber = phoneBookView.phoneTextField.text
-        let profileImage = pokemonViewModel.getPokemonImageURL() ?? ""
+        let profileImage = pokemonViewModel.getPokemonImageURL() ?? "default_image_url"  // 기본값 설정
         
         guard let name = name, !name.isEmpty,
               let phoneNumber = phoneNumber, !phoneNumber.isEmpty else {

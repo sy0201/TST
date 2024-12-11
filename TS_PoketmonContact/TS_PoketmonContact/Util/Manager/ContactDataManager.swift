@@ -58,7 +58,10 @@ final class ContactDataManager {
     func updateContactData(contact: ContactEntity, name: String, phoneNumber: String, profileImage: String) {
         contact.setValue(name, forKey: ContactEntity.Key.name)
         contact.setValue(phoneNumber, forKey: ContactEntity.Key.phoneNumber)
-        contact.setValue(profileImage, forKey: ContactEntity.Key.profileImage)
+        
+        // profileImage가 빈 값일 경우 기존 값 유지
+        let finalImageURL = (profileImage.isEmpty || profileImage == "default_image_url") ? contact.profileImage : profileImage
+        contact.setValue(finalImageURL, forKey: ContactEntity.Key.profileImage)
         
         do {
             try self.context.save()
@@ -67,6 +70,7 @@ final class ContactDataManager {
             print("데이터 업데이트 실패: \(error)")
         }
     }
+
     
     // delete
     func deleteContactData(name: String) {

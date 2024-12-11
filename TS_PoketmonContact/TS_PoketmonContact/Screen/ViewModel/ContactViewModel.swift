@@ -9,8 +9,7 @@ import UIKit
 
 final class ContactViewModel {
     let contactDataManager = ContactDataManager.shared
-    private(set) var contactList: [ContactEntity] = []     // contactList 외부에서 읽기만 가능, set은 해당 class에서만 가능
-
+    private(set) var contactList: [ContactEntity] = []  // contactList 외부에서 읽기만 가능, set은 해당 class에서만 가능
     
     func loadContacts() {
         self.contactList = contactDataManager.readContactData()
@@ -21,8 +20,15 @@ final class ContactViewModel {
         loadContacts()
     }
     
-    func updateContact(contact: ContactEntity, name: String, phoneNumber: String, profileImage: String) {
-        contactDataManager.updateContactData(contact: contact, name: name, phoneNumber: phoneNumber, profileImage: profileImage)
-        loadContacts() // 연락처 리스트 업데이트
+    func updateContact(contact: ContactEntity, name: String, phoneNumber: String, profileImage: String?) {
+        let updatedImageURL: String
+        if let profileImage = profileImage, !profileImage.isEmpty {
+            updatedImageURL = profileImage // 새로운 이미지 URL이 있을 경우
+        } else {
+            updatedImageURL = contact.profileImage ?? "default_image_url" // 기존 이미지 URL이 없으면 기본 이미지 사용
+        }
+        
+        contactDataManager.updateContactData(contact: contact, name: name, phoneNumber: phoneNumber, profileImage: updatedImageURL)
+        loadContacts()
     }
 }

@@ -99,6 +99,7 @@ extension ContactListViewController: UITableViewDataSource, UITableViewDelegate 
         
         if let imageURL = contact.profileImage {
             cell.profileImg.loadImage(from: imageURL)
+            print("imagURL \(imageURL)")
         } else {
             cell.profileImg.image = UIImage(named: "placeholder")
         }
