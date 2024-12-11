@@ -13,10 +13,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let windowScene = (scene as? UIWindowScene) else { return }
-        
+        guard let windowScene = (scene as? UIWindowScene) else { 
+            return }
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = ContactListViewController()
+        
+        let networkService = NetworkService()
+        let pokemonRepository = PokemonRepository(networkService: networkService)
+        let pokemonViewModel = PokemonViewModel(repository: pokemonRepository)
+        
+        // PokemonViewModel을 ContactListViewController에 주입
+        let viewController = ContactListViewController()
+        let navigationController = UINavigationController(rootViewController: viewController)
+        
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
 
