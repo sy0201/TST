@@ -23,12 +23,14 @@ final class ContactListViewController: UIViewController {
         setupNavigationBar()
         setupTableView()
         
+        // 연락처 데이터 로드
         contactViewModel.loadContacts()
         contactListView.tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // 데이터를 로드하고 새로 고침
         contactViewModel.loadContacts()
         contactListView.tableView.reloadData()
     }
@@ -110,6 +112,8 @@ extension ContactListViewController: UITableViewDataSource, UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedContact = contactViewModel.contactList[indexPath.row]
+        print("Selected Contact: \(selectedContact.name), \(selectedContact.phoneNumber)")
+        
         let contactInfoController = PhoneBookViewController(contactViewModel: contactViewModel, selectedContact: selectedContact)
         navigationController?.pushViewController(contactInfoController, animated: true)
     }
