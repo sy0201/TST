@@ -44,10 +44,9 @@
 
 ## 💫 필수 기능
 
-| 기본 UI | 연락처 추가화면 | 네비게이션 바 | API | CoreData |
-| -------- | -------- | -------- | -------- | -------- |
-| ![기본 UI](https://github.com/user-attachments/assets/4140d63f-19fc-4dbb-ab60-d6a48dc24326) | ![연락처 추가화면](https://github.com/user-attachments/assets/b62b61ec-4e1d-4825-81b1-005c0a60ef0f) |  ![상단 네비게이션 바](https://github.com/user-attachments/assets/2164f6ca-da24-4049-9e94-4df8c119ffbc) | ![API](https://github.com/user-attachments/assets/5334869c-b50e-48ba-a92f-03d764341f28) | ![CorData](https://github.com/user-attachments/assets/2cc01647-fd09-4d98-b88c-e516035f65ed) |
-
+|기본 UI|연락처 추가화면|네비게이션 바|API|CoreData|
+|--------|--------|--------|--------|--------|
+|![기본 UI](https://github.com/user-attachments/assets/4140d63f-19fc-4dbb-ab60-d6a48dc24326)|![연락처 추가화면](https://github.com/user-attachments/assets/b62b61ec-4e1d-4825-81b1-005c0a60ef0f)|![상단 네비게이션 바](https://github.com/user-attachments/assets/2164f6ca-da24-4049-9e94-4df8c119ffbc)|![API](https://github.com/user-attachments/assets/5334869c-b50e-48ba-a92f-03d764341f28)|![CorData](https://github.com/user-attachments/assets/2cc01647-fd09-4d98-b88c-e516035f65ed)|
 
 <a id="트러블-슈팅"></a>
 ## 🧨  레벨별 고민했던 점
