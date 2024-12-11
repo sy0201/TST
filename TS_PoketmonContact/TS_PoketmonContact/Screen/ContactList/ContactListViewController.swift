@@ -8,19 +8,8 @@
 import UIKit
 
 final class ContactListViewController: UIViewController {
-    private let pokemonViewModel: PokemonViewModel
-    var contactViewModel: ContactViewModel
+    let contactViewModel = ContactViewModel()
     let contactListView = ContactListView()
-    
-    init(pokemonViewModel: PokemonViewModel) {
-        self.pokemonViewModel = pokemonViewModel
-        self.contactViewModel = ContactViewModel(contactList: [])
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     
     override func loadView() {
@@ -33,27 +22,17 @@ final class ContactListViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationBar()
         setupTableView()
-        setupBind()
         
-        let contactEntities = contactViewModel.contactDataManager.readContactData()
-        contactViewModel = ContactViewModel(contactList: contactEntities)
+        contactViewModel.loadContacts()
+        contactListView.tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        contactViewModel.getContactList()
+        contactViewModel.loadContacts()
         contactListView.tableView.reloadData()
     }
-    
-    func setupBind() {
-        pokemonViewModel.onPokemonData = { [weak self] in
-            guard let pokemon = self?.pokemonViewModel.pokemonResponse else {
-                return
-            }
-            print("Pokemon data: \(pokemon)")
-        }
-    }
-    
+
     func setupNavigationBar() {
         // UINavigationBarAppearance 설정
         let appearance = UINavigationBarAppearance()
@@ -83,8 +62,8 @@ final class ContactListViewController: UIViewController {
     }
     
     @objc func addButtonTapped() {
-        let contactInfoController = ContactInfoViewController()
-        self.navigationController?.pushViewController(contactInfoController, animated: true)
+        let contactInfoController = ContactInfoViewController(contactViewModel: contactViewModel)
+        navigationController?.pushViewController(contactInfoController, animated: true)
     }
 }
 
@@ -116,9 +95,10 @@ extension ContactListViewController: UITableViewDataSource, UITableViewDelegate 
         cell.nameLabel.text =  contact.name
         cell.phoneNumberLabel.text =  contact.phoneNumber
         
-        if let profileImagePath = contact.profileImage,
-           let profileImage = contactViewModel.loadImage(from: profileImagePath) {
-            cell.profileImg.image = profileImage
+        if let imageURL = contact.profileImage {
+            cell.profileImg.loadImage(from: imageURL)
+        } else {
+            cell.profileImg.image = UIImage(named: "placeholder")
         }
         
         return cell

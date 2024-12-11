@@ -22,8 +22,7 @@ final class ContactDataManager {
     
     // create
     func createContactData(name: String, phoneNumber: String, profileImage: String) {
-        let entityName = "ContactEntity"
-        guard let entity = NSEntityDescription.entity(forEntityName: entityName, in: context) else {
+        guard let entity = NSEntityDescription.entity(forEntityName: ContactEntity.className, in: context) else {
             print("Entity not found")
             return
         }
