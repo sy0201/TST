@@ -61,7 +61,6 @@
 layoutSubviews에서 profileImg.layer.cornerRadius를 설정해도 동작하지 않는 문제가 발생하였다.
 검색해보니 뷰 계층이 올바르게 업데이트되기 전에 레이아웃을 그려주는 부분이 호출되는 문제라고 찾았다.
 
-  ![데이터 보여주기](https://user-images.githubusercontent.com/99253403/207301175-8c1b24aa-4b91-4de5-9e08-29afdbedf8ff.gif)
 **해결방법** <br>
 공식문서를 보다 layoutSubviews를 직접 호출하면 안된다는 내용을 확인하였고, 다른 함수 중 `func draw()`를 알게 되었다. 해당 메서드는 뷰의 커스텀 렌더링을 수행하기 위해 호출된다고 한다. 하지만 오히려 `draw()`메서드를 사용하면 오히려 불필요한 작업을 추가하기 때문에 피하는것이 좋다고 하였다. 하지만 해당 메서드에서 작성시 이상없이 ConerRadius가 적용되었고, 과제 제출 기간의 압박으로 우선 되는 부분에 적용하였지만 정확한 문제인 뷰 계층의 업데이트 순서를 확인하고 수정해야겠다고 생각했다.
 ```swift
@@ -81,7 +80,6 @@ override func draw(_ rect: CGRect) {
 과제 내용에는 이름과 전화번호 입력칸을 UITextView로 제안되어있었다. UITextView는 긴 내용을 입력하는것으로 알고 있었다.
 이름과 연락처 부분은 한줄이면 작성이 가능하였고, UITextField를 사용하는것이 맞지 않을까? 하는 고민이 생겼다.
 
-  ![데이터 보여주기](https://user-images.githubusercontent.com/99253403/207301175-8c1b24aa-4b91-4de5-9e08-29afdbedf8ff.gif)
 **해결방법** <br>
 1. 전화번호 입력시 하이픈도 자동으로 입력되도록 기능을 추가할 생각이었고, 2. 입력수 제한도 넣을 예정이었다. 3. 그리고 placeholder를 사용하여 사용자가 어떤걸 입력해야하는지 알려주고싶었다.
 이러한 고민 끝에 UITextField를 사용하기로 결정하였다. 덕분에 UITextView와 UITextField의 차이점도 다시한번 짚어볼수 있는 계기가 되었고, 왜 해당 기능(UI 컴포넌트)을 사용했는지 이유를 찾고 공부하게된 계기가 되었다.
