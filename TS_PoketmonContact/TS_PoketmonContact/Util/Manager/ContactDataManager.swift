@@ -55,21 +55,16 @@ final class ContactDataManager {
     }
     
     // update
-    func updateContactData(currentName: String, updateName: String) {
-        let fetchRequest = ContactEntity.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "name == %@", currentName)
+    func updateContactData(contact: ContactEntity, name: String, phoneNumber: String, profileImage: String) {
+        contact.setValue(name, forKey: ContactEntity.Key.name)
+        contact.setValue(phoneNumber, forKey: ContactEntity.Key.phoneNumber)
+        contact.setValue(profileImage, forKey: ContactEntity.Key.profileImage)
         
         do {
-            let result = try self.context.fetch(fetchRequest)
-            
-            for data in result as [NSManagedObject] {
-                data.setValue(updateName, forKey: ContactEntity.Key.name)
-            }
-            
             try self.context.save()
             print("데이터 업데이트 성공")
         } catch {
-            print("데이터 업데이트 실패")
+            print("데이터 업데이트 실패: \(error)")
         }
     }
     

@@ -10,10 +10,12 @@ import UIKit
 final class ContactInfoViewController: UIViewController {
     let pokemonViewModel = PokemonViewModel(repository: PokemonRepository(networkService: NetworkService()))
     let contactViewModel: ContactViewModel
+    var selectedContact: ContactEntity?
     let contactInfoView = ContactInfoView()
     
-    init(contactViewModel: ContactViewModel) {
+    init(contactViewModel: ContactViewModel, selectedContact: ContactEntity? = nil) {
         self.contactViewModel = contactViewModel
+        self.selectedContact = selectedContact
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -32,6 +34,14 @@ final class ContactInfoViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationBar()
         setupRandomPokemon()
+        
+        if let contact = selectedContact {
+            contactInfoView.nameTextField.text = contact.name
+            contactInfoView.phoneTextField.text = contact.phoneNumber
+            if let imageString = contact.profileImage {
+                contactInfoView.profileImg.loadImage(from: imageString)
+            }
+        }
     }
     
     func setupNavigationBar() {
@@ -52,7 +62,14 @@ final class ContactInfoViewController: UIViewController {
             return
         }
         
-        contactViewModel.addContact(name: name, phoneNumber: phoneNumber, profileImage: profileImage)
+        if let contact = selectedContact {
+            // 기존 데이터가 있으면 업데이트(수정)
+            contactViewModel.updateContact(contact: contact, name: name, phoneNumber: phoneNumber, profileImage: profileImage)
+        } else {
+            // 기존 데이터가 없으면 새로 저장
+            contactViewModel.addContact(name: name, phoneNumber: phoneNumber, profileImage: profileImage)
+        }
+        
         navigationController?.popViewController(animated: true)
     }
     
