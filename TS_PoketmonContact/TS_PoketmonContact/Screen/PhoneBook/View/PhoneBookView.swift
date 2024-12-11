@@ -48,6 +48,7 @@ final class PhoneBookView: UIView {
         let phoneTf = UITextField()
         phoneTf.frame.size.height = 30
         phoneTf.borderStyle = .roundedRect
+        phoneTf.keyboardType = .numberPad
         phoneTf.placeholder = "연락처를 입력해주세요.예시)010-1234-5678"
         return phoneTf
     }()

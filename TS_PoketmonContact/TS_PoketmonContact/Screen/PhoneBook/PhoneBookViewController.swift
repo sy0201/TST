@@ -33,8 +33,10 @@ final class PhoneBookViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
+        setupTextField()
         setupRandomPokemon()
         
+        // 기존 연락처 정보를 수정시 텍스트 필드에 값 설정
         if let contact = selectedContact {
             phoneBookView.nameTextField.text = contact.name
             phoneBookView.phoneTextField.text = contact.phoneNumber
@@ -53,22 +55,26 @@ final class PhoneBookViewController: UIViewController {
         navigationItem.rightBarButtonItem = navRightItem
         navigationItem.title = "연락처 추가"
     }
+    
+    func setupTextField() {
+        phoneBookView.nameTextField.delegate = self
+        phoneBookView.phoneTextField.delegate = self
+    }
 
     @objc func applyButtonTapped() {
-        guard let name = phoneBookView.nameTextField.text,
-              let phoneNumber = phoneBookView.phoneTextField.text,
-              let profileImage = pokemonViewModel.getPokemonImageURL() else {
+        let name = phoneBookView.nameTextField.text
+        let phoneNumber = phoneBookView.phoneTextField.text
+        let profileImage = pokemonViewModel.getPokemonImageURL() ?? ""
+        
+        guard let name = name, !name.isEmpty,
+              let phoneNumber = phoneNumber, !phoneNumber.isEmpty else {
             print("유효하지 않은 입력입니다.")
             return
         }
-
+        
         if let contact = selectedContact {
-            // 기존 데이터가 있으면 업데이트(수정)
-            print("name: \(name), phoneNumber: \(phoneNumber), profileImage: \(profileImage)")
             contactViewModel.updateContact(contact: contact, name: name, phoneNumber: phoneNumber, profileImage: profileImage)
         } else {
-            print("name: \(name), phoneNumber: \(phoneNumber), profileImage: \(profileImage)")
-            // 기존 데이터가 없으면 새로 저장
             contactViewModel.addContact(name: name, phoneNumber: phoneNumber, profileImage: profileImage)
         }
         
@@ -85,9 +91,30 @@ final class PhoneBookViewController: UIViewController {
         pokemonViewModel.onPokemonData = { [weak self] in
             if let imageURL = self?.pokemonViewModel.getPokemonImageURL() {
                 self?.phoneBookView.profileImg.loadImage(from: imageURL)
+                print("imageURL \(imageURL)")
             } else {
                 print("이미지가 없습니다.")
             }
         }
+    }
+}
+
+// MARK: - UITextFieldDelegate Method
+
+extension PhoneBookViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == phoneBookView.phoneTextField {
+            // 숫자입력만 허용
+            let allowedCharacters = CharacterSet.decimalDigits
+            let characterSet = CharacterSet(charactersIn: string)
+            return allowedCharacters.isSuperset(of: characterSet)
+        }
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        // 키보드 숨기기
+        textField.resignFirstResponder()
+        return true
     }
 }
