@@ -26,7 +26,6 @@
 		186235E22D0580F2000CEA16 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186235E12D0580F2000CEA16 /* NetworkService.swift */; };
 		186235E52D058469000CEA16 /* PokemonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186235E42D058469000CEA16 /* PokemonViewModel.swift */; };
 		186235E82D068878000CEA16 /* PokemonRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186235E72D068878000CEA16 /* PokemonRepository.swift */; };
-		186235ED2D06DEFD000CEA16 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 186235EC2D06DEFD000CEA16 /* Kingfisher */; };
 		186235F32D07D3B4000CEA16 /* ContactDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186235F22D07D3B4000CEA16 /* ContactDataManager.swift */; };
 		186235F62D07D754000CEA16 /* ContactEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186235F42D07D754000CEA16 /* ContactEntity+CoreDataClass.swift */; };
 		186235F72D07D754000CEA16 /* ContactEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186235F52D07D754000CEA16 /* ContactEntity+CoreDataProperties.swift */; };
@@ -66,7 +65,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				186235ED2D06DEFD000CEA16 /* Kingfisher in Frameworks */,
 				186235C12D051D8E000CEA16 /* Alamofire in Frameworks */,
 				186235C42D051D9E000CEA16 /* SnapKit in Frameworks */,
 			);
@@ -276,7 +274,6 @@
 			packageProductDependencies = (
 				186235C02D051D8E000CEA16 /* Alamofire */,
 				186235C32D051D9E000CEA16 /* SnapKit */,
-				186235EC2D06DEFD000CEA16 /* Kingfisher */,
 			);
 			productName = TS_PoketmonContact;
 			productReference = 186235A52D051C61000CEA16 /* TS_PoketmonContact.app */;
@@ -617,11 +614,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 186235C22D051D9E000CEA16 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
-		};
-		186235EC2D06DEFD000CEA16 /* Kingfisher */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 186235EB2D06DEFD000CEA16 /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 

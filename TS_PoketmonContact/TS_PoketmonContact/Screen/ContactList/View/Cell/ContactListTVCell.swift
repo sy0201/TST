@@ -22,7 +22,7 @@ final class ContactListTVCell: UITableViewCell, ReuseIdentifying {
         imageView.layer.borderWidth = 1
         imageView.layer.borderColor = CGColor(red: 216/255, green: 216/255, blue: 216/255, alpha: 1.0)
         imageView.clipsToBounds = true
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     var nameLabel: UILabel = {
