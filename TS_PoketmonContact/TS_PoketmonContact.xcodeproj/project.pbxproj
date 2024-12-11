@@ -97,7 +97,8 @@
 				186235B12D051C61000CEA16 /* TS_PoketmonContact.xcdatamodeld */,
 				186235C52D051DF4000CEA16 /* Support */,
 				186235D32D05286E000CEA16 /* Util */,
-				186235DD2D057862000CEA16 /* Network */,
+				186235DD2D057862000CEA16 /* API */,
+				186236042D09BA5A000CEA16 /* CoreData */,
 				186235D72D05663F000CEA16 /* Screen */,
 				186235DE2D05788A000CEA16 /* Resource */,
 			);
@@ -163,7 +164,6 @@
 			children = (
 				186235D02D052858000CEA16 /* Extexsion */,
 				186235CD2D0527E4000CEA16 /* Protocol */,
-				186235FB2D0800EC000CEA16 /* Manager */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -180,7 +180,6 @@
 		186235D72D05663F000CEA16 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
-				186235FC2D084DE9000CEA16 /* Entity */,
 				186235F82D07F8A9000CEA16 /* ViewModel */,
 				186235C62D05252F000CEA16 /* ContactList */,
 				186235D62D05662D000CEA16 /* PhoneBook */,
@@ -196,15 +195,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		186235DD2D057862000CEA16 /* Network */ = {
+		186235DD2D057862000CEA16 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				186235E62D058D57000CEA16 /* Entity */,
+				186235E62D058D57000CEA16 /* Model */,
 				186235E32D05845C000CEA16 /* ViewModel */,
-				186235E12D0580F2000CEA16 /* NetworkService.swift */,
-				186235E72D068878000CEA16 /* PokemonRepository.swift */,
+				186236052D09BA90000CEA16 /* Repository */,
+				186236062D09BAA5000CEA16 /* Network */,
 			);
-			path = Network;
+			path = API;
 			sourceTree = "<group>";
 		};
 		186235DE2D05788A000CEA16 /* Resource */ = {
@@ -224,12 +223,12 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		186235E62D058D57000CEA16 /* Entity */ = {
+		186235E62D058D57000CEA16 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				186235DF2D057933000CEA16 /* PokemonResponse.swift */,
 			);
-			path = Entity;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		186235F82D07F8A9000CEA16 /* ViewModel */ = {
@@ -255,6 +254,31 @@
 				186235F52D07D754000CEA16 /* ContactEntity+CoreDataProperties.swift */,
 			);
 			path = Entity;
+			sourceTree = "<group>";
+		};
+		186236042D09BA5A000CEA16 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				186235FC2D084DE9000CEA16 /* Entity */,
+				186235FB2D0800EC000CEA16 /* Manager */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		186236052D09BA90000CEA16 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				186235E72D068878000CEA16 /* PokemonRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		186236062D09BAA5000CEA16 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				186235E12D0580F2000CEA16 /* NetworkService.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
