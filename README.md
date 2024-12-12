@@ -174,7 +174,7 @@ func setupNavigationBar() {
 </details>
 
 <details>
-<summary>:four:~:five: Lv4 API ~ Lv5 CoreData</summary>
+<summary>:four: Lv4 API</summary>
 <div markdown="4">
 <br>
 
