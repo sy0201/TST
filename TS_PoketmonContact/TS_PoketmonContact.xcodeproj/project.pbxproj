@@ -33,6 +33,7 @@
 		186235FE2D08709C000CEA16 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186235FD2D08709C000CEA16 /* UIImage+Extension.swift */; };
 		186236012D095402000CEA16 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 186236002D095402000CEA16 /* Kingfisher */; };
 		186236082D0ACBF5000CEA16 /* NetowrkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186236072D0ACBF5000CEA16 /* NetowrkMonitor.swift */; };
+		1862360A2D0ADDF4000CEA16 /* EmptyTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186236092D0ADDF4000CEA16 /* EmptyTVCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +62,7 @@
 		186235F92D07F8BA000CEA16 /* ContactViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewModel.swift; sourceTree = "<group>"; };
 		186235FD2D08709C000CEA16 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		186236072D0ACBF5000CEA16 /* NetowrkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetowrkMonitor.swift; sourceTree = "<group>"; };
+		186236092D0ADDF4000CEA16 /* EmptyTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTVCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				186235CB2D052703000CEA16 /* ContactListTVCell.swift */,
+				186236092D0ADDF4000CEA16 /* EmptyTVCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 				186235FA2D07F8BA000CEA16 /* ContactViewModel.swift in Sources */,
 				186235E02D057933000CEA16 /* PokemonResponse.swift in Sources */,
 				186235B32D051C61000CEA16 /* TS_PoketmonContact.xcdatamodeld in Sources */,
+				1862360A2D0ADDF4000CEA16 /* EmptyTVCell.swift in Sources */,
 				186235AB2D051C61000CEA16 /* SceneDelegate.swift in Sources */,
 				186235E52D058469000CEA16 /* PokemonViewModel.swift in Sources */,
 				186235E82D068878000CEA16 /* PokemonRepository.swift in Sources */,

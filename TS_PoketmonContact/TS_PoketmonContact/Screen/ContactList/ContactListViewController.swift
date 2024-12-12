@@ -116,6 +116,8 @@ private extension ContactListViewController {
         
         // 셀 연결
         contactListView.tableView.register(ContactListTVCell.self, forCellReuseIdentifier: ContactListTVCell.reuseIdentifier)
+        
+        contactListView.tableView.register(EmptyTVCell.self, forCellReuseIdentifier: EmptyTVCell.reuseIdentifier)
     }
 }
 
@@ -123,10 +125,21 @@ private extension ContactListViewController {
 
 extension ContactListViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let count = contactViewModel.contactList.count
+        if count == 0 {
+            return 1
+        }
         return contactViewModel.contactList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if contactViewModel.contactList.isEmpty {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: EmptyTVCell.reuseIdentifier, for: indexPath) as? EmptyTVCell else {
+                return UITableViewCell()
+            }
+            return cell
+        }
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ContactListTVCell.reuseIdentifier, for: indexPath) as? ContactListTVCell else {
             return UITableViewCell()
         }
