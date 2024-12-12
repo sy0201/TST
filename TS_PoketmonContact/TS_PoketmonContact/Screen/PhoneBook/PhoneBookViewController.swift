@@ -7,15 +7,22 @@
 
 import UIKit
 
+enum PhoneBookMode {
+    case add
+    case edit
+}
+
 final class PhoneBookViewController: UIViewController {
     let pokemonViewModel = PokemonViewModel(repository: PokemonRepository(networkService: NetworkService()))
     let contactViewModel: ContactViewModel
     var selectedContact: ContactEntity?
+    let mode: PhoneBookMode
     let phoneBookView = PhoneBookView()
     
-    init(contactViewModel: ContactViewModel, selectedContact: ContactEntity? = nil) {
+    init(contactViewModel: ContactViewModel, selectedContact: ContactEntity? = nil, mode: PhoneBookMode) {
         self.contactViewModel = contactViewModel
         self.selectedContact = selectedContact
+        self.mode = mode
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -57,7 +64,12 @@ final class PhoneBookViewController: UIViewController {
                                            target: self,
                                            action: #selector(applyButtonTapped))
         navigationItem.rightBarButtonItem = navRightItem
-        navigationItem.title = "연락처 추가"
+        
+        if mode == .edit {
+            navigationItem.title = selectedContact?.name
+        } else {
+            navigationItem.title = "연락처 추가"
+        }
     }
     
     func setupTextField() {

@@ -102,7 +102,7 @@ final class ContactListViewController: UIViewController {
     }
     
     @objc func addButtonTapped() {
-        let contactInfoController = PhoneBookViewController(contactViewModel: contactViewModel)
+        let contactInfoController = PhoneBookViewController(contactViewModel: contactViewModel, mode: .add)
         navigationController?.pushViewController(contactInfoController, animated: true)
     }
 }
@@ -143,7 +143,7 @@ extension ContactListViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedContact = contactViewModel.contactList[indexPath.row]
         
-        let contactInfoController = PhoneBookViewController(contactViewModel: contactViewModel, selectedContact: selectedContact)
+        let contactInfoController = PhoneBookViewController(contactViewModel: contactViewModel, selectedContact: selectedContact, mode: .edit)
         navigationController?.pushViewController(contactInfoController, animated: true)
     }
     
