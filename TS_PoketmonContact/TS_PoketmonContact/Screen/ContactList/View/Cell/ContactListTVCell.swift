@@ -29,7 +29,6 @@ final class ContactListTVCell: UITableViewCell, ReuseIdentifying {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .regular)
         label.textColor = .black
-        label.text = "name"
         return label
     }()
     
@@ -37,7 +36,6 @@ final class ContactListTVCell: UITableViewCell, ReuseIdentifying {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .regular)
         label.textColor = .black
-        label.text = "010-1234-1234"
         return label
     }()
     
