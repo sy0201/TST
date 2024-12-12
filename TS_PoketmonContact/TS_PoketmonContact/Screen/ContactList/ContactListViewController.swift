@@ -93,7 +93,8 @@ extension ContactListViewController: UITableViewDataSource, UITableViewDelegate 
             return UITableViewCell()
         }
         
-        cell.configure(contactViewModel.contactList[indexPath.row])
+        let contactData = contactViewModel.contactList[indexPath.row]
+        cell.configure(profile: contactData.profileImage ?? "", name: contactData.name ?? "", phoneNumber: contactData.phoneNumber ?? "")
         return cell
     }
     
