@@ -118,4 +118,19 @@ extension ContactListViewController: UITableViewDataSource, UITableViewDelegate 
         let contactInfoController = PhoneBookViewController(contactViewModel: contactViewModel, selectedContact: selectedContact)
         navigationController?.pushViewController(contactInfoController, animated: true)
     }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { (_, _, completionHandler) in
+            // 삭제할 연락처 가져오기
+            let contactToDelete = self.contactViewModel.contactList[indexPath.row]
+            
+            // Core Data에서 연락처 삭제
+            self.contactViewModel.deleteContact(contact: contactToDelete)
+            
+            // TableView에서 해당 행 삭제
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
 }
