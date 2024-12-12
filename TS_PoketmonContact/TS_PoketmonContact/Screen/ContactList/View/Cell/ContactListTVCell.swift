@@ -48,9 +48,15 @@ final class ContactListTVCell: UITableViewCell, ReuseIdentifying {
     }()
     
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//        
+//        profileImg.layer.cornerRadius = profileImg.bounds.width / 2
+//        profileImg.layer.masksToBounds = true
+//    }
+    
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
         profileImg.layer.cornerRadius = profileImg.bounds.width / 2
         profileImg.layer.masksToBounds = true
     }
