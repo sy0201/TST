@@ -46,6 +46,12 @@ final class NetworkService: NetworkServiceProtocol {
                                       parameters: [String : Any]?,
                                       completion: @escaping (Result<T, NetworkError>) -> Void) {
         
+        // 네트워크 상태 확인
+        guard NetworkMonitor.shared.isConnected else {
+            completion(.failure(.invalidRequest)) // 네트워크 연결이 없음을 나타내는 에러 반환
+            return
+        }
+        
         guard let validURL = URL(string: url) else {
             completion(.failure(.invalidURL))
             return
