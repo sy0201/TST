@@ -34,6 +34,7 @@
 		186236012D095402000CEA16 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 186236002D095402000CEA16 /* Kingfisher */; };
 		186236082D0ACBF5000CEA16 /* NetowrkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186236072D0ACBF5000CEA16 /* NetowrkMonitor.swift */; };
 		1862360A2D0ADDF4000CEA16 /* EmptyTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186236092D0ADDF4000CEA16 /* EmptyTVCell.swift */; };
+		1862360C2D0AEBC8000CEA16 /* UIVIewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1862360B2D0AEBC8000CEA16 /* UIVIewController+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +64,7 @@
 		186235FD2D08709C000CEA16 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		186236072D0ACBF5000CEA16 /* NetowrkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetowrkMonitor.swift; sourceTree = "<group>"; };
 		186236092D0ADDF4000CEA16 /* EmptyTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTVCell.swift; sourceTree = "<group>"; };
+		1862360B2D0AEBC8000CEA16 /* UIVIewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVIewController+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +162,7 @@
 				186235D12D052866000CEA16 /* UIView+Extension.swift */,
 				186235D42D0528E9000CEA16 /* UIStackView+Extension.swift */,
 				186235FD2D08709C000CEA16 /* UIImage+Extension.swift */,
+				1862360B2D0AEBC8000CEA16 /* UIVIewController+Extension.swift */,
 			);
 			path = Extexsion;
 			sourceTree = "<group>";
@@ -375,6 +378,7 @@
 				186235A92D051C61000CEA16 /* AppDelegate.swift in Sources */,
 				186235F32D07D3B4000CEA16 /* ContactDataManager.swift in Sources */,
 				186235FE2D08709C000CEA16 /* UIImage+Extension.swift in Sources */,
+				1862360C2D0AEBC8000CEA16 /* UIVIewController+Extension.swift in Sources */,
 				186235D52D0528E9000CEA16 /* UIStackView+Extension.swift in Sources */,
 				186236082D0ACBF5000CEA16 /* NetowrkMonitor.swift in Sources */,
 				186235FA2D07F8BA000CEA16 /* ContactViewModel.swift in Sources */,
