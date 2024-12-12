@@ -36,4 +36,9 @@ final class ContactViewModel {
         contactDataManager.updateContactData(contact: contact, name: name, phoneNumber: phoneNumber, profileImage: updatedImageURL)
         loadContacts()
     }
+    
+    func deleteContact(contact: ContactEntity) {
+        contactDataManager.deleteContactData(name: contact.name ?? "")
+        loadContacts()
+    }
 }
