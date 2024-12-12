@@ -65,6 +65,14 @@ final class ContactListTVCell: UITableViewCell, ReuseIdentifying {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func configure(_ contactData: ContactEntity) {
+        if let imageString = contactData.profileImage {
+            self.profileImg.loadImage(from: imageString)
+        }
+        self.nameLabel.text = contactData.name
+        self.phoneNumberLabel.text = contactData.phoneNumber
+    }
 }
 
 

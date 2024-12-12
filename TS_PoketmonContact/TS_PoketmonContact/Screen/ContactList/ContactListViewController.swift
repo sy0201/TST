@@ -93,17 +93,7 @@ extension ContactListViewController: UITableViewDataSource, UITableViewDelegate 
             return UITableViewCell()
         }
         
-        let contact = contactViewModel.contactList[indexPath.row]
-        cell.nameLabel.text =  contact.name
-        cell.phoneNumberLabel.text =  contact.phoneNumber
-        
-        if let imageURL = contact.profileImage {
-            cell.profileImg.loadImage(from: imageURL)
-            print("imagURL \(imageURL)")
-        } else {
-            cell.profileImg.image = UIImage(named: "placeholder")
-        }
-        
+        cell.configure(contactViewModel.contactList[indexPath.row])
         return cell
     }
     
@@ -113,7 +103,6 @@ extension ContactListViewController: UITableViewDataSource, UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedContact = contactViewModel.contactList[indexPath.row]
-        print("Selected Contact: \(selectedContact.name), \(selectedContact.phoneNumber)")
         
         let contactInfoController = PhoneBookViewController(contactViewModel: contactViewModel, selectedContact: selectedContact)
         navigationController?.pushViewController(contactInfoController, animated: true)
