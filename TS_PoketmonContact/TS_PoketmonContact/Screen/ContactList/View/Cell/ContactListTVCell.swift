@@ -72,12 +72,12 @@ final class ContactListTVCell: UITableViewCell, ReuseIdentifying {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(_ contactData: ContactEntity) {
-        if let imageString = contactData.profileImage {
+    func configure(profile: String?, name: String, phoneNumber: String) {
+        if let imageString = profile {
             self.profileImg.loadImage(from: imageString)
         }
-        self.nameLabel.text = contactData.name
-        self.phoneNumberLabel.text = contactData.phoneNumber
+        self.nameLabel.text = name
+        self.phoneNumberLabel.text = phoneNumber
     }
 }
 
