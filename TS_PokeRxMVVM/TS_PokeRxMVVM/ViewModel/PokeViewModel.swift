@@ -26,7 +26,7 @@ final class PokeViewModel {
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { [weak self] list in
                 self?.pokeList.accept(list)
-            }, onError: { error in
+            }, onFailure: { error in
                 print("Error loading poke list: \(error)")
             })
             .disposed(by: disposeBag)
@@ -37,7 +37,7 @@ final class PokeViewModel {
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { [weak self] detail in
                 self?.pokeDetail.accept(detail)
-            }, onError: { error in
+            }, onFailure: { error in
                 print("Error loading poke detail: \(error)")
             })
             .disposed(by: disposeBag)
