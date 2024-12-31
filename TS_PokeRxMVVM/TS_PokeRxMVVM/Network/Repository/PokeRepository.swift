@@ -33,6 +33,13 @@ final class PokeRepository: PokeRepositoryProtocol {
     // 포켓몬 디테일 가져오기
     func fetchPokeDetail(id: Int) -> Single<PokeDetail> {
         provider.rx.request(.getPokeDetail(id: id))
-            .map(PokeDetail.self)     // JSON 디코딩
+            .do(onSuccess: { response in
+                if let json = try? JSONSerialization.jsonObject(with: response.data, options: []) {
+                    print("Detail JSON: \(json)")
+                }
+            }, onError: { error in
+                print("Detail Error: \(error)")
+            })
+            .map(PokeDetail.self) // JSON 디코딩
     }
 }

@@ -85,7 +85,8 @@ private extension MainViewController {
             switch item {
             case .pokeList(let detail):
                 print("detail")
-                let viewController = DetailViewController()
+                let viewController = DetailViewController(viewModel: self.viewModel)
+                self.viewModel.loadPokeDetail(id: detail.id)
                 self.navigationController?.pushViewController(viewController, animated: true)
             default:
                 print("default")
