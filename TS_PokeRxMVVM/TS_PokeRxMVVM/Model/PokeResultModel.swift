@@ -11,7 +11,7 @@ struct PokeResultModel: Decodable {
     let results: [Result]
 }
 
-struct Result: Decodable {
+struct Result: Decodable, Hashable {
     let name: String
     let url: String
     

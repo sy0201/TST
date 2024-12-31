@@ -9,7 +9,7 @@ import Foundation
 import Moya
 
 enum PokeAPI {
-    case getPokeList(offset: Int)
+    case getPokeList(offset: Int, limit: Int)
     case getPokeDetail(id: Int)
     
 }
@@ -21,10 +21,10 @@ extension PokeAPI: TargetType {
     
     var path: String {
         switch self {
-        case .getPokeList(_):
+        case .getPokeList(_, _):
             return "/api/v2/pokemon"
         case .getPokeDetail(let id):
-            return "apiapi/v2/pokemon/\(id)"
+            return "/api/v2/pokemon/\(id)"
         }
     }
     
@@ -34,8 +34,12 @@ extension PokeAPI: TargetType {
     
     var task: Moya.Task {
         switch self {
-        case .getPokeList(let offset):
-            return .requestPlain
+        case .getPokeList(let offset, let limit):
+            let params: [String: Any] = [
+                "offset": offset,
+                "limit": limit
+            ]
+            return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
         case .getPokeDetail(let id):
             let params: [String: Any] = [
                 "id": id
