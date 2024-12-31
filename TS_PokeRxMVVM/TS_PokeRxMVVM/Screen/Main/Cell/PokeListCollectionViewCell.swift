@@ -11,8 +11,6 @@ import Kingfisher
 final class PokeListCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
     let imageView: UIImageView = {
         let imageView = UIImageView()
-        //imageView.layer.cornerRadius = 20
-        //imageView.layer.masksToBounds = true
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
@@ -28,7 +26,7 @@ final class PokeListCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
     }
     
     func configure(id: Int) {
-        var imageId = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/\(id).png"
+        let imageId = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/\(id).png"
         imageView.kf.setImage(with: URL(string: imageId)) { result in
             switch result {
             case .success(let value):
