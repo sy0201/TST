@@ -56,13 +56,27 @@ final class MainViewController: UIViewController {
 private extension MainViewController {
     func bindViewModel() {
         // 포켓몬 리스트 데이터 요청 로드(
-        viewModel.loadPokeList(offset: 20, limit: 20)
+        viewModel.refreshPokemonList()
         
         // 포켓몬 리스트 데이터 바인드
         viewModel.pokeList
             .subscribe(onNext: { [weak self] pokeList in
                 print("PokeList Updated: \(pokeList)")
                 self?.applySnapshot(pokeList: pokeList)
+            })
+            .disposed(by: disposebag)
+        
+        // 스크롤 감지를 위한 바인딩 추가
+        collectionView.rx.willDisplayCell
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] cell, indexPath in
+                guard let self = self,
+                      let totalItems = self.dataSource?.snapshot().itemIdentifiers.count else { return }
+                
+                // 마지막 아이템으로부터 5개 셀 전에 도달하면 추가 로드
+                if indexPath.item == totalItems - 5 {
+                    self.viewModel.loadMorePokemon()
+                }
             })
             .disposed(by: disposebag)
     }
