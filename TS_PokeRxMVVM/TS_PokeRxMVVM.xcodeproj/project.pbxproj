@@ -20,10 +20,10 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		CB285BB92D2353FA00B5F1B6 /* Exceptions for "TS_PokeRxMVVM" folder in "TS_PokeRxMVVM" target */ = {
+		CB1C3A912D23B10F00674665 /* Exceptions for "TS_PokeRxMVVM" folder in "TS_PokeRxMVVM" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				Support/Info.plist,
 			);
 			target = CB285BA62D2353F800B5F1B6 /* TS_PokeRxMVVM */;
 		};
@@ -33,7 +33,7 @@
 		CB285BA92D2353F800B5F1B6 /* TS_PokeRxMVVM */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				CB285BB92D2353FA00B5F1B6 /* Exceptions for "TS_PokeRxMVVM" folder in "TS_PokeRxMVVM" target */,
+				CB1C3A912D23B10F00674665 /* Exceptions for "TS_PokeRxMVVM" folder in "TS_PokeRxMVVM" target */,
 			);
 			path = TS_PokeRxMVVM;
 			sourceTree = "<group>";
@@ -173,7 +173,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = TS_PokeRxMVVM/Info.plist;
+				INFOPLIST_FILE = TS_PokeRxMVVM/Support/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -203,7 +203,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = TS_PokeRxMVVM/Info.plist;
+				INFOPLIST_FILE = TS_PokeRxMVVM/Support/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -277,7 +277,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -334,7 +334,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
