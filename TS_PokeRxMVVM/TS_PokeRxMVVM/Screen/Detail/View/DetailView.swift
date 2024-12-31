@@ -14,7 +14,7 @@ final class DetailView: UIView {
     
     let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
 
@@ -66,7 +66,21 @@ final class DetailView: UIView {
     }
     
     func configure(with detail: PokeDetail) {
-        imageView.kf.setImage(with: URL(string: detail.frontDefault))
+        let imageUrl = URL(string: detail.sprites.frontDefault)
+        imageView.kf.setImage(
+            with: imageUrl,
+            placeholder: UIImage(named: "pokemonBall"), // 데이터 호출시 대기용 플레이스홀더 이미지 설정
+            options: [
+                .transition(.fade(0.2)),
+                .cacheOriginalImage
+            ]) { result in
+                switch result {
+                case .success:
+                    print("이미지 로드 성공: \(detail.sprites.frontDefault)")
+                case .failure(let error):
+                    print("이미지 로드 실패: \(error.localizedDescription)")
+                }
+            }
         nameLabel.text = detail.name
         typeLabel.text = detail.types.map { $0.type.name }.joined(separator: ", ")
         heightLabel.text = "키: \(detail.height) m"
@@ -99,8 +113,8 @@ private extension DetailView {
         
         imageView.snp.makeConstraints { make in
             make.top.equalTo(baseView.snp.top).offset(10)
-            make.width.equalToSuperview().multipliedBy(1/3)
-            make.height.equalTo(200)
+            make.centerX.equalTo(baseView.snp.centerX)
+            make.size.equalTo(200)
         }
         
         labelStackView.snp.makeConstraints { make in
