@@ -20,14 +20,26 @@ final class PokeRepository: PokeRepositoryProtocol {
     
     // 포켓몬 리스트 가져오기
     func fetchPokeList(offset: Int, limit: Int) -> Single<[Result]> {
-        provider.rx.request(.getPokeList(offset: offset))
-            .map(PokeResultModel.self) // JSON 디코딩
-            .map { $0.results }        // 리스트만 추출
+        provider.rx.request(.getPokeList(offset: offset, limit: limit))
+            .do(onSuccess: { response in
+                print("Response: \(response)")
+            }, onError: { error in
+                print("Error: \(error)")
+            })
+            .map(PokeResultModel.self)
+            .map { $0.results }
     }
     
     // 포켓몬 디테일 가져오기
     func fetchPokeDetail(id: Int) -> Single<PokeDetail> {
         provider.rx.request(.getPokeDetail(id: id))
-            .map(PokeDetail.self)     // JSON 디코딩
+            .do(onSuccess: { response in
+                if let json = try? JSONSerialization.jsonObject(with: response.data, options: []) {
+                    print("Detail JSON: \(json)")
+                }
+            }, onError: { error in
+                print("Detail Error: \(error)")
+            })
+            .map(PokeDetail.self) // JSON 디코딩
     }
 }

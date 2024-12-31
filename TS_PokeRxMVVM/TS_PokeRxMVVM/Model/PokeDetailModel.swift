@@ -12,14 +12,31 @@ struct PokeDetailModel: Decodable {
 }
 
 struct PokeDetail: Decodable {
-    var id: Int
-    let types: [PokeType]
-    let url: String
+    let id: Int
     let name: String
     let height: Int
     let weight: Int
+    let types: [PokeType]
+    let sprites: Sprites
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case height
+        case weight
+        case types
+        case sprites
+    }
 }
 
+// 스프라이트 이미지 URL을 위한 새로운 구조체
+struct Sprites: Decodable {
+    let frontDefault: String
+    
+    enum CodingKeys: String, CodingKey {
+        case frontDefault = "front_default"
+    }
+}
 struct PokeType: Decodable {
     let type: PokeTypeName
 }
