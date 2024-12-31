@@ -11,8 +11,6 @@ import Kingfisher
 final class PokeListCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
     let imageView: UIImageView = {
         let imageView = UIImageView()
-        //imageView.layer.cornerRadius = 20
-        //imageView.layer.masksToBounds = true
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
