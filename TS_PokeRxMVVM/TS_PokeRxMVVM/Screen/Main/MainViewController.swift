@@ -49,6 +49,14 @@ final class MainViewController: UIViewController {
         bindViewModel()
         bindView()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.isNavigationBarHidden = true // MainViewController가 나타날 때 NavigationBar 숨기기
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+      navigationController?.isNavigationBarHidden = false // MainViewController가 사라질 때 NavigationBar 나타내기
+    }
 }
 
 // MARK: - bind Method
@@ -142,7 +150,7 @@ private extension MainViewController {
     func createMainSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 5, bottom: 10, trailing: 5)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
         
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1/3), heightDimension: .fractionalWidth(1/3))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, repeatingSubitem: item, count: 3)
