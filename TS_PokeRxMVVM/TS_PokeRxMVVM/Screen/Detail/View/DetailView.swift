@@ -14,6 +14,7 @@ final class DetailView: UIView {
     
     let imageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.image = UIImage(named: "pokemonBall")
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
@@ -27,30 +28,46 @@ final class DetailView: UIView {
         return stackView
     }()
     
+    let horisontalStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 10
+        stackView.alignment = .center
+        stackView.distribution = .fill
+        return stackView
+    }()
+    
+    let numberLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 24, weight: .bold)
+        label.textColor = .white
+        return label
+    }()
+    
     let nameLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 20, weight: .bold)
+        label.font = .systemFont(ofSize: 24, weight: .bold)
         label.textColor = .white
         return label
     }()
     
     let typeLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 16, weight: .medium)
+        label.font = .systemFont(ofSize: 18, weight: .medium)
         label.textColor = .white
         return label
     }()
     
     let heightLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 16, weight: .medium)
+        label.font = .systemFont(ofSize: 18, weight: .medium)
         label.textColor = .white
         return label
     }()
     
     let weightLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 16, weight: .medium)
+        label.font = .systemFont(ofSize: 18, weight: .medium)
         label.textColor = .white
         return label
     }()
@@ -67,25 +84,17 @@ final class DetailView: UIView {
     
     func configure(with detail: PokeDetail) {
         let imageUrl = URL(string: detail.sprites.frontDefault)
-        imageView.kf.setImage(
-            with: imageUrl,
-            placeholder: UIImage(named: "pokemonBall"), // 데이터 호출시 대기용 플레이스홀더 이미지 설정
-            options: [
-                .transition(.fade(0.2)),
-                .cacheOriginalImage
-            ]) { result in
-                switch result {
-                case .success:
-                    print("이미지 로드 성공: \(detail.sprites.frontDefault)")
-                case .failure(let error):
-                    print("이미지 로드 실패: \(error.localizedDescription)")
-                }
-            }
-        nameLabel.text = detail.name
+        imageView.kf.setImage(with: imageUrl)
+        
+        numberLabel.text = "No. \(detail.id)"
+        
+        let pokeName = String(detail.name)
+        let koreanName = PokemonTranslator.getKoreanName(for: pokeName)
+        nameLabel.text = koreanName
+        
         typeLabel.text = detail.types.map { $0.type.name }.joined(separator: ", ")
         heightLabel.text = "키: \(detail.height) m"
         weightLabel.text = "몸무게: \(detail.weight) kg"
-       
     }
 }
 
@@ -99,10 +108,11 @@ private extension DetailView {
         addSubview(baseView)
         baseView.addSubViews([imageView, labelStackView])
 
-        labelStackView.addArrangedSubViews([nameLabel,
+        labelStackView.addArrangedSubViews([horisontalStackView,
                                             typeLabel,
                                             heightLabel,
                                             weightLabel])
+        horisontalStackView.addArrangedSubViews([numberLabel, nameLabel])
     }
     
     func setupConstraint() {
