@@ -89,10 +89,13 @@ final class DetailView: UIView {
         numberLabel.text = "No. \(detail.id)"
         
         let pokeName = String(detail.name)
-        let koreanName = PokemonTranslator.getKoreanName(for: pokeName)
+        let koreanName = Enum.PokemonTranslator.getKoreanName(for: pokeName)
         nameLabel.text = koreanName
         
-        typeLabel.text = detail.types.map { $0.type.name }.joined(separator: ", ")
+        let pokeType = detail.types.map { type in
+            Enum.PokemonTypeName.getPokeType(type.type.name)
+        }
+        typeLabel.text = "타입: \(pokeType.joined(separator: ", "))"
         heightLabel.text = "키: \(detail.height) m"
         weightLabel.text = "몸무게: \(detail.weight) kg"
     }
