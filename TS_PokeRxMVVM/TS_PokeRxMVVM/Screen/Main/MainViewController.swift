@@ -19,7 +19,7 @@ fileprivate enum Item: Hashable {
 }
 
 final class MainViewController: UIViewController {
-    private let viewModel: PokeViewModel
+    private let viewModel: MainViewModel
     private let disposebag = DisposeBag()
     private var dataSource: UICollectionViewDiffableDataSource<Section, Item>?
     lazy var collectionView: UICollectionView = {
@@ -32,7 +32,7 @@ final class MainViewController: UIViewController {
         return collectionView
     }()
     
-    init(viewModel: PokeViewModel) {
+    init(viewModel: MainViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -63,25 +63,19 @@ final class MainViewController: UIViewController {
 
 private extension MainViewController {
     func bindViewModel() {
-        // 포켓몬 리스트 데이터 요청 로드(
         viewModel.refreshPokemonList()
-        
-        // 포켓몬 리스트 데이터 바인드
         viewModel.pokeList
             .subscribe(onNext: { [weak self] pokeList in
-                print("PokeList Updated: \(pokeList)")
                 self?.applySnapshot(pokeList: pokeList)
             })
             .disposed(by: disposebag)
         
-        // 스크롤 감지를 위한 바인딩 추가
         collectionView.rx.willDisplayCell
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] cell, indexPath in
                 guard let self = self,
                       let totalItems = self.dataSource?.snapshot().itemIdentifiers.count else { return }
                 
-                // 마지막 아이템으로부터 5개 셀 전에 도달하면 추가 로드
                 if indexPath.item == totalItems - 5 {
                     self.viewModel.loadMorePokemon()
                 }
@@ -101,19 +95,20 @@ private extension MainViewController {
     }
     
     func bindView() {
-        collectionView.rx.itemSelected.bind { indexPath in
-            print(indexPath)
-            let item = self.dataSource?.itemIdentifier(for: indexPath)
-            switch item {
-            case .pokeList(let detail):
-                print("detail")
-                let viewController = DetailViewController(viewModel: self.viewModel)
-                self.viewModel.loadPokeDetail(id: detail.id)
-                self.navigationController?.pushViewController(viewController, animated: true)
-            default:
-                print("default")
-            }
-        }.disposed(by: disposebag)
+        collectionView.rx.itemSelected
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] indexPath in
+                guard let self = self,
+                      let item = self.dataSource?.itemIdentifier(for: indexPath) else { return }
+                
+                switch item {
+                case .pokeList(let result):
+                    let detailViewModel = DetailViewModel(repository: self.viewModel.repository, pokemonID: result.id)
+                    let detailVC = DetailViewController(viewModel: detailViewModel)
+                    self.navigationController?.pushViewController(detailVC, animated: true)
+                }
+            })
+            .disposed(by: disposebag)
     }
 }
 

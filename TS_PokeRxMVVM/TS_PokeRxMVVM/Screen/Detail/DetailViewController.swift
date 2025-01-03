@@ -9,12 +9,12 @@ import UIKit
 import RxSwift
 
 final class DetailViewController: UIViewController {
-    private let viewModel: PokeViewModel
+    private let viewModel: DetailViewModel
     private let disposebag = DisposeBag()
     
     let detailView = DetailView()
 
-    init(viewModel: PokeViewModel) {
+    init(viewModel: DetailViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -27,9 +27,11 @@ final class DetailViewController: UIViewController {
         self.view = detailView
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         bindViewModel()
+        viewModel.loadPokeDetail()
     }
 }
 
