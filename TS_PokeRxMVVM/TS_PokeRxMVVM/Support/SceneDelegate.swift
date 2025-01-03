@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         let repository = PokeRepository() // 의존성 주입
-        let viewModel = PokeViewModel(repository: repository)
+        let viewModel = MainViewModel(repository: repository)
         let mainViewController = MainViewController(viewModel: viewModel)
         let navigationController = UINavigationController(rootViewController: mainViewController)
 
