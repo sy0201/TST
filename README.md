@@ -72,14 +72,77 @@
 ###### 아래는 핵심 위주로 작성하였습니다 [블로그에서 더보기](https://velog.io/@sy0201/posts?q=%ED%8F%AC%EC%BC%93%EB%AA%AC)
 
 <details>
-<summary>1️⃣ ViewModel 나누기</summary>
+<summary>1️⃣ ViewModel 분리 및 의존성 관리</summary>
 <div markdown="1">
 <br>
 
-**문제발생** <br>
-ViewModel을 나눌때 문제가 발생하였습다.
+**배경 및 문제 상황** <br>
+PokeViewModel 하나로 모든 로직(포켓몬 리스트 및 상세 정보)을 처리하던 구조에서 MainViewModel과 DetailViewModel로 분리하여 각각의 역할을 명확히 하고자 했습니다.
+그러나 ViewModel 분리 이후, MainViewController에서 두 개의 ViewModel(MainViewModel, DetailViewModel)을 동시에 주입받게 되면서 아래와 같은 문제가 발생했습니다:
 
-**해결방법** <br>
+의존성 혼란: MainVC에서 DetailVC로 화면 전환 시 어떤 ViewModel을 주입해야 하는지 모호해졌습니다.
+SRP 위반 가능성: MainViewController에서 DetailViewModel을 직접 다루는 방식은 단일 책임 원칙(SRP)을 벗어날 위험이 있었습니다.
+
+**문제 원인** <br>
+하나의 ViewController가 두 개 이상의 ViewModel을 사용하는 구조는 의존성 흐름이 복잡해지고 관리가 어려워질 수 있습니다.
+MainViewController → MainViewModel → PokeRepository 및 DetailViewController → DetailViewModel → PokeRepository라는 명확한 의존성 흐름을 설계하지 못했습니다.
+두 ViewModel의 역할이 구분되었음에도 불구하고 DetailViewModel을 MainViewController에서 직접 참조하여 책임 분리가 제대로 이루어지지 않았습니다.
+
+**문제 해결 과정** <br>
+1. 의존성 흐름 재정의
+- ViewModel 간 직접 참조를 제거하고, ViewController와 ViewModel 간의 1:1 매칭 구조를 유지했습니다.
+2. 책임 분리
+- MainViewModel: 포켓몬 리스트 로드, 페이징, 새로고침 등 리스트 관련 로직 담당.
+- DetailViewModel: 포켓몬 상세 정보 로드만 책임.
+3. 의존성 주입 흐름 정리
+- MainViewController는 MainViewModel만 주입받습니다.
+- DetailViewController는 DetailViewModel만 주입받습니다.
+- MainViewModel이 createDetailViewModel(for:) 메서드를 통해 필요한 DetailViewModel을 생성하도록 했습니다.
+
+**최종 코드**<br>
+```swift
+final class MainViewModel {
+    private let repository: PokeRepositoryProtocol
+
+    init(repository: PokeRepositoryProtocol) {
+        self.repository = repository
+    }
+
+    func createDetailViewModel(for id: Int) -> DetailViewModel {
+        return DetailViewModel(repository: repository, pokemonID: id)
+    }
+}
+```
+
+```swift
+final class DetailViewModel {
+    private let repository: PokeRepositoryProtocol
+    private let disposeBag = DisposeBag()
+    private let pokemonID: Int
+    
+    let pokeDetail = PublishRelay<PokeDetail>()
+    
+    init(repository: PokeRepositoryProtocol, pokemonID: Int) {
+        self.repository = repository
+        self.pokemonID = pokemonID
+    }
+    
+    func loadPokeDetail() {
+        repository.fetchPokeDetail(id: pokemonID)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { [weak self] detail in
+                self?.pokeDetail.accept(detail)
+            }, onFailure: { error in
+                print("Error loading poke detail: \(error.localizedDescription)")
+            })
+            .disposed(by: disposeBag)
+    }
+}
+```
+**결론 및 교훈** <br>
+- MainViewController는 MainViewModel과만 바인딩, DetailViewController는 DetailViewModel과만 바인딩하도록 하여 관리의 용이성을 높였습니다.
+- ViewModel 생성은 필요할 때 상위 ViewModel에서 처리하여 ViewController의 의존성을 최소화했습니다.
+- ViewController와 ViewModel 간의 1:1 매칭을 유지하여 SRP를 준수하고 코드 복잡도를 줄였습니다
 
  <br>
 </div>
