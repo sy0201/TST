@@ -15,7 +15,7 @@ final class DetailViewModel {
     private let pokemonID: Int
     
     // Outputs
-    let pokeDetail = PublishRelay<PokeDetail>()
+    let pokeDetail = PublishRelay<PokeDetail?>()
     
     init(repository: PokeRepositoryProtocol, pokemonID: Int) {
         self.repository = repository
@@ -23,6 +23,13 @@ final class DetailViewModel {
     }
     
     func loadPokeDetail() {
+        // 네트워크 상태 확인
+        guard NetworkMonitor.shared.isNetworkAvailable() else {
+            // 네트워크가 없으면 에러처리
+            self.pokeDetail.accept(nil)
+            return
+        }
+        
         repository.fetchPokeDetail(id: pokemonID)
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { [weak self] detail in
