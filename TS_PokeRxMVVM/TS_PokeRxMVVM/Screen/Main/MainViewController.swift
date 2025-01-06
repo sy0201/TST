@@ -108,9 +108,19 @@ private extension MainViewController {
                 
                 switch item {
                 case .pokeList(let result):
+                    // Show the loading indicator before navigation
+                    LoadingIndicator.showLoading()
+                    
                     let detailViewModel = DetailViewModel(repository: self.viewModel.repository, pokemonID: result.id)
                     let detailVC = DetailViewController(viewModel: detailViewModel)
+                    
+                    // Push the DetailViewController
                     self.navigationController?.pushViewController(detailVC, animated: true)
+                    
+                    // Hide loading indicator after a slight delay (or once data is loaded in DetailViewController)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                        LoadingIndicator.hideLoading()
+                    }
                 }
             })
             .disposed(by: disposebag)
