@@ -15,7 +15,7 @@ final class DetailView: UIView {
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "pokemonBall")
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
 
@@ -37,10 +37,19 @@ final class DetailView: UIView {
         return stackView
     }()
     
+    let numberTitleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 24, weight: .bold)
+        label.textColor = .white
+        label.text = "No."
+        return label
+    }()
+    
     let numberLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 24, weight: .bold)
         label.textColor = .white
+        label.text = "??"
         return label
     }()
     
@@ -48,6 +57,24 @@ final class DetailView: UIView {
         let label = UILabel()
         label.font = .systemFont(ofSize: 24, weight: .bold)
         label.textColor = .white
+        label.text = "??"
+        return label
+    }()
+    
+    let typeStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 10
+        stackView.alignment = .center
+        stackView.distribution = .fill
+        return stackView
+    }()
+    
+    let typeTitleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 18, weight: .medium)
+        label.textColor = .white
+        label.text = "타입 :"
         return label
     }()
     
@@ -55,6 +82,24 @@ final class DetailView: UIView {
         let label = UILabel()
         label.font = .systemFont(ofSize: 18, weight: .medium)
         label.textColor = .white
+        label.text = "??"
+        return label
+    }()
+    
+    let heightStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 10
+        stackView.alignment = .center
+        stackView.distribution = .fill
+        return stackView
+    }()
+    
+    let heightTitleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 18, weight: .medium)
+        label.textColor = .white
+        label.text = "키 :"
         return label
     }()
     
@@ -62,6 +107,24 @@ final class DetailView: UIView {
         let label = UILabel()
         label.font = .systemFont(ofSize: 18, weight: .medium)
         label.textColor = .white
+        label.text = "??"
+        return label
+    }()
+    
+    let weightStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 10
+        stackView.alignment = .center
+        stackView.distribution = .fill
+        return stackView
+    }()
+    
+    let weightTitleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 18, weight: .medium)
+        label.textColor = .white
+        label.text = "몸무게 :"
         return label
     }()
     
@@ -86,7 +149,7 @@ final class DetailView: UIView {
         let imageUrl = URL(string: detail.sprites.frontDefault)
         imageView.kf.setImage(with: imageUrl)
         
-        numberLabel.text = "No. \(detail.id)"
+        numberLabel.text = "\(detail.id)"
         
         let pokeName = String(detail.name)
         let koreanName = Enum.PokemonTranslator.getKoreanName(for: pokeName)
@@ -95,9 +158,9 @@ final class DetailView: UIView {
         let pokeType = detail.types.map { type in
             Enum.PokemonTypeName.getPokeType(type.type.name)
         }
-        typeLabel.text = "타입: \(pokeType.joined(separator: ", "))"
-        heightLabel.text = "키: \(detail.height) m"
-        weightLabel.text = "몸무게: \(detail.weight) kg"
+        typeLabel.text = "\(pokeType.joined(separator: ", "))"
+        heightLabel.text = "\(detail.height) m"
+        weightLabel.text = "\(detail.weight) kg"
     }
 }
 
@@ -112,10 +175,13 @@ private extension DetailView {
         baseView.addSubViews([imageView, labelStackView])
 
         labelStackView.addArrangedSubViews([horisontalStackView,
-                                            typeLabel,
-                                            heightLabel,
-                                            weightLabel])
-        horisontalStackView.addArrangedSubViews([numberLabel, nameLabel])
+                                            typeStackView,
+                                            heightStackView,
+                                            weightStackView])
+        horisontalStackView.addArrangedSubViews([numberTitleLabel, numberLabel, nameLabel])
+        typeStackView.addArrangedSubViews([typeTitleLabel, typeLabel])
+        heightStackView.addArrangedSubViews([heightTitleLabel, heightLabel])
+        weightStackView.addArrangedSubViews([weightTitleLabel, weightLabel])
     }
     
     func setupConstraint() {
