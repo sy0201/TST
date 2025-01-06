@@ -41,8 +41,21 @@ private extension DetailViewController {
         viewModel.pokeDetail
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] detail in
-                self?.detailView.configure(with: detail)
+                if let detail = detail {
+                    self?.detailView.configure(with: detail)
+                } else {
+                    // detail이 nil인 경우 처리 (예: 에러 메시지 표시, 기본값 설정 등)
+                    self?.showNoNetworkAlert()
+                    print("PokeDetail is nil.")
+                }
             })
             .disposed(by: disposebag)
+    }
+    
+    // 네트워크가 없을 때 사용자에게 알림을 표시하는 함수
+    func showNoNetworkAlert() {
+        let alert = UIAlertController(title: "네트워크가 없습니다.", message: "네트워크 연결을 다시 시도하시겠습니까?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }
