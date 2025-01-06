@@ -48,6 +48,9 @@ private extension DetailViewController {
                     self?.showNoNetworkAlert()
                     print("PokeDetail is nil.")
                 }
+                
+                // Hide loading indicator once the data is loaded
+                LoadingIndicator.hideLoading()
             })
             .disposed(by: disposebag)
     }
