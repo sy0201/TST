@@ -30,6 +30,7 @@ final class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigationBar()
         bindViewModel()
         viewModel.loadPokeDetail()
     }
@@ -37,6 +38,11 @@ final class DetailViewController: UIViewController {
 
 // MARK: - bind Method
 private extension DetailViewController {
+    func setupNavigationBar() {
+        // NavigationBar 버튼 색상 설정
+        navigationController?.navigationBar.tintColor = .white
+    }
+    
     func bindViewModel() {
         viewModel.pokeDetail
             .observe(on: MainScheduler.instance)
