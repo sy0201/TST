@@ -20,7 +20,12 @@ final class PokeRepository: PokeRepositoryProtocol {
     
     // 포켓몬 리스트 가져오기
     func fetchPokeList(offset: Int, limit: Int) -> Single<[Result]> {
-        provider.rx.request(.getPokeList(offset: offset, limit: limit))
+        // 네트워크 연결 상태 확인
+        guard NetworkMonitor.shared.isNetworkAvailable() else {
+            return Single.error(NetworkError.invalidRequest)  // 네트워크가 없으면 에러 반환
+        }
+        
+        return provider.rx.request(.getPokeList(offset: offset, limit: limit))
             .do(onSuccess: { response in
                 print("Response: \(response)")
             }, onError: { error in
@@ -60,7 +65,12 @@ final class PokeRepository: PokeRepositoryProtocol {
     
     // 포켓몬 디테일 가져오기
     func fetchPokeDetail(id: Int) -> Single<PokeDetail> {
-        provider.rx.request(.getPokeDetail(id: id))
+        // 네트워크 연결 상태 확인
+        guard NetworkMonitor.shared.isNetworkAvailable() else {
+            return Single.error(NetworkError.invalidRequest)  // 네트워크가 없으면 에러 반환
+        }
+        
+        return provider.rx.request(.getPokeDetail(id: id))
             .do(onSuccess: { response in
                 if let json = try? JSONSerialization.jsonObject(with: response.data, options: []) {
                     print("Detail JSON: \(json)")

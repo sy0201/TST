@@ -33,6 +33,13 @@ final class MainViewModel {
     }
     
     func loadMorePokemon() {
+        // 네트워크 상태 확인
+        guard NetworkMonitor.shared.isNetworkAvailable() else {
+            // 네트워크가 없으면 에러 처리
+            self.pokeList.accept([])
+            return
+        }
+        
         guard !isLoading && canLoadMore else { return }
         
         isLoading = true
@@ -63,6 +70,13 @@ final class MainViewModel {
     
     // 초기 로드 또는 새로고침을 위한 메서드
     func refreshPokemonList() {
+        // 네트워크 상태 확인
+        guard NetworkMonitor.shared.isNetworkAvailable() else {
+            // 네트워크가 없으면 에러 처리
+            self.pokeList.accept([])
+            return
+        }
+        
         currentOffset = 0
         currentItems = []
         canLoadMore = true

@@ -66,7 +66,12 @@ private extension MainViewController {
         viewModel.refreshPokemonList()
         viewModel.pokeList
             .subscribe(onNext: { [weak self] pokeList in
-                self?.applySnapshot(pokeList: pokeList)
+                if pokeList.isEmpty {
+                    // 네트워크 오류시 빈 목록 처리
+                    self?.showNoNetworkAlert()
+                } else {
+                    self?.applySnapshot(pokeList: pokeList)
+                }
             })
             .disposed(by: disposebag)
         
@@ -109,6 +114,13 @@ private extension MainViewController {
                 }
             })
             .disposed(by: disposebag)
+    }
+    
+    // 네트워크가 없을 때 사용자에게 알림을 표시하는 함수
+    func showNoNetworkAlert() {
+        let alert = UIAlertController(title: "네트워크가 없습니다.", message: "네트워크 연결을 다시 시도하시겠습니까?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
