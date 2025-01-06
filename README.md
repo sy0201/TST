@@ -44,9 +44,9 @@
 
 ## 💫 필수 기능
 
-|기본 UI|연락처 추가화면|네비게이션 바|API|CoreData|
-|--------|--------|--------|--------|--------|
-|![기본 UI](https://github.com/user-attachments/assets/4140d63f-19fc-4dbb-ab60-d6a48dc24326)|![연락처 추가화면](https://github.com/user-attachments/assets/b62b61ec-4e1d-4825-81b1-005c0a60ef0f)|![상단 네비게이션 바](https://github.com/user-attachments/assets/2164f6ca-da24-4049-9e94-4df8c119ffbc)|![API](https://github.com/user-attachments/assets/5334869c-b50e-48ba-a92f-03d764341f28)|![CorData](https://github.com/user-attachments/assets/2cc01647-fd09-4d98-b88c-e516035f65ed)|
+|기본 UI|
+|:---:|
+|![기본 UI](https://github.com/user-attachments/assets/0a62c6d7-eac9-457f-b0e0-123908a3c087)|
 <br>
 
 ## ✏️ 필수 기능 구현
@@ -69,7 +69,7 @@
 
 <a id="트러블-슈팅"></a>
 ## 🧨  기능별 트러블 슈팅
-###### 아래는 핵심 위주로 작성하였습니다 [블로그에서 더보기](https://velog.io/@sy0201/posts?q=%ED%8F%AC%EC%BC%93%EB%AA%AC)
+###### 아래는 핵심 위주로 작성하였습니다 [블로그에서 더보기](https://velog.io/@sy0201/posts?q=Poke+Challenge)
 
 <details>
 <summary>1️⃣ ViewModel 분리 및 의존성 관리</summary>
@@ -177,24 +177,9 @@ BehaviorRelay와 PublishRelay를 먼저 비교해본 후 처음 코드 작성시
 <br>
 </div>
 </details>
-
-<details>
-<summary>:three: 무한 스크롤 구현 </summary>
-<div markdown="3">
-<br>
-
-**문제발생** <br>
-리스트 화면에서 프로필 추가화면으로 PushViewController를 통해 화면 전환시 NavigationBar는 어디에서 설정해야하는지 고민되었습니다.
-예를 들어 리스트 화면에서 프로필 추가화면으로 Push될때 NavigationBar의 Title이 잘못 표시되는 문제가 생겼습니다.
-
-**해결방법** <br>
-해결방법 작성하기
-
- <br>
-</div>
-</details>
 <br>
 
 <a id="회고"></a>
 ## 📕 회고<br>
-UnitTest
+RxSwift와 MVVM 패턴을 결합하여 사용하면 UnitTest가 용이하다는 장점이 있는데
+Test추가하여 직접 경혐해보고싶다.
