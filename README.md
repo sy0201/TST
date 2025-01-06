@@ -60,13 +60,13 @@
 <br>
 :heavy_check_mark: 무한 스크롤 구현
 <br>
-
+<br>
 ## ✏️ 도전 기능 구현
 :heavy_check_mark: Observable, Subject, Relay 차이를 공부하고, ViewModel에서 Relay를 활용
 <br>
 :heavy_check_mark: Kingfisher 활용
 <br>
-
+<br>
 <a id="트러블-슈팅"></a>
 ## 🧨  기능별 트러블 슈팅
 ###### 아래는 핵심 위주로 작성하였습니다 [블로그에서 더보기](https://velog.io/@sy0201/posts?q=Poke+Challenge)
