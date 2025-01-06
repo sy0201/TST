@@ -36,7 +36,7 @@
 ## :computer: 개발 환경
 > * Xcode 15.4
 > * Swift 5
-> * iOS 15 이상
+> * iOS 16 이상
 <br>
 
 <a id="동작-화면"></a>
