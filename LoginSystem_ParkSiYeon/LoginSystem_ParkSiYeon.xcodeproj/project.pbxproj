@@ -7,15 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1895FD542D83F7A400BB644B /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 1895FD532D83F7A400BB644B /* RxCocoa */; };
+		1895FD562D83F7A400BB644B /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1895FD552D83F7A400BB644B /* RxSwift */; };
+		1895FD592D83F7C700BB644B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1895FD582D83F7C700BB644B /* LoginViewController.swift */; };
 		18CE48132D82B128003A2E7D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CE48122D82B128003A2E7D /* AppDelegate.swift */; };
 		18CE48152D82B128003A2E7D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CE48142D82B128003A2E7D /* SceneDelegate.swift */; };
 		18CE48172D82B128003A2E7D /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CE48162D82B128003A2E7D /* StartViewController.swift */; };
 		18CE481D2D82B128003A2E7D /* LoginSystem_ParkSiYeon.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 18CE481B2D82B128003A2E7D /* LoginSystem_ParkSiYeon.xcdatamodeld */; };
 		18CE481F2D82B12B003A2E7D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18CE481E2D82B12B003A2E7D /* Assets.xcassets */; };
 		18CE48222D82B12B003A2E7D /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 18CE48212D82B12B003A2E7D /* Base */; };
+		18CE482F2D83C8C7003A2E7D /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CE482E2D83C8C7003A2E7D /* StartView.swift */; };
+		18CE48322D83E717003A2E7D /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 18CE48312D83E717003A2E7D /* SnapKit */; };
+		18CE48352D83E925003A2E7D /* StartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CE48342D83E925003A2E7D /* StartViewModel.swift */; };
+		18CE48392D83EB68003A2E7D /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CE48382D83EB68003A2E7D /* UIView+Extension.swift */; };
+		18CE483B2D83F140003A2E7D /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CE483A2D83F140003A2E7D /* UIColor+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1895FD582D83F7C700BB644B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		18CE480F2D82B128003A2E7D /* LoginSystem_ParkSiYeon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoginSystem_ParkSiYeon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18CE48122D82B128003A2E7D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		18CE48142D82B128003A2E7D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +33,10 @@
 		18CE481E2D82B12B003A2E7D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18CE48212D82B12B003A2E7D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		18CE48232D82B12B003A2E7D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18CE482E2D83C8C7003A2E7D /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
+		18CE48342D83E925003A2E7D /* StartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewModel.swift; sourceTree = "<group>"; };
+		18CE48382D83EB68003A2E7D /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		18CE483A2D83F140003A2E7D /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,12 +44,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1895FD562D83F7A400BB644B /* RxSwift in Frameworks */,
+				1895FD542D83F7A400BB644B /* RxCocoa in Frameworks */,
+				18CE48322D83E717003A2E7D /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1895FD572D83F7B500BB644B /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				1895FD582D83F7C700BB644B /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		18CE48062D82B128003A2E7D = {
 			isa = PBXGroup;
 			children = (
@@ -56,9 +80,10 @@
 		18CE48112D82B128003A2E7D /* LoginSystem_ParkSiYeon */ = {
 			isa = PBXGroup;
 			children = (
-				18CE48292D82CB50003A2E7D /* Support */,
-				18CE482C2D82CC36003A2E7D /* Screen */,
 				18CE482B2D82CC2B003A2E7D /* CoreData */,
+				18CE48292D82CB50003A2E7D /* Support */,
+				18CE48362D83EB4D003A2E7D /* Utils */,
+				18CE482C2D82CC36003A2E7D /* Screen */,
 				18CE482A2D82CB9E003A2E7D /* Resource */,
 			);
 			path = LoginSystem_ParkSiYeon;
@@ -94,6 +119,7 @@
 		18CE482C2D82CC36003A2E7D /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				1895FD572D83F7B500BB644B /* Login */,
 				18CE482D2D82CC3C003A2E7D /* Start */,
 			);
 			path = Screen;
@@ -102,9 +128,36 @@
 		18CE482D2D82CC3C003A2E7D /* Start */ = {
 			isa = PBXGroup;
 			children = (
+				18CE48332D83E917003A2E7D /* ViewModel */,
+				18CE482E2D83C8C7003A2E7D /* StartView.swift */,
 				18CE48162D82B128003A2E7D /* StartViewController.swift */,
 			);
 			path = Start;
+			sourceTree = "<group>";
+		};
+		18CE48332D83E917003A2E7D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				18CE48342D83E925003A2E7D /* StartViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		18CE48362D83EB4D003A2E7D /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				18CE48372D83EB59003A2E7D /* Extensions */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		18CE48372D83EB59003A2E7D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				18CE48382D83EB68003A2E7D /* UIView+Extension.swift */,
+				18CE483A2D83F140003A2E7D /* UIColor+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -123,6 +176,11 @@
 			dependencies = (
 			);
 			name = LoginSystem_ParkSiYeon;
+			packageProductDependencies = (
+				18CE48312D83E717003A2E7D /* SnapKit */,
+				1895FD532D83F7A400BB644B /* RxCocoa */,
+				1895FD552D83F7A400BB644B /* RxSwift */,
+			);
 			productName = LoginSystem_ParkSiYeon;
 			productReference = 18CE480F2D82B128003A2E7D /* LoginSystem_ParkSiYeon.app */;
 			productType = "com.apple.product-type.application";
@@ -151,6 +209,10 @@
 				Base,
 			);
 			mainGroup = 18CE48062D82B128003A2E7D;
+			packageReferences = (
+				18CE48302D83E717003A2E7D /* XCRemoteSwiftPackageReference "SnapKit" */,
+				1895FD522D83F7A400BB644B /* XCRemoteSwiftPackageReference "RxSwift" */,
+			);
 			productRefGroup = 18CE48102D82B128003A2E7D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -177,10 +239,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1895FD592D83F7C700BB644B /* LoginViewController.swift in Sources */,
 				18CE48172D82B128003A2E7D /* StartViewController.swift in Sources */,
+				18CE48392D83EB68003A2E7D /* UIView+Extension.swift in Sources */,
+				18CE48352D83E925003A2E7D /* StartViewModel.swift in Sources */,
+				18CE482F2D83C8C7003A2E7D /* StartView.swift in Sources */,
 				18CE481D2D82B128003A2E7D /* LoginSystem_ParkSiYeon.xcdatamodeld in Sources */,
 				18CE48132D82B128003A2E7D /* AppDelegate.swift in Sources */,
 				18CE48152D82B128003A2E7D /* SceneDelegate.swift in Sources */,
+				18CE483B2D83F140003A2E7D /* UIColor+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,6 +470,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1895FD522D83F7A400BB644B /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.9.0;
+			};
+		};
+		18CE48302D83E717003A2E7D /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1895FD532D83F7A400BB644B /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1895FD522D83F7A400BB644B /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		1895FD552D83F7A400BB644B /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1895FD522D83F7A400BB644B /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		18CE48312D83E717003A2E7D /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 18CE48302D83E717003A2E7D /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		18CE481B2D82B128003A2E7D /* LoginSystem_ParkSiYeon.xcdatamodeld */ = {
