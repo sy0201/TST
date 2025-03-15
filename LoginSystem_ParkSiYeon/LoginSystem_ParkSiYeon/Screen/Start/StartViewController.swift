@@ -25,7 +25,7 @@ final class StartViewController: UIViewController {
     }
 }
 
-// MARK: - Private setupUI Method
+// MARK: - Private bindViewModel Method
 
 private extension StartViewController {
     func bindStartViewModel() {
@@ -57,7 +57,6 @@ private extension StartViewController {
             return
         }
         
-        // 애니메이션을 추가하여 화면 전환
         UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: {
             window.rootViewController = viewController
         }, completion: { _ in
