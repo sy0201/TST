@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 final class StartView: UIView {
-    let baseView = UIView()
+    private let baseView = UIView()
 
     var startButton: UIButton = {
         let button = UIButton()
