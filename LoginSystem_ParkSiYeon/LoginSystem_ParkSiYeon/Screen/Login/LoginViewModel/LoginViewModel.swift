@@ -22,6 +22,12 @@ final class LoginViewModel {
             nickname.onNext(savedNickname) // 사용자 이름을 BehaviorSubject에 전달
         }
     }
+    
+    // 로그인 성공 처리
+    func loginSuccess() {
+        userDefaultsManager.saveUserLoggedIn(true)  // 로그인 상태 저장
+    }
+    
     func logout() {
         userDefaultsManager.clearUserLoggedIn()
         userDefaultsManager.clearNickname()

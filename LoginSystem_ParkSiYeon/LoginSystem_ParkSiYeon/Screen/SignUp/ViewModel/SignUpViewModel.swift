@@ -24,6 +24,7 @@ final class SignUpViewModel {
     let signUpSuccess: PublishRelay<Bool> = PublishRelay()
     
     private let userInfoManager = UserInfoCoreDataManager()
+    private let userDefaultsManager = UserDefaultsManager.shared
     
     init() {
         // 유효성 검사
@@ -88,6 +89,11 @@ final class SignUpViewModel {
         } else {
             // CoreData에 저장
             userInfoManager.saveUserInfo(email: email.value, password: password.value, nickname: nickname.value)
+            
+            // UserDefaults에 로그인 상태와 사용자 정보 저장
+            userDefaultsManager.saveUserLoggedIn(true)  // 로그인 상태 저장
+            userDefaultsManager.saveNickname(nickname.value)  // 닉네임 저장
+            userDefaultsManager.saveUserEmail(email.value)  // 이메일 저장
             
             signUpSuccess.accept(true)
         }

@@ -78,6 +78,7 @@ final class SignUpView: UIView {
 private extension SignUpView {
     func setupUI() {
         self.backgroundColor = .white
+        scrollView.backgroundColor = .white
         baseView.backgroundColor = .white
         
         addSubview(scrollView)
