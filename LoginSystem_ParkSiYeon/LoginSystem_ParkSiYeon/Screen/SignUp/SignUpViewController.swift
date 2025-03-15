@@ -25,6 +25,8 @@ final class SignUpViewController: UIViewController {
     }
 }
 
+// MARK: - Private Extension Methods
+
 private extension SignUpViewController {
     func bindSignUpViewModel() {
         // 회원가입 버튼 액션 바인딩
@@ -55,8 +57,24 @@ private extension SignUpViewController {
     
     func navigateToLogin() {
         // 로그인 화면으로 이동
-        let loginViewController = LoginViewController() // 로그인 화면으로 바꿔주세요
-        navigationController?.pushViewController(loginViewController, animated: true)
+        let loginViewController = LoginViewController()
+        setRootViewController(loginViewController)
+    }
+    
+    func setRootViewController(_ viewController: UIViewController) {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
+            return
+        }
+        
+        guard let window = windowScene.windows.first else {
+            return
+        }
+        
+        UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: {
+            window.rootViewController = viewController
+        }, completion: { _ in
+            window.makeKeyAndVisible()
+        })
     }
     
     func showEmailAlreadyExistsError() {
