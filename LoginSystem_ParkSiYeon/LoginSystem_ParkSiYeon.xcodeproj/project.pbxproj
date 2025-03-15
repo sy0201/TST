@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		182BF0DD2D85886B00C7B308 /* KeyChainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182BF0DC2D85886B00C7B308 /* KeyChainHelper.swift */; };
+		182BF0E52D8595B800C7B308 /* UserInfoCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 182BF0E32D8595B800C7B308 /* UserInfoCoreData.xcdatamodeld */; };
 		1895FD542D83F7A400BB644B /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 1895FD532D83F7A400BB644B /* RxCocoa */; };
 		1895FD562D83F7A400BB644B /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1895FD552D83F7A400BB644B /* RxSwift */; };
 		1895FD592D83F7C700BB644B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1895FD582D83F7C700BB644B /* LoginViewController.swift */; };
@@ -23,7 +24,6 @@
 		18CE48132D82B128003A2E7D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CE48122D82B128003A2E7D /* AppDelegate.swift */; };
 		18CE48152D82B128003A2E7D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CE48142D82B128003A2E7D /* SceneDelegate.swift */; };
 		18CE48172D82B128003A2E7D /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CE48162D82B128003A2E7D /* StartViewController.swift */; };
-		18CE481D2D82B128003A2E7D /* UserInfoCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 18CE481B2D82B128003A2E7D /* UserInfoCoreData.xcdatamodeld */; };
 		18CE481F2D82B12B003A2E7D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18CE481E2D82B12B003A2E7D /* Assets.xcassets */; };
 		18CE48222D82B12B003A2E7D /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 18CE48212D82B12B003A2E7D /* Base */; };
 		18CE482F2D83C8C7003A2E7D /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CE482E2D83C8C7003A2E7D /* StartView.swift */; };
@@ -35,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		182BF0DC2D85886B00C7B308 /* KeyChainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainHelper.swift; sourceTree = "<group>"; };
+		182BF0E42D8595B800C7B308 /* UserInfoCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserInfoCoreData.xcdatamodel; sourceTree = "<group>"; };
 		1895FD582D83F7C700BB644B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1895FD5D2D840CDC00BB644B /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		1895FD5F2D840D4700BB644B /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -50,7 +51,6 @@
 		18CE48122D82B128003A2E7D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		18CE48142D82B128003A2E7D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		18CE48162D82B128003A2E7D /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
-		18CE481C2D82B128003A2E7D /* UserInfoCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserInfoCoreData.xcdatamodel; sourceTree = "<group>"; };
 		18CE481E2D82B12B003A2E7D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18CE48212D82B12B003A2E7D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		18CE48232D82B12B003A2E7D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -170,8 +170,8 @@
 		18CE482B2D82CC2B003A2E7D /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				18CE481B2D82B128003A2E7D /* UserInfoCoreData.xcdatamodeld */,
 				1895FD702D85815100BB644B /* UserInfoCoreDataManager.swift */,
+				182BF0E32D8595B800C7B308 /* UserInfoCoreData.xcdatamodeld */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -309,6 +309,7 @@
 				18CE48172D82B128003A2E7D /* StartViewController.swift in Sources */,
 				1895FD692D8420EC00BB644B /* InputType.swift in Sources */,
 				18CE48392D83EB68003A2E7D /* UIView+Extension.swift in Sources */,
+				182BF0E52D8595B800C7B308 /* UserInfoCoreData.xcdatamodeld in Sources */,
 				18CE48352D83E925003A2E7D /* StartViewModel.swift in Sources */,
 				1895FD5E2D840CDC00BB644B /* SignUpViewController.swift in Sources */,
 				1895FD6E2D8570A100BB644B /* String+Extension.swift in Sources */,
@@ -316,7 +317,6 @@
 				1895FD602D840D4700BB644B /* SignUpView.swift in Sources */,
 				18CE482F2D83C8C7003A2E7D /* StartView.swift in Sources */,
 				1895FD712D85815100BB644B /* UserInfoCoreDataManager.swift in Sources */,
-				18CE481D2D82B128003A2E7D /* UserInfoCoreData.xcdatamodeld in Sources */,
 				18CE48132D82B128003A2E7D /* AppDelegate.swift in Sources */,
 				1895FD642D841BCF00BB644B /* UIStackView+Extension.swift in Sources */,
 				18CE48152D82B128003A2E7D /* SceneDelegate.swift in Sources */,
@@ -589,13 +589,14 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		18CE481B2D82B128003A2E7D /* UserInfoCoreData.xcdatamodeld */ = {
+		182BF0E32D8595B800C7B308 /* UserInfoCoreData.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				18CE481C2D82B128003A2E7D /* UserInfoCoreData.xcdatamodel */,
+				182BF0E42D8595B800C7B308 /* UserInfoCoreData.xcdatamodel */,
 			);
-			currentVersion = 18CE481C2D82B128003A2E7D /* UserInfoCoreData.xcdatamodel */;
-			path = UserInfoCoreData.xcdatamodeld;
+			currentVersion = 182BF0E42D8595B800C7B308 /* UserInfoCoreData.xcdatamodel */;
+			name = UserInfoCoreData.xcdatamodeld;
+			path = /Users/siyeonpark/Documents/LoginSystem_ParkSiYeon/iOS_Intern_LoginSystem/LoginSystem_ParkSiYeon/LoginSystem_ParkSiYeon/CoreData/UserInfoCoreData.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

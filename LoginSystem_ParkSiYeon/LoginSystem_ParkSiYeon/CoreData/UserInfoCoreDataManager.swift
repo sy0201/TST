@@ -12,7 +12,7 @@ final class UserInfoCoreDataManager {
     static let shared = UserInfoCoreDataManager()
     
     lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "SignUpInfoCoreData")
+        let container = NSPersistentContainer(name: "UserInfoCoreData")
         container.loadPersistentStores { storeDescription, error in
             if let error = error {
                 fatalError("Unresolved error \(error), \(error.localizedDescription)")
@@ -45,7 +45,7 @@ extension UserInfoCoreDataManager {
         let context = getContext()
         
         // 새로운 UserInfo 객체 생성
-        let userInfo = UserInfo(context: context)
+        let userInfo = UserInfoCoreData(context: context)
         userInfo.email = email
         userInfo.password = password
         userInfo.nickname = nickname
@@ -58,9 +58,9 @@ extension UserInfoCoreDataManager {
 // MARK: - Fetch UserInfoCoreData
 
 extension UserInfoCoreDataManager {
-    func fetchUserByEmail(email: String) -> UserInfo? {
+    func fetchUserByEmail(email: String) -> UserInfoCoreData? {
         let context = persistentContainer.viewContext
-        let fetchRequest: NSFetchRequest<UserInfo> = UserInfo.fetchRequest()
+        let fetchRequest: NSFetchRequest<UserInfoCoreData> = UserInfoCoreData.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "email == %@", email)
         
         do {
@@ -73,3 +73,20 @@ extension UserInfoCoreDataManager {
     }
 }
 
+// MARK: - Check
+
+extension UserInfoCoreDataManager {
+    func isEmailAlreadyExists(email: String) -> Bool {
+        let context = getContext()
+        let fetchRequest: NSFetchRequest<UserInfoCoreData> = UserInfoCoreData.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "email == %@", email)
+        
+        do {
+            let results = try context.fetch(fetchRequest)
+            return !results.isEmpty
+        } catch {
+            print("Failed to fetch email: \(error)")
+            return false
+        }
+    }
+}

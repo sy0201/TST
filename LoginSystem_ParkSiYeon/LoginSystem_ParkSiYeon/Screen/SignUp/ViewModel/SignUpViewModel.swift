@@ -23,6 +23,9 @@ final class SignUpViewModel {
     let signUpEnabled: Observable<Bool>
     
     private let disposeBag = DisposeBag()
+    private let userInfoManager = UserInfoCoreDataManager()
+    
+    let signUpSuccess: PublishRelay<Bool> = PublishRelay()
     
     init() {
         // 유효성 검사
@@ -34,6 +37,21 @@ final class SignUpViewModel {
         // 회원가입 가능 여부
         signUpEnabled = Observable.combineLatest(emailValid, passwordValid, confirmPasswordValid, nicknameValid) {
             $0 && $1 && $2 && $3
+        }
+    }
+    
+    func signUp() {
+        // 이메일 중복 체크
+        let emailExists = userInfoManager.isEmailAlreadyExists(email: email.value)
+        
+        if emailExists {
+            // 이메일 중복 시
+            signUpSuccess.accept(false)
+        } else {
+            // CoreData에 저장
+            userInfoManager.saveUserInfo(email: email.value, password: password.value, nickname: nickname.value)
+            print("회원가입완료")
+            signUpSuccess.accept(true)
         }
     }
 }
