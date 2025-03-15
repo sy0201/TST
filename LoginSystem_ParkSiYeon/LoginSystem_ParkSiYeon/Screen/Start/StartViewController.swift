@@ -32,7 +32,7 @@ private extension StartViewController {
         startViewModel.startButtonTapped
             .subscribe(onNext: { [weak self] _ in
                 // Login 정보 확인
-                self?.pushToLoginView()
+                self?.checkLoginStatus()
             })
             .disposed(by: disposeBag)
         
@@ -43,9 +43,24 @@ private extension StartViewController {
             .disposed(by: disposeBag)
     }
     
+    func checkLoginStatus() {
+        if let _ = UserDefaults.standard.string(forKey: "userLoggedIn") {
+            // 로그인 정보가 있다면 로그인 화면으로 이동
+            self.pushToLoginView()
+        } else {
+            // 로그인 정보가 없다면 회원가입 화면으로 이동
+            self.pushToSignUpView()
+        }
+    }
+    
     func pushToLoginView() {
         let loginViewController = LoginViewController()
         setRootViewController(loginViewController)
+    }
+    
+    func pushToSignUpView() {
+        let signUpViewController = SignUpViewController()
+        setRootViewController(signUpViewController)
     }
     
     func setRootViewController(_ viewController: UIViewController) {
