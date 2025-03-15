@@ -52,6 +52,9 @@ extension UserInfoCoreDataManager {
         
         // 저장
         saveContext()
+        
+        // UserDefaults에 닉네임 저장
+        UserDefaultsManager.shared.saveNickname(nickname)
     }
 }
 
@@ -73,7 +76,7 @@ extension UserInfoCoreDataManager {
     }
 }
 
-// MARK: - Check
+// MARK: - Check UserInfoCoreData
 
 extension UserInfoCoreDataManager {
     func isEmailAlreadyExists(email: String) -> Bool {
@@ -88,5 +91,15 @@ extension UserInfoCoreDataManager {
             print("Failed to fetch email: \(error)")
             return false
         }
+    }
+}
+
+// MARK: - Delete UserInfoCoreData
+
+extension UserInfoCoreDataManager {
+    func deleteUser(user: UserInfoCoreData) {
+        let context = getContext()
+        context.delete(user)
+        saveContext()
     }
 }

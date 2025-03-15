@@ -22,7 +22,6 @@ final class SignUpViewModel {
     
     let signUpEnabled: Observable<Bool>
     
-    private let disposeBag = DisposeBag()
     private let userInfoManager = UserInfoCoreDataManager()
     
     let signUpSuccess: PublishRelay<Bool> = PublishRelay()
@@ -50,7 +49,7 @@ final class SignUpViewModel {
         } else {
             // CoreData에 저장
             userInfoManager.saveUserInfo(email: email.value, password: password.value, nickname: nickname.value)
-            print("회원가입완료")
+            
             signUpSuccess.accept(true)
         }
     }
