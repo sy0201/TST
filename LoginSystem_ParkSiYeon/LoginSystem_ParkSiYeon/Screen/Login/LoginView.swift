@@ -36,7 +36,7 @@ final class LoginView: UIView {
     var logoutButton: UIButton = {
         let button = UIButton()
         button.layer.cornerRadius = 20
-        button.clipsToBounds = true
+        button.layer.masksToBounds = true
         button.setTitle("로그아웃", for: .normal)
         button.setTitleColor(.primaryDarkGray, for: .normal)
         button.backgroundColor = .backgroundLightGray
@@ -69,6 +69,7 @@ final class LoginView: UIView {
 private extension LoginView {
     func setupUI() {
         self.backgroundColor = .white
+        scrollView.backgroundColor = .white
         baseView.backgroundColor = .white
         
         addSubview(scrollView)

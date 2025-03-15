@@ -14,7 +14,7 @@ final class StartView: UIView {
     var startButton: UIButton = {
         let button = UIButton()
         button.layer.cornerRadius = 20
-        button.clipsToBounds = true
+        button.layer.masksToBounds = true
         button.setTitle("시작하기", for: .normal)
         button.setTitleColor(.primaryDarkGray, for: .normal)
         button.backgroundColor = .backgroundLightGray
@@ -37,7 +37,9 @@ final class StartView: UIView {
 
 private extension StartView {
     func setupUI() {
+        self.backgroundColor = .white
         baseView.backgroundColor = .white
+        
         addSubViews([baseView, startButton])
     }
     
