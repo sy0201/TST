@@ -41,10 +41,20 @@ private extension StartViewController {
                 self?.startViewModel.handleStartButtonTap()
             })
             .disposed(by: disposeBag)
+        
+        startViewModel.loginStatus
+            .subscribe(onNext: { [weak self] loggedIn in
+                self?.loginStatus(loggedIn: loggedIn)
+            })
+            .disposed(by: disposeBag)
     }
     
     func checkLoginStatus() {
-        if let _ = UserDefaults.standard.string(forKey: "userLoggedIn") {
+        startViewModel.updateLoginStatus()
+    }
+    
+    func loginStatus(loggedIn: Bool) {
+        if loggedIn {
             // 로그인 정보가 있다면 로그인 화면으로 이동
             self.pushToLoginView()
         } else {
