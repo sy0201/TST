@@ -22,6 +22,7 @@ final class SignUpViewModel {
     
     let signUpEnabled: Observable<Bool>
     let signUpSuccess: PublishRelay<Bool> = PublishRelay()
+    let errorMessage: PublishRelay<SignUpError?> = PublishRelay()
     
     private let userDefaultsManager = UserDefaultsManager.shared
     private let coreDataManager = UserInfoCoreDataManager.shared
@@ -84,18 +85,27 @@ final class SignUpViewModel {
         let emailExists = coreDataManager.isEmailAlreadyExists(email: email.value)
         
         if emailExists {
-            // 이메일 중복 시
+            // 이메일 중복 시 SignUpError 처리
+            errorMessage.accept(.emailAlreadyExists)
             signUpSuccess.accept(false)
-        } else {
-            // CoreData에 저장
-            coreDataManager.saveUserInfo(email: email.value, password: password.value, nickname: nickname.value)
+            return
+        }
+        
+        // CoreData에 저장
+        do {
+            try coreDataManager.saveUserInfo(email: email.value, password: password.value, nickname: nickname.value)
             
             // UserDefaults에 로그인 상태와 사용자 정보 저장
             userDefaultsManager.saveUserLoggedIn(true)  // 로그인 상태 저장
             userDefaultsManager.saveNickname(nickname.value)  // 닉네임 저장
             userDefaultsManager.saveUserEmail(email.value)  // 이메일 저장
             
+            // 회원가입 성공 처리
             signUpSuccess.accept(true)
+        } catch {
+            // 코어 데이터 저장 실패 시 SignUpError 처리
+            errorMessage.accept(.saveError)
+            signUpSuccess.accept(false)
         }
     }
 }
