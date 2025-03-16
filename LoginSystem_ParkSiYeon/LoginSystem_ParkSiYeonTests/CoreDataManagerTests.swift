@@ -5,7 +5,7 @@
 //  Created by siyeon park on 3/16/25.
 //
 
-import XCTestCase
+import XCTest
 
 class CoreDataManagerTests: XCTestCase {
     var coreDataManager: MockCoreDataManager!
