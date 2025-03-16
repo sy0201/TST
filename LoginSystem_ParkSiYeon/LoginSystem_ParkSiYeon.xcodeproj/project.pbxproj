@@ -54,13 +54,6 @@
 			remoteGlobalIDString = 18CE480E2D82B128003A2E7D;
 			remoteInfo = LoginSystem_ParkSiYeon;
 		};
-		182BF1162D86679800C7B308 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 18CE48072D82B128003A2E7D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 18CE480E2D82B128003A2E7D;
-			remoteInfo = LoginSystem_ParkSiYeon;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -74,7 +67,6 @@
 		182BF0FB2D86630300C7B308 /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
 		182BF1012D8666ED00C7B308 /* LoginSystem_ParkSiYeonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LoginSystem_ParkSiYeonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		182BF1032D8666ED00C7B308 /* LoginSystem_ParkSiYeonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSystem_ParkSiYeonTests.swift; sourceTree = "<group>"; };
-		182BF1122D86679800C7B308 /* StartViewModelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StartViewModelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		182BF1292D86A4B000C7B308 /* UserDefaultsManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManagerTests.swift; sourceTree = "<group>"; };
 		182BF12A2D86A4B000C7B308 /* CoreDataManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManagerTests.swift; sourceTree = "<group>"; };
 		182BF12B2D86A4B000C7B308 /* MockCoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockCoreDataManager.swift; sourceTree = "<group>"; };
@@ -110,13 +102,6 @@
 			files = (
 				182BF10D2D86672D00C7B308 /* RxTest in Frameworks */,
 				182BF10B2D86672D00C7B308 /* RxBlocking in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		182BF10F2D86679800C7B308 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,7 +226,6 @@
 			children = (
 				18CE480F2D82B128003A2E7D /* LoginSystem_ParkSiYeon.app */,
 				182BF1012D8666ED00C7B308 /* LoginSystem_ParkSiYeonTests.xctest */,
-				182BF1122D86679800C7B308 /* StartViewModelTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -361,24 +345,6 @@
 			productReference = 182BF1012D8666ED00C7B308 /* LoginSystem_ParkSiYeonTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		182BF1112D86679800C7B308 /* StartViewModelTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 182BF1182D86679800C7B308 /* Build configuration list for PBXNativeTarget "StartViewModelTests" */;
-			buildPhases = (
-				182BF10E2D86679800C7B308 /* Sources */,
-				182BF10F2D86679800C7B308 /* Frameworks */,
-				182BF1102D86679800C7B308 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				182BF1172D86679800C7B308 /* PBXTargetDependency */,
-			);
-			name = StartViewModelTests;
-			productName = StartViewModelTests;
-			productReference = 182BF1122D86679800C7B308 /* StartViewModelTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		18CE480E2D82B128003A2E7D /* LoginSystem_ParkSiYeon */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 18CE48262D82B12B003A2E7D /* Build configuration list for PBXNativeTarget "LoginSystem_ParkSiYeon" */;
@@ -415,10 +381,6 @@
 						CreatedOnToolsVersion = 15.4;
 						TestTargetID = 18CE480E2D82B128003A2E7D;
 					};
-					182BF1112D86679800C7B308 = {
-						CreatedOnToolsVersion = 15.4;
-						TestTargetID = 18CE480E2D82B128003A2E7D;
-					};
 					18CE480E2D82B128003A2E7D = {
 						CreatedOnToolsVersion = 15.4;
 					};
@@ -443,20 +405,12 @@
 			targets = (
 				18CE480E2D82B128003A2E7D /* LoginSystem_ParkSiYeon */,
 				182BF1002D8666ED00C7B308 /* LoginSystem_ParkSiYeonTests */,
-				182BF1112D86679800C7B308 /* StartViewModelTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		182BF0FF2D8666ED00C7B308 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		182BF1102D86679800C7B308 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -484,13 +438,6 @@
 				182BF12F2D86A4B000C7B308 /* CoreDataManagerTests.swift in Sources */,
 				182BF1042D8666ED00C7B308 /* LoginSystem_ParkSiYeonTests.swift in Sources */,
 				182BF1312D86A4B000C7B308 /* MockUserDefaultsManager.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		182BF10E2D86679800C7B308 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -534,11 +481,6 @@
 			target = 18CE480E2D82B128003A2E7D /* LoginSystem_ParkSiYeon */;
 			targetProxy = 182BF1052D8666ED00C7B308 /* PBXContainerItemProxy */;
 		};
-		182BF1172D86679800C7B308 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 18CE480E2D82B128003A2E7D /* LoginSystem_ParkSiYeon */;
-			targetProxy = 182BF1162D86679800C7B308 /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -561,7 +503,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5Y43RDX3FM;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sy0201.LoginSystem-ParkSiYeonTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -580,47 +522,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5Y43RDX3FM;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sy0201.LoginSystem-ParkSiYeonTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LoginSystem_ParkSiYeon.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LoginSystem_ParkSiYeon";
-			};
-			name = Release;
-		};
-		182BF1192D86679800C7B308 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5Y43RDX3FM;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sy0201.StartViewModelTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LoginSystem_ParkSiYeon.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LoginSystem_ParkSiYeon";
-			};
-			name = Debug;
-		};
-		182BF11A2D86679800C7B308 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5Y43RDX3FM;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sy0201.StartViewModelTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -826,15 +730,6 @@
 			buildConfigurations = (
 				182BF1072D8666ED00C7B308 /* Debug */,
 				182BF1082D8666ED00C7B308 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		182BF1182D86679800C7B308 /* Build configuration list for PBXNativeTarget "StartViewModelTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				182BF1192D86679800C7B308 /* Debug */,
-				182BF11A2D86679800C7B308 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
