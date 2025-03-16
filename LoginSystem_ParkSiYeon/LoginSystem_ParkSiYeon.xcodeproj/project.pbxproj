@@ -18,6 +18,10 @@
 		182BF1042D8666ED00C7B308 /* LoginSystem_ParkSiYeonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182BF1032D8666ED00C7B308 /* LoginSystem_ParkSiYeonTests.swift */; };
 		182BF10B2D86672D00C7B308 /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 182BF10A2D86672D00C7B308 /* RxBlocking */; };
 		182BF10D2D86672D00C7B308 /* RxTest in Frameworks */ = {isa = PBXBuildFile; productRef = 182BF10C2D86672D00C7B308 /* RxTest */; };
+		182BF12E2D86A4B000C7B308 /* UserDefaultsManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182BF1292D86A4B000C7B308 /* UserDefaultsManagerTests.swift */; };
+		182BF12F2D86A4B000C7B308 /* CoreDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182BF12A2D86A4B000C7B308 /* CoreDataManagerTests.swift */; };
+		182BF1302D86A4B000C7B308 /* MockCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182BF12B2D86A4B000C7B308 /* MockCoreDataManager.swift */; };
+		182BF1312D86A4B000C7B308 /* MockUserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182BF12C2D86A4B000C7B308 /* MockUserDefaultsManager.swift */; };
 		1895FD542D83F7A400BB644B /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 1895FD532D83F7A400BB644B /* RxCocoa */; };
 		1895FD562D83F7A400BB644B /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1895FD552D83F7A400BB644B /* RxSwift */; };
 		1895FD592D83F7C700BB644B /* LoginSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1895FD582D83F7C700BB644B /* LoginSuccessViewController.swift */; };
@@ -71,6 +75,10 @@
 		182BF1012D8666ED00C7B308 /* LoginSystem_ParkSiYeonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LoginSystem_ParkSiYeonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		182BF1032D8666ED00C7B308 /* LoginSystem_ParkSiYeonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSystem_ParkSiYeonTests.swift; sourceTree = "<group>"; };
 		182BF1122D86679800C7B308 /* StartViewModelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StartViewModelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		182BF1292D86A4B000C7B308 /* UserDefaultsManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManagerTests.swift; sourceTree = "<group>"; };
+		182BF12A2D86A4B000C7B308 /* CoreDataManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManagerTests.swift; sourceTree = "<group>"; };
+		182BF12B2D86A4B000C7B308 /* MockCoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockCoreDataManager.swift; sourceTree = "<group>"; };
+		182BF12C2D86A4B000C7B308 /* MockUserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockUserDefaultsManager.swift; sourceTree = "<group>"; };
 		1895FD582D83F7C700BB644B /* LoginSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSuccessViewController.swift; sourceTree = "<group>"; };
 		1895FD5D2D840CDC00BB644B /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		1895FD5F2D840D4700BB644B /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -163,9 +171,21 @@
 		182BF1022D8666ED00C7B308 /* LoginSystem_ParkSiYeonTests */ = {
 			isa = PBXGroup;
 			children = (
+				182BF12A2D86A4B000C7B308 /* CoreDataManagerTests.swift */,
+				182BF12D2D86A4B000C7B308 /* Mock */,
+				182BF1292D86A4B000C7B308 /* UserDefaultsManagerTests.swift */,
 				182BF1032D8666ED00C7B308 /* LoginSystem_ParkSiYeonTests.swift */,
 			);
 			path = LoginSystem_ParkSiYeonTests;
+			sourceTree = "<group>";
+		};
+		182BF12D2D86A4B000C7B308 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				182BF12B2D86A4B000C7B308 /* MockCoreDataManager.swift */,
+				182BF12C2D86A4B000C7B308 /* MockUserDefaultsManager.swift */,
+			);
+			path = Mock;
 			sourceTree = "<group>";
 		};
 		1895FD572D83F7B500BB644B /* LoginSuccess */ = {
@@ -459,7 +479,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				182BF1302D86A4B000C7B308 /* MockCoreDataManager.swift in Sources */,
+				182BF12E2D86A4B000C7B308 /* UserDefaultsManagerTests.swift in Sources */,
+				182BF12F2D86A4B000C7B308 /* CoreDataManagerTests.swift in Sources */,
 				182BF1042D8666ED00C7B308 /* LoginSystem_ParkSiYeonTests.swift in Sources */,
+				182BF1312D86A4B000C7B308 /* MockUserDefaultsManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
