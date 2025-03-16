@@ -64,8 +64,8 @@ private extension StartViewController {
     }
     
     func pushToLoginView() {
-        let loginViewController = LoginViewController()
-        setRootViewController(loginViewController)
+        let successViewController = LoginSuccessViewController()
+        setRootViewController(successViewController)
     }
     
     func pushToSignUpView() {

@@ -29,15 +29,15 @@ final class SignUpView: UIView {
         return stackView
     }()
     
-    private let emailView = CustomInputView(inputType: .email, placeholder: "이메일을 입력해주세요.")
-    private let passwordView = CustomInputView(inputType: .password, placeholder: "비밀번호를 입력해주세요.")
-    private let confirmPasswordView = CustomInputView(inputType: .confirmPassword, placeholder: "비밀번호를 확인해주세요.")
-    private let nicknameView = CustomInputView(inputType: .nickname, placeholder: "닉네임을 입력해주세요.")
+    private let emailView = CustomInputView(inputType: .email)
+    private let passwordView = CustomInputView(inputType: .password)
+    private let confirmPasswordView = CustomInputView(inputType: .confirmPassword)
+    private let nicknameView = CustomInputView(inputType: .nickname)
     
     var signUpButton: UIButton = {
         let button = UIButton()
         button.layer.cornerRadius = 20
-        button.clipsToBounds = true
+        button.layer.masksToBounds = true
         button.setTitle("회원가입", for: .normal)
         button.setTitleColor(.primaryDarkGray, for: .normal)
         button.backgroundColor = .backgroundLightGray
@@ -78,6 +78,7 @@ final class SignUpView: UIView {
 private extension SignUpView {
     func setupUI() {
         self.backgroundColor = .white
+        scrollView.backgroundColor = .white
         baseView.backgroundColor = .white
         
         addSubview(scrollView)
@@ -106,19 +107,19 @@ private extension SignUpView {
         }
         
         emailView.snp.makeConstraints { make in
-            make.height.equalTo(64)
+            make.height.equalTo(70)
         }
         
         passwordView.snp.makeConstraints { make in
-            make.height.equalTo(64)
+            make.height.equalTo(70)
         }
         
         confirmPasswordView.snp.makeConstraints { make in
-            make.height.equalTo(64)
+            make.height.equalTo(70)
         }
         
         nicknameView.snp.makeConstraints { make in
-            make.height.equalTo(64)
+            make.height.equalTo(70)
         }
         
         signUpButton.snp.makeConstraints { make in
@@ -166,9 +167,48 @@ extension SignUpView {
             .bind(to: viewModel.nickname)
             .disposed(by: disposeBag)
         
+        // email, password, confirmPassword, nickname 텍스트가 변경될 때마다 유효성 검사 호출
+        emailView.inputTextField.rx.text.orEmpty
+            .subscribe(onNext: { [weak self] _ in
+                self?.emailView.validateInput()  // email 입력이 변경될 때마다 validateInput 호출
+            })
+            .disposed(by: disposeBag)
+        
+        passwordView.inputTextField.rx.text.orEmpty
+            .subscribe(onNext: { [weak self] _ in
+                self?.passwordView.validateInput()  // password 입력이 변경될 때마다 validateInput 호출
+            })
+            .disposed(by: disposeBag)
+        
+        confirmPasswordView.inputTextField.rx.text.orEmpty
+            .subscribe(onNext: { [weak self] _ in
+                self?.confirmPasswordView.validateInput(confirmPassword: viewModel.password.value)  // confirmPassword 입력이 변경될 때마다 validateInput 호출
+            })
+            .disposed(by: disposeBag)
+        
+        nicknameView.inputTextField.rx.text.orEmpty
+            .subscribe(onNext: { [weak self] _ in
+                self?.nicknameView.validateInput()  // nickname 입력이 변경될 때마다 validateInput 호출
+            })
+            .disposed(by: disposeBag)
+        
         // SignUp 버튼 활성화/비활성화 바인딩
         viewModel.signUpEnabled
             .bind(to: signUpButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        // SignUp 버튼 배경색 변경 바인딩
+        viewModel.signUpEnabled
+            .map { $0 ? UIColor.primaryGray : UIColor.backgroundLightGray }
+            .bind(to: signUpButton.rx.backgroundColor)
+            .disposed(by: disposeBag)
+        
+        // SignUp 버튼 텍스트컬러 변경 바인딩
+        viewModel.signUpEnabled
+            .map { $0 ? UIColor.backgroundLightGray : UIColor.primaryGray }
+            .bind { [weak signUpButton] color in
+                signUpButton?.setTitleColor(color, for: .normal)
+            }
             .disposed(by: disposeBag)
     }
 }

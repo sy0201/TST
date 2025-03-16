@@ -57,8 +57,8 @@ private extension SignUpViewController {
     
     func navigateToLogin() {
         // 로그인 화면으로 이동
-        let loginViewController = LoginViewController()
-        setRootViewController(loginViewController)
+        let successViewController = LoginSuccessViewController()
+        setRootViewController(successViewController)
     }
     
     func setRootViewController(_ viewController: UIViewController) {

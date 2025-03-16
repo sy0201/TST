@@ -41,20 +41,30 @@ final class UserInfoCoreDataManager {
 // MARK: - Save UserInfoCoreData
 
 extension UserInfoCoreDataManager {
-    func saveUserInfo(email: String, password: String, nickname: String) {
+    func saveUserInfo(email: String, password: String, nickname: String) throws {
         let context = getContext()
         
         // 새로운 UserInfo 객체 생성
         let userInfo = UserInfoCoreData(context: context)
         userInfo.email = email
-        userInfo.password = password
         userInfo.nickname = nickname
         
-        // 저장
-        saveContext()
+        // 비밀번호는 Keychain에 저장
+        let isPasswordSaved = KeyChainHelper.savePassword(password: password, for: email)
+        if !isPasswordSaved {
+            print("비밀번호 저장에 실패했습니다.")
+            throw KeyChainError.passwordSaveFailed
+        }
         
-        // UserDefaults에 닉네임 저장
+        // 저장
+        do {
+            try context.save()
+        } catch {
+            throw CoreDataError.contextSaveFailed
+        }
+        
         UserDefaultsManager.shared.saveNickname(nickname)
+        UserDefaultsManager.shared.saveUserEmail(email)
     }
 }
 

@@ -1,5 +1,5 @@
 //
-//  LoginView.swift
+//  LoginSuccessView.swift
 //  LoginSystem_ParkSiYeon
 //
 //  Created by siyeon park on 3/15/25.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class LoginView: UIView {
+final class LoginSuccessView: UIView {
     var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
@@ -36,7 +36,7 @@ final class LoginView: UIView {
     var logoutButton: UIButton = {
         let button = UIButton()
         button.layer.cornerRadius = 20
-        button.clipsToBounds = true
+        button.layer.masksToBounds = true
         button.setTitle("로그아웃", for: .normal)
         button.setTitleColor(.primaryDarkGray, for: .normal)
         button.backgroundColor = .backgroundLightGray
@@ -66,9 +66,10 @@ final class LoginView: UIView {
 
 // MARK: - Private setupUI Method
 
-private extension LoginView {
+private extension LoginSuccessView {
     func setupUI() {
         self.backgroundColor = .white
+        scrollView.backgroundColor = .white
         baseView.backgroundColor = .white
         
         addSubview(scrollView)
