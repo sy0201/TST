@@ -1,5 +1,5 @@
 //
-//  LoginViewController.swift
+//  LoginSuccessViewController.swift
 //  LoginSystem_ParkSiYeon
 //
 //  Created by siyeon park on 3/14/25.
@@ -8,11 +8,11 @@
 import UIKit
 import RxSwift
 
-final class LoginViewController: UIViewController {
-    let loginViewModel = LoginViewModel()
+final class LoginSuccessViewController: UIViewController {
+    let loginViewModel = LoginSuccessViewModel()
     let disposeBag = DisposeBag()
     
-    let loginView = LoginView()
+    let loginView = LoginSuccessView()
 
     override func loadView() {
         super.loadView()
@@ -27,7 +27,7 @@ final class LoginViewController: UIViewController {
 
 // MARK: - Private Extension Methods
 
-private extension LoginViewController {
+private extension LoginSuccessViewController {
     func bindLoginViewModel() {
         // 로그아웃 버튼 액션 바인딩
         loginView.logoutButton.rx.tap
